@@ -1,12 +1,21 @@
 package sp_coding.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import sp_coding.myapplication.Model.DBHandler;
 import sp_coding.myapplication.Model.Ingredient;
@@ -15,7 +24,7 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
     DBHandler dbh = new DBHandler(this);
 
-    //test commit andreas
+
 
     public void TestDB() {
 
@@ -38,26 +47,34 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
     }
 
-    private TextView mTextMessage;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+
+                    HomeFragment homeFragment = new HomeFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame, homeFragment);
+                    fragmentTransaction.commit();
+
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+
+                    RecipeFragment recipeFragment = new RecipeFragment();
+                    FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.frame, recipeFragment);
+                    fragmentTransaction1.commit();
+
                     return true;
             }
             return false;
         }
+
     };
 
     @Override
@@ -65,11 +82,14 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy_bake__ap__coding);
 
-        mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, homeFragment);
+        fragmentTransaction.commit();
+
         TestDB();
     }
-
 }
