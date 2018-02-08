@@ -1,7 +1,5 @@
 package sp_coding.myapplication.Model;
 
-import java.util.ArrayList;
-
 /**
  * Created by woojen on 2018-02-07.
  */
@@ -11,16 +9,17 @@ public class Recipe {
     private int id;
     private String name;
     private String infoText;
-    private ArrayList<Ingredient> ingredients;
+    private Ingredient[] ingredients;
 
     private enum difficulty {LOW, MEDIUM, HARD}
 
-
-    public Recipe(int id, String name, String infoText, ArrayList<Ingredient> ingredients) {
+    public Recipe(int id, String name, String infoText, Ingredient[] ingredients) {
         this.id = id;
         this.name = name;
         this.infoText = infoText;
         this.ingredients = ingredients;
+
+        ingredients = new Ingredient[30];
     }
 
     public Recipe(int id, String name) {
@@ -52,11 +51,12 @@ public class Recipe {
         this.infoText = infoText;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
+
+    public Ingredient[] getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
+    public void setIngredients(Ingredient[] ingredients) {
         this.ingredients = ingredients;
     }
 

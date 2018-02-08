@@ -20,8 +20,9 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
     public void TestDB() {
 
-        Ingredient ingredient1 = new Ingredient(0, "Morot");//,true);
-        Ingredient ingredient2 = new Ingredient(1, "Apelsin");//,false);
+
+        Ingredient ingredient1 = new Ingredient(0, "Morot", true);
+        Ingredient ingredient2 = new Ingredient(1, "Apelsin", false);
 
         Ingredient morotTest;
         Ingredient apelsinTest;
@@ -50,6 +51,7 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
         Log.d("Reading from DB table 2", rec1Test.toString());
         Log.d("Reading from DB table 2", rec2Test.toString());
+
 
     }
 

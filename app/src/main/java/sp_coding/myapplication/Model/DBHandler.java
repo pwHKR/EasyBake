@@ -42,19 +42,25 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
         String CREATE_Ingredient_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")"; //+ KEY_INSTOCK +" TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
 
         db.execSQL(CREATE_Ingredient_TABLE);
+
+        db.execSQL("ALTER TABLE ingredient ADD COLUMN inStock INTEGER DEFAULT 0");
+
 
         String CREATE_Recipe_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
                 + KEY_ID2 + " INTEGER PRIMARY KEY," + KEY_NAME2 + " TEXT" + ")";
 
 
         db.execSQL(CREATE_Recipe_TABLE);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
 
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENT);
@@ -77,7 +83,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, ingredient.getId()); // Ingredient ID
         values.put(KEY_NAME, ingredient.getName()); // Ingredient Name
-        // values.put(KEY_INSTOCK,ingredient.isInStock()); // If Ingredient in stock
+        values.put(KEY_INSTOCK, ingredient.isInStock()); // If Ingredient in stock
 
 
         // Inserting Row
@@ -88,16 +94,20 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     // Getting single contact
     public Ingredient getIngredient(int id) {
+
+
+        Logic logic = new Logic();
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_INGREDIENT, new String[]{KEY_ID,
-                        KEY_NAME,}, KEY_ID + "=?",
+                        KEY_NAME, KEY_INSTOCK}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        Ingredient ingredient = new Ingredient(cursor.getInt(0), cursor.getString(1));
-        // return contact
+        Ingredient ingredient = new Ingredient(cursor.getInt(0), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
+        // return Ingredient
         return ingredient;
     }
 

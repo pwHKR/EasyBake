@@ -12,6 +12,26 @@ public class Logic {
 
     }
 
+    public boolean convertTinyInt(int tinyInt) {
+
+
+        boolean result = false;
+
+
+        if (tinyInt == 0) {
+
+            result = false;
+        }
+
+        if (tinyInt == 1) {
+
+            result = true;
+        }
+
+        return result;
+
+    }
+
 
 }
 
