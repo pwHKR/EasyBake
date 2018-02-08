@@ -1,5 +1,6 @@
 package sp_coding.myapplication;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -79,6 +80,14 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
                     fragmentTransaction1.commit();
 
                     return true;
+
+                case R.id.navigation_ingredients:
+                    IngredientFragment ingredientFragment = new IngredientFragment();
+                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction2.replace(R.id.frame, ingredientFragment);
+                    fragmentTransaction2.commit();
+
+                    return true;
             }
             return false;
         }
@@ -89,6 +98,8 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy_bake__ap__coding);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
