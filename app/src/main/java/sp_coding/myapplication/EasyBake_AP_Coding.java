@@ -15,6 +15,8 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
     DBHandler dbh = new DBHandler(this);
 
+    //test commit andreas
+
     public void TestDB() {
 
         Ingredient ingredient1 = new Ingredient(0, "Morot");
