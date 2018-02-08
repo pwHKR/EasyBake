@@ -23,6 +23,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public Recipe(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
@@ -53,5 +58,15 @@ public class Recipe {
 
     public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", infoText='" + infoText + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
     }
 }

@@ -24,6 +24,12 @@ public class Ingredient {
         this.name = name;
     }
 
+    public Ingredient(int id, String name, boolean inStock) {
+        this.id = id;
+        this.name = name;
+        this.inStock = inStock;
+    }
+
     public String getName() {
         return name;
     }

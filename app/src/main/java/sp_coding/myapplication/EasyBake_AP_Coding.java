@@ -1,24 +1,16 @@
 package sp_coding.myapplication;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.GridView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import sp_coding.myapplication.Model.DBHandler;
 import sp_coding.myapplication.Model.Ingredient;
+import sp_coding.myapplication.Model.Recipe;
 
 public class EasyBake_AP_Coding extends AppCompatActivity {
 
@@ -28,8 +20,8 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
 
     public void TestDB() {
 
-        Ingredient ingredient1 = new Ingredient(0, "Morot");
-        Ingredient ingredient2 = new Ingredient(1, "Apelsin");
+        Ingredient ingredient1 = new Ingredient(0, "Morot");//,true);
+        Ingredient ingredient2 = new Ingredient(1, "Apelsin");//,false);
 
         Ingredient morotTest;
         Ingredient apelsinTest;
@@ -44,6 +36,20 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
         Log.d("READING FROM DB:", morotTest.toString());
         Log.d("READING FROM DB2:", apelsinTest.toString());
 
+        Recipe recipe1 = new Recipe(0, "recept1");
+        Recipe recipe2 = new Recipe(1, "recept2");
+
+        dbh.addRecipe(recipe1);
+        dbh.addRecipe(recipe2);
+
+        Recipe rec1Test;
+        Recipe rec2Test;
+
+        rec1Test = dbh.getRecipe(0);
+        rec2Test = dbh.getRecipe(1);
+
+        Log.d("Reading from DB table 2", rec1Test.toString());
+        Log.d("Reading from DB table 2", rec2Test.toString());
 
     }
 

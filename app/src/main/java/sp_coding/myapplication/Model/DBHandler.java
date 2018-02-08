@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by woojen on 2018-02-07.
  */
 
-public class DBHandler extends SQLiteOpenHelper {
+public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     // All Static variables
     // Database Version
@@ -30,6 +30,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // Ingredient Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
+    private static final String KEY_INSTOCK = "inStock";
 
 
     // Recipe Table Columns names
@@ -38,10 +39,13 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         String CREATE_Ingredient_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")"; //+ KEY_INSTOCK +" TEXT" + ")";
 
         db.execSQL(CREATE_Ingredient_TABLE);
+
         String CREATE_Recipe_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
                 + KEY_ID2 + " INTEGER PRIMARY KEY," + KEY_NAME2 + " TEXT" + ")";
 
@@ -62,10 +66,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
-
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -77,6 +77,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, ingredient.getId()); // Ingredient ID
         values.put(KEY_NAME, ingredient.getName()); // Ingredient Name
+        // values.put(KEY_INSTOCK,ingredient.isInStock()); // If Ingredient in stock
 
 
         // Inserting Row
@@ -90,7 +91,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_INGREDIENT, new String[]{KEY_ID,
-                        KEY_NAME}, KEY_ID + "=?",
+                        KEY_NAME,}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -98,5 +99,32 @@ public class DBHandler extends SQLiteOpenHelper {
         Ingredient ingredient = new Ingredient(cursor.getInt(0), cursor.getString(1));
         // return contact
         return ingredient;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID2, recipe.getId()); // Recipe ID
+        values.put(KEY_NAME2, recipe.getName()); // Recipe Name
+
+
+        // Inserting Row
+        db.insert(TABLE_RECIPE, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public Recipe getRecipe(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_RECIPE, new String[]{KEY_ID2,
+                        KEY_NAME2,}, KEY_ID2 + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1));
+        // return recipe
+        return recipe;
     }
 }
