@@ -9,19 +9,16 @@ public class Ingredient {
     private int id;
     private String name;
     private boolean inStock;
+    private int inStock_TinyInt;
 
-    public Ingredient(String name) {
-        this.name = name;
+    public Ingredient() {
     }
 
-    public Ingredient(String name, boolean inStock) {
-        this.name = name;
-        this.inStock = inStock;
-    }
 
-    public Ingredient(int id, String name) {
+    public Ingredient(int id, String name, int inStock_TinyInt) {
         this.id = id;
         this.name = name;
+        this.inStock_TinyInt = inStock_TinyInt;
     }
 
     public Ingredient(int id, String name, boolean inStock) {
@@ -34,6 +31,9 @@ public class Ingredient {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public boolean isInStock() {
         return inStock;
@@ -49,6 +49,14 @@ public class Ingredient {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getInStock_TinyInt() {
+        return inStock_TinyInt;
+    }
+
+    public void setInStock_TinyInt(int inStock_TinyInt) {
+        this.inStock_TinyInt = inStock_TinyInt;
     }
 
     @Override

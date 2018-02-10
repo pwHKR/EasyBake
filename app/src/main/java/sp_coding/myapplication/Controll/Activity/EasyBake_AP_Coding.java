@@ -1,4 +1,4 @@
-package sp_coding.myapplication;
+package sp_coding.myapplication.Controll.Activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,9 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import sp_coding.myapplication.Controll.Fragment.HomeFragment;
+import sp_coding.myapplication.Controll.Fragment.IngredientFragment;
+import sp_coding.myapplication.Controll.Fragment.RecipeFragment;
 import sp_coding.myapplication.Model.DBHandler;
 import sp_coding.myapplication.Model.Ingredient;
 import sp_coding.myapplication.Model.Recipe;
+import sp_coding.myapplication.R;
 
 public class EasyBake_AP_Coding extends AppCompatActivity {
 
@@ -88,7 +92,9 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
                     fragmentTransaction2.commit();
 
                     return true;
+
             }
+
             return false;
         }
 

@@ -12,6 +12,8 @@ public class Logic {
 
     }
 
+    // Convert Int to Boolean
+
     public boolean convertTinyInt(int tinyInt) {
 
 
@@ -26,6 +28,30 @@ public class Logic {
         if (tinyInt == 1) {
 
             result = true;
+        }
+
+        return result;
+
+    }
+
+    // Convert boolean to Int
+
+    public int convertBoolean(boolean input) {
+
+
+        int result = 0;
+
+        String StringValue = String.valueOf(input);
+
+
+        if (StringValue.equalsIgnoreCase("false")) {
+
+            result = 0;
+        }
+
+        if (StringValue.equalsIgnoreCase("true")) {
+
+            result = 1;
         }
 
         return result;

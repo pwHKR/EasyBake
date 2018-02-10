@@ -6,11 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by woojen on 2018-02-07.
  */
 
 public class DBHandler extends SQLiteOpenHelper implements DataStorage {
+
+    Logic logic = new Logic();
+
 
     // All Static variables
     // Database Version
@@ -39,6 +45,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
 
 
         String CREATE_Ingredient_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
@@ -136,5 +143,47 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1));
         // return recipe
         return recipe;
+    }
+
+    public int getCount(String table) {
+
+        int countResult;
+
+        String countQuery = "SELECT  * FROM " + table + "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        countResult = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return countResult;
+
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        List<Ingredient> ingredientList = new ArrayList<Ingredient>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + "ingredient";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setId(Integer.parseInt(cursor.getString(0)));
+                ingredient.setName(cursor.getString(1));
+
+                int inStock = cursor.getInt(2);
+                boolean stock = logic.convertTinyInt(inStock);
+                ingredient.setInStock(stock);
+                // Adding contact to list
+                ingredientList.add(ingredient);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return ingredientList;
     }
 }

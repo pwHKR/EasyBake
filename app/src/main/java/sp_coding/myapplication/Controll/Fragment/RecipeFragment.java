@@ -1,11 +1,13 @@
-package sp_coding.myapplication;
+package sp_coding.myapplication.Controll.Fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import sp_coding.myapplication.R;
 
 /**
  * Created by andreas on 2018-02-08.
