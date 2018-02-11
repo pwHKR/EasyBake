@@ -9,20 +9,29 @@ import java.util.List;
 public interface DataStorage {
 
     // Ingredient storing
+
+    // Set
     void addIngredient(Ingredient ingredient);
 
-    List<Ingredient> getAllIngredients();
+    // Get
 
     Ingredient getIngredient(int id);
 
+    // Print
+
+    List<Ingredient> getAllIngredients();
+
+
+
     // Recipe storing
+
+
+    // Set
     void addRecipe(Recipe recipe);
 
+
+    // Get
     Recipe getRecipe(int id);
-
-    // General Storage
-
-    int getCount(String table); // Get count from table (in DB case)
 
 
 }

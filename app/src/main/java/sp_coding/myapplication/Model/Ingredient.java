@@ -11,9 +11,6 @@ public class Ingredient {
     private boolean inStock;
     private int inStock_TinyInt;
 
-    public Ingredient() {
-    }
-
 
     public Ingredient(int id, String name, int inStock_TinyInt) {
         this.id = id;

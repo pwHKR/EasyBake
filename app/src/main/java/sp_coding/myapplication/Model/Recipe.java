@@ -9,7 +9,7 @@ public class Recipe {
     private int id;
     private String name;
     private String infoText;
-    private int idIngredient; // Tänkte att vi skapar en tabbel enbart för ingridenser i ett recpet och detta Id för vara forign key elr nått. 
+    private int idIngredient; // Tänkte att vi skapar en tabbel enbart för ingridenser i ett recpet och detta Id för vara forign key elr nått.
 
 
     public Recipe(int id, String name, String infoText) {

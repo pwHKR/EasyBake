@@ -90,7 +90,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, ingredient.getId()); // Ingredient ID
         values.put(KEY_NAME, ingredient.getName()); // Ingredient Name
-        values.put(KEY_INSTOCK, ingredient.isInStock()); // If Ingredient in stock
+        values.put(KEY_INSTOCK, ingredient.getInStock_TinyInt()); // If Ingredient in stock
 
 
         // Inserting Row
@@ -171,14 +171,21 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Ingredient ingredient = new Ingredient();
+                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
+
+                /*
+
                 ingredient.setId(Integer.parseInt(cursor.getString(0)));
                 ingredient.setName(cursor.getString(1));
 
                 int inStock = cursor.getInt(2);
                 boolean stock = logic.convertTinyInt(inStock);
+
+                Log.d("boolean Stock:", String.valueOf(stock));
                 ingredient.setInStock(stock);
-                // Adding contact to list
+
+                */
+                // Adding Ingredient to list
                 ingredientList.add(ingredient);
             } while (cursor.moveToNext());
         }

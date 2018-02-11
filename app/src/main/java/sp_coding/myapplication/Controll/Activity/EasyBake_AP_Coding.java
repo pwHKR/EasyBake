@@ -6,15 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
 import sp_coding.myapplication.Controll.Fragment.HomeFragment;
 import sp_coding.myapplication.Controll.Fragment.IngredientFragment;
 import sp_coding.myapplication.Controll.Fragment.RecipeFragment;
 import sp_coding.myapplication.Model.DBHandler;
-import sp_coding.myapplication.Model.Ingredient;
-import sp_coding.myapplication.Model.Recipe;
 import sp_coding.myapplication.R;
 
 public class EasyBake_AP_Coding extends AppCompatActivity {
@@ -26,7 +23,9 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
     public void TestDB() {
 
 
-        Ingredient ingredient1 = new Ingredient(0, "Morot", true);
+
+
+       /* Ingredient ingredient1 = new Ingredient(0, "Morot", true);
         Ingredient ingredient2 = new Ingredient(1, "Apelsin", false);
 
         Ingredient morotTest;
@@ -57,6 +56,7 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
         Log.d("Reading from DB table 2", rec1Test.toString());
         Log.d("Reading from DB table 2", rec2Test.toString());
 
+*/
 
     }
 

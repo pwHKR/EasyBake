@@ -17,18 +17,10 @@ public class Logic {
     public boolean convertTinyInt(int tinyInt) {
 
 
-        boolean result = false;
+        boolean result;
 
 
-        if (tinyInt == 0) {
-
-            result = false;
-        }
-
-        if (tinyInt == 1) {
-
-            result = true;
-        }
+        result = tinyInt != 0;
 
         return result;
 

@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sp_coding.myapplication.Model.DBHandler;
 import sp_coding.myapplication.Model.Ingredient;
 import sp_coding.myapplication.Model.Logic;
@@ -22,10 +25,11 @@ import sp_coding.myapplication.R;
 
 public class IngredientFragment extends Fragment {
 
-    EditText editText;
-    CheckBox checkBox;
+
     DBHandler dbh;
     Logic logic;
+
+    List<Ingredient> forTesting = new ArrayList<>();
 
     @Nullable
     @Override
@@ -53,7 +57,9 @@ public class IngredientFragment extends Fragment {
 
                 NewIngredient(editText.getText().toString(), isTrue);
 
-                Log.d("Complete Table INGRE..", dbh.getAllIngredients().toString());
+                forTesting = dbh.getAllIngredients();
+
+                logIngredient(forTesting);
 
 
             }
@@ -74,6 +80,8 @@ public class IngredientFragment extends Fragment {
 
         int inStockTinyInt = logic.convertBoolean(inStock);
 
+        Log.d("FCT", String.valueOf(inStockTinyInt));
+
         newId = getNewID("ingredient");
 
         Ingredient ingredient = new Ingredient(newId, name, inStockTinyInt);
@@ -87,6 +95,24 @@ public class IngredientFragment extends Fragment {
         int result = dbh.getCount(table) + 1;
 
         return result;
+    }
+
+
+    // temp  Method used for testing db
+    private void logIngredient(List<Ingredient> ingredients) {
+
+        int loopCount = 0;
+
+        for (Ingredient i : ingredients) {
+
+            loopCount++;
+
+            Log.d("Element " + String.valueOf(loopCount) + ": ",
+                    "name: " + i.getName() + "\n" + "id: " + i.getId() + "\n" + "in stock: "
+                            + i.isInStock());
+        }
+
+
     }
 
 
