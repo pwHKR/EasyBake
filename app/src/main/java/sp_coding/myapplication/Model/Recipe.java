@@ -9,17 +9,15 @@ public class Recipe {
     private int id;
     private String name;
     private String infoText;
-    private Ingredient[] ingredients;
+    private int idIngredient; // Tänkte att vi skapar en tabbel enbart för ingridenser i ett recpet och detta Id för vara forign key elr nått. 
 
-    private enum difficulty {LOW, MEDIUM, HARD}
 
-    public Recipe(int id, String name, String infoText, Ingredient[] ingredients) {
+    public Recipe(int id, String name, String infoText) {
         this.id = id;
         this.name = name;
         this.infoText = infoText;
-        this.ingredients = ingredients;
 
-        ingredients = new Ingredient[30];
+
     }
 
     public Recipe(int id, String name) {
@@ -52,21 +50,13 @@ public class Recipe {
     }
 
 
-    public Ingredient[] getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Ingredient[] ingredients) {
-        this.ingredients = ingredients;
-    }
-
     @Override
     public String toString() {
         return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", infoText='" + infoText + '\'' +
-                ", ingredients=" + ingredients +
+                ", idIngredient=" + idIngredient +
                 '}';
     }
 }
