@@ -2,12 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipe_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
+
     android:weightSum="10"
-    android:id="@+id/home_layout"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -15,12 +16,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="76dp"
-        android:text="Home"
+        android:layout_marginBottom="164dp"
+        android:layout_marginTop="105dp"
+        android:text="Recipes"
         android:textColor="@android:color/white"
-        android:textSize="34sp"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_recipe"
+        android:layout_width="343dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="516dp"
+        android:background="@drawable/buttonshape"
+        android:text="Add Recipe"
+        android:textColor="#1C83CE"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGrid" />
+
 
 </android.support.constraint.ConstraintLayout>

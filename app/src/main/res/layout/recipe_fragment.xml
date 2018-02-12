@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:weightSum="10"
 
+    android:id="@+id/recipe_layout"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
