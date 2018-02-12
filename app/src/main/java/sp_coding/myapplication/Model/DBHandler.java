@@ -59,6 +59,9 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         String CREATE_Recipe_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
                 + KEY_ID2 + " INTEGER PRIMARY KEY," + KEY_NAME2 + " TEXT" + ")";
 
+        db.execSQL("ALTER TABLE recipe ADD COLUMN infoText Text DEFAULT 0");
+        db.execSQL("ALTER TABLE recipe ADD COLUMN idIngredient INTEGER DEFAULT 0");
+
 
         db.execSQL(CREATE_Recipe_TABLE);
 
@@ -124,6 +127,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         ContentValues values = new ContentValues();
         values.put(KEY_ID2, recipe.getId()); // Recipe ID
         values.put(KEY_NAME2, recipe.getName()); // Recipe Name
+        values.put("infoText", recipe.getInfoText());
+        values.put("idInteger", recipe.getIdIngredient());
 
 
         // Inserting Row

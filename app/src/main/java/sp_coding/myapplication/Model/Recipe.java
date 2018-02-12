@@ -50,6 +50,14 @@ public class Recipe {
     }
 
 
+    public int getIdIngredient() {
+        return idIngredient;
+    }
+
+    public void setIdIngredient(int idIngredient) {
+        this.idIngredient = idIngredient;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
