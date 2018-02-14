@@ -14,9 +14,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import sp_coding.myapplication.Model.DBHandler;
-import sp_coding.myapplication.Model.Ingredient;
-import sp_coding.myapplication.Model.Logic;
+import sp_coding.myapplication.Model.DB.DBHandler;
+import sp_coding.myapplication.Model.Object.Ingredient;
+import sp_coding.myapplication.Model.System.Logic;
 import sp_coding.myapplication.R;
 
 /**

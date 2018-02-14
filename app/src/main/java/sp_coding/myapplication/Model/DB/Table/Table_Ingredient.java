@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Model.Table;
+package sp_coding.myapplication.Model.DB.Table;
 
 /**
  * Created by woojen on 2018-02-14.

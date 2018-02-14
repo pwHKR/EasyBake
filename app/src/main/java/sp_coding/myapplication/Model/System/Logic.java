@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Model;
+package sp_coding.myapplication.Model.System;
 
 /**
  * Created by woojen on 2018-02-07.

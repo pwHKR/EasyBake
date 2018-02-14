@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Model;
+package sp_coding.myapplication.Model.DB;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,13 +9,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import static sp_coding.myapplication.Model.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
-import static sp_coding.myapplication.Model.Table.Table_Ingredient.KEY_INGREDIENT;
-import static sp_coding.myapplication.Model.Table.Table_Ingredient.NAME_INGREDIENT;
-import static sp_coding.myapplication.Model.Table.Table_Ingredient.TABLE_INGREDIENT;
-import static sp_coding.myapplication.Model.Table.Table_Recipe.KEY_ID_RECIPE;
-import static sp_coding.myapplication.Model.Table.Table_Recipe.NAME_RECIPE;
-import static sp_coding.myapplication.Model.Table.Table_Recipe.TABLE_RECIPE;
+import sp_coding.myapplication.Model.Interface.DataStorage;
+import sp_coding.myapplication.Model.Object.Ingredient;
+import sp_coding.myapplication.Model.Object.Recipe;
+import sp_coding.myapplication.Model.System.Logic;
+
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.TABLE_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.KEY_ID_RECIPE;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.NAME_RECIPE;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.TABLE_RECIPE;
+
 
 /**
  * Created by woojen on 2018-02-07.
