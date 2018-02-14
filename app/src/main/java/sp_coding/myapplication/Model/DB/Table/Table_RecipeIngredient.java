@@ -6,6 +6,8 @@ package sp_coding.myapplication.Model.DB.Table;
 
 public class Table_RecipeIngredient {
 
+    // This table will neeed 20
+
 
     // RecipeIngredient table name
 
