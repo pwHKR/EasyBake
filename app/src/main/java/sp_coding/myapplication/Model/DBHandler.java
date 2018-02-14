@@ -9,6 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sp_coding.myapplication.Model.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
+import static sp_coding.myapplication.Model.Table.Table_Ingredient.KEY_INGREDIENT;
+import static sp_coding.myapplication.Model.Table.Table_Ingredient.NAME_INGREDIENT;
+import static sp_coding.myapplication.Model.Table.Table_Ingredient.TABLE_INGREDIENT;
+import static sp_coding.myapplication.Model.Table.Table_Recipe.KEY_ID_RECIPE;
+import static sp_coding.myapplication.Model.Table.Table_Recipe.NAME_RECIPE;
+import static sp_coding.myapplication.Model.Table.Table_Recipe.TABLE_RECIPE;
+
 /**
  * Created by woojen on 2018-02-07.
  */
@@ -26,30 +34,12 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     private static final String DATABASE_NAME = "bakeManager";
 
 
-    // Ingredient table name
-    private static final String TABLE_INGREDIENT = "ingredient";
-
-    // Recipe table name
-    private static final String TABLE_RECIPE = "recipe";
-
-
-    // Ingredient Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
-    private static final String KEY_INSTOCK = "inStock";
-
-
-    // Recipe Table Columns names
-    private static final String KEY_ID2 = "id";
-    private static final String KEY_NAME2 = "name";
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
 
-
         String CREATE_Ingredient_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+                + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + NAME_INGREDIENT + " TEXT" + ")";
 
         db.execSQL(CREATE_Ingredient_TABLE);
 
@@ -57,7 +47,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
         String CREATE_Recipe_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
-                + KEY_ID2 + " INTEGER PRIMARY KEY," + KEY_NAME2 + " TEXT" + ")";
+                + KEY_ID_RECIPE + " INTEGER PRIMARY KEY," + NAME_RECIPE + " TEXT" + ")";
 
         db.execSQL("ALTER TABLE recipe ADD COLUMN infoText Text DEFAULT 0");
         db.execSQL("ALTER TABLE recipe ADD COLUMN idIngredient INTEGER DEFAULT 0");
@@ -91,9 +81,9 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, ingredient.getId()); // Ingredient ID
-        values.put(KEY_NAME, ingredient.getName()); // Ingredient Name
-        values.put(KEY_INSTOCK, ingredient.getInStock_TinyInt()); // If Ingredient in stock
+        values.put(KEY_INGREDIENT, ingredient.getId()); // Ingredient ID
+        values.put(NAME_INGREDIENT, ingredient.getName()); // Ingredient Name
+        values.put(BOOLEAN_INGREDIENT, ingredient.getInStock_TinyInt()); // If Ingredient in stock
 
 
         // Inserting Row
@@ -110,8 +100,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_INGREDIENT, new String[]{KEY_ID,
-                        KEY_NAME, KEY_INSTOCK}, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_INGREDIENT, new String[]{KEY_INGREDIENT,
+                        NAME_INGREDIENT, BOOLEAN_INGREDIENT}, KEY_INGREDIENT + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -125,8 +115,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID2, recipe.getId()); // Recipe ID
-        values.put(KEY_NAME2, recipe.getName()); // Recipe Name
+        values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
+        values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
         values.put("infoText", recipe.getInfoText());
         values.put("idInteger", recipe.getIdIngredient());
 
@@ -139,8 +129,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     public Recipe getRecipe(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_RECIPE, new String[]{KEY_ID2,
-                        KEY_NAME2,}, KEY_ID2 + "=?",
+        Cursor cursor = db.query(TABLE_RECIPE, new String[]{KEY_ID_RECIPE,
+                        NAME_RECIPE,}, KEY_ID_RECIPE + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -178,18 +168,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
             do {
                 Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
 
-                /*
-
-                ingredient.setId(Integer.parseInt(cursor.getString(0)));
-                ingredient.setName(cursor.getString(1));
-
-                int inStock = cursor.getInt(2);
-                boolean stock = logic.convertTinyInt(inStock);
-
-                Log.d("boolean Stock:", String.valueOf(stock));
-                ingredient.setInStock(stock);
-
-                */
                 // Adding Ingredient to list
                 ingredientList.add(ingredient);
             } while (cursor.moveToNext());
