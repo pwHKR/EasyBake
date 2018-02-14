@@ -18,6 +18,8 @@ import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_IN
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.TABLE_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.F_KEY_RECIPE_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.INFO_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.KEY_ID_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.NAME_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.TABLE_RECIPE;
@@ -123,8 +125,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         ContentValues values = new ContentValues();
         values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
         values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
-        values.put("infoText", recipe.getInfoText());
-        values.put("idInteger", recipe.getIdIngredient());
+        values.put(INFO_RECIPE, recipe.getInfoText());
+        values.put(F_KEY_RECIPE_INGREDIENT, recipe.getIdIngredient());
 
 
         // Inserting Row

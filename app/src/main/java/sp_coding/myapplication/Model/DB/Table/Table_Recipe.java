@@ -13,5 +13,10 @@ public class Table_Recipe {
     // Recipe table columns names
     public static final String KEY_ID_RECIPE = "id";
     public static final String NAME_RECIPE = "name";
+    public static final String INFO_RECIPE = "infoText";
+    public static final String F_KEY_RECIPE_INGREDIENT = "IdIngredient";
+
+
+
 
 }

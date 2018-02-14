@@ -15,5 +15,6 @@ public class Table_RecipeIngredient {
     // RecipeIngredient table columns names
 
     public static final String KEY_RI = "IdRI";
+    public static final String F_KEY_RECIPE = "IdRecipe";
 
 }
