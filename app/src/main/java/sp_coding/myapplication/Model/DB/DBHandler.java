@@ -62,12 +62,10 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         // Create Recipe_Table
 
+        db.execSQL(CREATE_RECIPE_TABLE);
 
         db.execSQL("ALTER TABLE recipe ADD COLUMN infoText Text DEFAULT 0");
         db.execSQL("ALTER TABLE recipe ADD COLUMN idIngredient INTEGER DEFAULT 0");
-
-
-        db.execSQL(CREATE_RECIPE_TABLE);
 
         // Create Link_Table
 
