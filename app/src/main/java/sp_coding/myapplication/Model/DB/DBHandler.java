@@ -11,14 +11,20 @@ import java.util.List;
 
 import sp_coding.myapplication.Model.Interface.DataStorage;
 import sp_coding.myapplication.Model.Object.Ingredient;
+import sp_coding.myapplication.Model.Object.Link;
 import sp_coding.myapplication.Model.Object.Recipe;
 import sp_coding.myapplication.Model.System.Logic;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.TABLE_INGREDIENT;
-import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.F_KEY_RECIPE_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Link.CREATE_LINK_TABLE;
+import static sp_coding.myapplication.Model.DB.Table.Table_Link.KEY_LINK;
+import static sp_coding.myapplication.Model.DB.Table.Table_Link.TABLE_LINK;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.CREATE_RECIPE_TABLE;
+import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.F_KEY_LINK;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.INFO_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.KEY_ID_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.NAME_RECIPE;
@@ -46,22 +52,26 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String CREATE_Ingredient_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
-                + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + NAME_INGREDIENT + " TEXT" + ")";
+        // Create Ingredient_Table
 
-        db.execSQL(CREATE_Ingredient_TABLE);
+
+        db.execSQL(CREATE_INGREDIENT_TABLE);
 
         db.execSQL("ALTER TABLE ingredient ADD COLUMN inStock INTEGER DEFAULT 0");
 
 
-        String CREATE_Recipe_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
-                + KEY_ID_RECIPE + " INTEGER PRIMARY KEY," + NAME_RECIPE + " TEXT" + ")";
+        // Create Recipe_Table
+
 
         db.execSQL("ALTER TABLE recipe ADD COLUMN infoText Text DEFAULT 0");
         db.execSQL("ALTER TABLE recipe ADD COLUMN idIngredient INTEGER DEFAULT 0");
 
 
-        db.execSQL(CREATE_Recipe_TABLE);
+        db.execSQL(CREATE_RECIPE_TABLE);
+
+        // Create Link_Table
+
+        db.execSQL(CREATE_LINK_TABLE);
 
 
     }
@@ -73,6 +83,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INGREDIENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LINK);
 
         // Create tables again
         onCreate(db);
@@ -126,7 +137,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
         values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
         values.put(INFO_RECIPE, recipe.getInfoText());
-        values.put(F_KEY_RECIPE_INGREDIENT, recipe.getIdIngredient());
+        values.put(F_KEY_LINK, recipe.getIdIngredient());
 
 
         // Inserting Row
@@ -183,5 +194,29 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         // return contact list
         return ingredientList;
+    }
+
+
+    public void addLink(Link link, String[] ingredientNum) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_LINK, link.getIdLink()); // Link ID
+        values.put(F_KEY_LINK, link.getIdRecipe()); // Recipe Name
+
+        for (int i = 0; i < ingredientNum.length; i++) {
+
+
+            if (ingredientNum[i] != null) {
+
+                values.put("num" + (i + 1), ingredientNum[i]);
+            }
+
+        }
+
+
+        // Inserting Row
+        db.insert(TABLE_LINK, null, values);
+        db.close(); // Closing database connection
     }
 }

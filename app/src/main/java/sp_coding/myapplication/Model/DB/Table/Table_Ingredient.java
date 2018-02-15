@@ -17,6 +17,11 @@ public class Table_Ingredient implements Table {
     public static final String NAME_INGREDIENT = "name";
     public static final String BOOLEAN_INGREDIENT = "inStock";
 
+    // Create statement
+
+    public static final String CREATE_INGREDIENT_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
+            + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + NAME_INGREDIENT + " TEXT" + ")";
+
 
     @Override
     public String printTable() {

@@ -9,7 +9,7 @@ import sp_coding.myapplication.Model.Object.Recipe;
  * Created by woojen on 2018-02-08.
  */
 
-// Implement this interface when creating a storage class for this project
+// Implement this interface when creating or changing the storage class for this project
 
 public interface DataStorage {
 
