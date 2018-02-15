@@ -6,57 +6,25 @@ package sp_coding.myapplication.Model.Object;
 
 public class Link {
 
-    private String IdLink;
-    private String IdRecipe;
+    private int IdLink;
+    private int IdRecipe;
 
-    private String[] ingredientNum = new String[]{
-
-
-            "num1",
-            "num2",
-            "num3",
-            "num4",
-            "num5",
-            "num6",
-            "num7",
-            "num8",
-            "num9",
-            "num10;",
-            "num11",
-            "num12",
-            "num13",
-            "num14",
-            "num15",
-            "num16",
-            "num17",
-            "num18",
-            "num19",
-            "num20",
-            "num21",
-            "num22",
-            "num23",
-            "num24",
-            "num25",
-            "num26",
-            "num27",
-            "num28",
-            "num29",
-            "num30"};
+    private String[] ingredientNum = new String[30];
 
 
-    public String getIdLink() {
+    public int getIdLink() {
         return IdLink;
     }
 
-    public void setIdLink(String idLink) {
+    public void setIdLink(int idLink) {
         IdLink = idLink;
     }
 
-    public String getIdRecipe() {
+    public int getIdRecipe() {
         return IdRecipe;
     }
 
-    public void setIdRecipe(String idRecipe) {
+    public void setIdRecipe(int idRecipe) {
         IdRecipe = idRecipe;
     }
 
@@ -65,6 +33,12 @@ public class Link {
     }
 
     public void setIngredientNum(String[] ingredientNum) {
+        this.ingredientNum = ingredientNum;
+    }
+
+    public Link(int idLink, int idRecipe, String[] ingredientNum) {
+        IdLink = idLink;
+        IdRecipe = idRecipe;
         this.ingredientNum = ingredientNum;
     }
 }

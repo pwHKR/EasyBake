@@ -9,7 +9,7 @@ public class Table_Link {
 
     // RecipeIngredient table name
 
-    public static final String TABLE_LINK = "RecipeIngredient;";
+    public static final String TABLE_LINK = "link";
 
 
     // RecipeIngredient table columns names
@@ -51,7 +51,7 @@ public class Table_Link {
 
     public static final String CREATE_LINK_TABLE = "CREATE TABLE " + TABLE_LINK + "("
             + KEY_LINK + " INTEGER PRIMARY KEY," + F_KEY_RECIPE + " INTEGER" + NUM1 + " INTEGER"
-            + ")";
+            + NUM2 + " INTEGER" + ")";
 
 
 }

@@ -25,6 +25,7 @@ public class Recipe {
         this.name = name;
     }
 
+
     public int getId() {
         return id;
     }
