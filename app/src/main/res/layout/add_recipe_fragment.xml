@@ -22,7 +22,6 @@
             android:layout_gravity="right">
 
 
-
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
