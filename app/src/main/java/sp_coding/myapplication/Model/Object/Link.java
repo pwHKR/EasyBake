@@ -9,7 +9,7 @@ public class Link {
     private int IdLink;
     private int IdRecipe;
 
-    private String[] ingredientNum = new String[30];
+    private int[] ingredientNum = new int[30];
 
 
     public int getIdLink() {
@@ -28,17 +28,17 @@ public class Link {
         IdRecipe = idRecipe;
     }
 
-    public String[] getIngredientNum() {
-        return ingredientNum;
-    }
-
-    public void setIngredientNum(String[] ingredientNum) {
+    public Link(int idLink, int idRecipe, int[] ingredientNum) {
+        IdLink = idLink;
+        IdRecipe = idRecipe;
         this.ingredientNum = ingredientNum;
     }
 
-    public Link(int idLink, int idRecipe, String[] ingredientNum) {
-        IdLink = idLink;
-        IdRecipe = idRecipe;
+    public int[] getIngredientNum() {
+        return ingredientNum;
+    }
+
+    public void setIngredientNum(int[] ingredientNum) {
         this.ingredientNum = ingredientNum;
     }
 }

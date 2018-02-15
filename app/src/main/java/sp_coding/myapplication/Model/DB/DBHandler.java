@@ -197,19 +197,19 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
-    public void addLink(Link link, String[] ingredientNum) {
+    public void addLink(Link link) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_LINK, link.getIdLink()); // Link ID
         values.put(F_KEY_LINK, link.getIdRecipe()); // Recipe Name
 
-        for (int i = 0; i < ingredientNum.length; i++) {
+        for (int i = 0; i < link.getIngredientNum().length; i++) {
 
 
-            if (ingredientNum[i] != null) {
+            if (link.getIngredientNum()[i] == 0) {
 
-                values.put("num" + (i + 1), ingredientNum[i]);
+                values.put("num" + (i + 1), link.getIngredientNum()[i]);
             }
 
         }
@@ -218,5 +218,66 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // Inserting Row
         db.insert(TABLE_LINK, null, values);
         db.close(); // Closing database connection
+    }
+
+
+    public List<Recipe> getAllRecipes() {
+        List<Recipe> recipeList = new ArrayList<Recipe>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + "recipe";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+
+                // Adding Recipe to list
+                recipeList.add(recipe);
+            } while (cursor.moveToNext());
+        }
+
+        // return Recipe list
+        return recipeList;
+    }
+
+
+    public List<Link> getAllLink() {
+
+        int numArray[] = new int[30];
+        int linkId = 0;
+        int idRecipe = 0;
+
+
+        List<Link> linkList = new ArrayList<Link>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + "recipe";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                //  Link link = new Link(cursor.getInt(0), cursor.getInt(1),cursor.getInt(2),
+                //    cursor.getInt(3));
+
+                linkId = cursor.getInt(0);
+                idRecipe = cursor.getInt(1);
+                numArray[0] = cursor.getInt(2);
+                numArray[1] = cursor.getInt(3);
+
+
+                Link link = new Link(linkId, idRecipe, numArray);
+
+                // Adding Link to list
+                linkList.add(link);
+            } while (cursor.moveToNext());
+        }
+
+        // return Link list
+        return linkList;
     }
 }

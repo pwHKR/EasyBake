@@ -9,10 +9,13 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:title="Add Recipe"
         app:titleTextColor="#FFFFFF">
 
@@ -30,48 +33,55 @@
         android:id="@+id/createRecipeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="393dp" />
+        app:layout_constraintStart_toStartOf="@+id/ingredient2"
+        app:layout_constraintTop_toBottomOf="@+id/ingredient2" />
 
     <EditText
         android:id="@+id/nameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="115dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="115dp" />
+        app:layout_constraintEnd_toEndOf="@+id/infoInput"
+        app:layout_constraintStart_toStartOf="@+id/infoInput"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/infoInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="34dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="InfoText"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="195dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
 
     <EditText
         android:id="@+id/ingredient1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Ingredient1"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="269dp" />
+        app:layout_constraintStart_toStartOf="@+id/infoInput"
+        app:layout_constraintTop_toBottomOf="@+id/infoInput" />
 
     <EditText
         android:id="@+id/ingredient2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Ingredient2"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="331dp" />
+        app:layout_constraintStart_toStartOf="@+id/ingredient1"
+        app:layout_constraintTop_toBottomOf="@+id/ingredient1" />
 
 </android.support.constraint.ConstraintLayout>

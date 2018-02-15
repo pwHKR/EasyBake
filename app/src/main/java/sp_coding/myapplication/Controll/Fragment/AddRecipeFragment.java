@@ -6,11 +6,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.Model.Object.Link;
@@ -55,6 +58,12 @@ public class AddRecipeFragment extends Fragment {
 
                 newRecipe();
 
+                logLink(dbh.getAllLink());
+                logRecipe(dbh.getAllRecipes());
+
+
+
+
 
 
 
@@ -78,16 +87,57 @@ public class AddRecipeFragment extends Fragment {
 
     private void newRecipe() {
 
-        String numArray[] = new String[30];
+        int numArray[] = new int[30];
 
-        numArray[0] = ingredient1.toString();
-        numArray[1] = ingredient2.toString();
+        Log.d("ingre1", ingredient1.getText().toString());
 
-        Recipe recipe = new Recipe(getNewID("recipe"), inputName.toString(), inputInfo.toString());
+        numArray[0] = Integer.parseInt(ingredient1.getText().toString());
+
+        Log.d("intTest", String.valueOf(numArray[0]));
+        numArray[1] = Integer.parseInt(ingredient2.getText().toString());
+
+        Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
 
         recipe.setIdIngredient(link.getIdLink());
 
+        dbh.addRecipe(recipe);
+        dbh.addLink(link);
+
+    }
+
+
+    private void logRecipe(List<Recipe> recipe) {
+
+        int loopCount = 0;
+
+        for (Recipe i : recipe) {
+
+            loopCount++;
+
+            Log.d("Element " + String.valueOf(loopCount) + ": ",
+                    "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n" + "IdLink: "
+                            + i.getIdIngredient());
+        }
+    }
+
+    private void logLink(List<Link> link) {
+
+
+        int temp[] = new int[30];
+
+        int loopCount = 0;
+
+        for (Link i : link) {
+
+            loopCount++;
+
+            temp = i.getIngredientNum();
+
+            Log.d("Element " + String.valueOf(loopCount) + ": ",
+                    "id " + i.getIdLink() + "\n" + "Id Recipe " + i.getIdRecipe() + "\n" + "ingredient 1: " + temp[0] + "\n" + "Ingredient 2 "
+                            + temp[1]);
+        }
     }
 }
