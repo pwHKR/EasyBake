@@ -116,7 +116,7 @@ public class AddRecipeFragment extends Fragment {
 
             loopCount++;
 
-            Log.d("Element " + String.valueOf(loopCount) + ": ",
+            Log.d("RecipeElement " + String.valueOf(loopCount) + ": ",
                     "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n" + "IdLink: "
                             + i.getIdIngredient());
         }
@@ -135,7 +135,7 @@ public class AddRecipeFragment extends Fragment {
 
             temp = i.getIngredientNum();
 
-            Log.d("Element " + String.valueOf(loopCount) + ": ",
+            Log.d("Link Element " + String.valueOf(loopCount) + ": ",
                     "id " + i.getIdLink() + "\n" + "Id Recipe " + i.getIdRecipe() + "\n" + "ingredient 1: " + temp[0] + "\n" + "Ingredient 2 "
                             + temp[1]);
         }
