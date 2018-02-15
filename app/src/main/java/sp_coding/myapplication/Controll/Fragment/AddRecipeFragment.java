@@ -22,6 +22,8 @@ public class AddRecipeFragment extends Fragment {
 
     EditText inputName;
     EditText inputInfo;
+    EditText ingredient1;
+    EditText ingredient2;
 
     @Nullable
     @Override
@@ -30,6 +32,8 @@ public class AddRecipeFragment extends Fragment {
 
         inputName = (EditText) v.findViewById(R.id.nameInput);
         inputInfo = (EditText) v.findViewById(R.id.infoInput);
+        ingredient1 = (EditText) v.findViewById(R.id.ingredient1);
+        ingredient2 = (EditText) v.findViewById(R.id.ingredient2);
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         bottomNavigationView.setVisibility(View.GONE);
