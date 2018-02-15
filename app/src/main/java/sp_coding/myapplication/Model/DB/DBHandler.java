@@ -205,7 +205,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         for (int i = 0; i < link.getIngredientNum().length; i++) {
 
 
-            if (link.getIngredientNum()[i] == 0) {
+            if (link.getIngredientNum()[i] != 0) {
 
                 values.put("num" + (i + 1), link.getIngredientNum()[i]);
             }
