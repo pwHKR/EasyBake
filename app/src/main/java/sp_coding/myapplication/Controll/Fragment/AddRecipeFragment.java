@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -47,8 +48,24 @@ public class AddRecipeFragment extends Fragment {
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         bottomNavigationView.setVisibility(View.GONE);
 
-        Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
+        final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+
+        Button exitButton = v.findViewById(R.id.exitBtn);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
+                RecipeFragment recipeFragment = new RecipeFragment();
+                FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                fragmentTransaction1.replace(R.id.frame, recipeFragment);
+                fragmentTransaction1.commit();
+
+            }
+        });
 
         Button button = v.findViewById(R.id.createRecipeBtn);
         button.setOnClickListener(new View.OnClickListener() {
