@@ -31,6 +31,35 @@ public class AddRecipeFragment extends Fragment {
     EditText inputInfo;
     EditText ingredient1;
     EditText ingredient2;
+    EditText ingredient3;
+    EditText ingredient4;
+    EditText ingredient5;
+    EditText ingredient6;
+    EditText ingredient7;
+    EditText ingredient8;
+    EditText ingredient9;
+    EditText ingredient10;
+    EditText ingredient11;
+    EditText ingredient12;
+    EditText ingredient13;
+    EditText ingredient14;
+    EditText ingredient15;
+    EditText ingredient16;
+    EditText ingredient17;
+    EditText ingredient18;
+    EditText ingredient19;
+    EditText ingredient20;
+    EditText ingredient21;
+    EditText ingredient22;
+    EditText ingredient23;
+    EditText ingredient24;
+    EditText ingredient25;
+    EditText ingredient26;
+    EditText ingredient27;
+    EditText ingredient28;
+    EditText ingredient29;
+    EditText ingredient30;
+
     DBHandler dbh;
 
     @Nullable
@@ -42,6 +71,34 @@ public class AddRecipeFragment extends Fragment {
         inputInfo = v.findViewById(R.id.infoInput);
         ingredient1 = v.findViewById(R.id.ingredient1);
         ingredient2 = v.findViewById(R.id.ingredient2);
+        ingredient3 = v.findViewById(R.id.ingredient3);
+        ingredient4 = v.findViewById(R.id.ingredient4);
+        ingredient5 = v.findViewById(R.id.ingredient5);
+        ingredient6 = v.findViewById(R.id.ingredient6);
+        ingredient7 = v.findViewById(R.id.ingredient7);
+        ingredient8 = v.findViewById(R.id.ingredient8);
+        ingredient9 = v.findViewById(R.id.ingredient9);
+        ingredient10 = v.findViewById(R.id.ingredient10);
+        ingredient11 = v.findViewById(R.id.ingredient11);
+        ingredient12 = v.findViewById(R.id.ingredient12);
+        ingredient13 = v.findViewById(R.id.ingredient13);
+        ingredient14 = v.findViewById(R.id.ingredient14);
+        ingredient15 = v.findViewById(R.id.ingredient15);
+        ingredient16 = v.findViewById(R.id.ingredient16);
+        ingredient17 = v.findViewById(R.id.ingredient17);
+        ingredient18 = v.findViewById(R.id.ingredient18);
+        ingredient19 = v.findViewById(R.id.ingredient19);
+        ingredient20 = v.findViewById(R.id.ingredient20);
+        ingredient21 = v.findViewById(R.id.ingredient21);
+        ingredient22 = v.findViewById(R.id.ingredient22);
+        ingredient23 = v.findViewById(R.id.ingredient23);
+        ingredient24 = v.findViewById(R.id.ingredient24);
+        ingredient25 = v.findViewById(R.id.ingredient25);
+        ingredient26 = v.findViewById(R.id.ingredient26);
+        ingredient27 = v.findViewById(R.id.ingredient27);
+        ingredient28 = v.findViewById(R.id.ingredient28);
+        ingredient29 = v.findViewById(R.id.ingredient29);
+        ingredient30 = v.findViewById(R.id.ingredient30);
 
         dbh = new DBHandler(this.getContext());
 
