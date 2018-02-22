@@ -7,12 +7,12 @@ package sp_coding.myapplication.Model.DB.Table;
 public class Table_Link {
 
 
-    // RecipeIngredient table name
+    // RecipeIngredient link table name
 
     public static final String TABLE_LINK = "link";
 
 
-    // RecipeIngredient table columns names
+    // link table columns names
 
     public static final String KEY_LINK = "IdLink";
     public static final String F_KEY_RECIPE = "IdRecipe";
@@ -50,7 +50,7 @@ public class Table_Link {
 
 
     public static final String CREATE_LINK_TABLE = "CREATE TABLE " + TABLE_LINK + "("
-            + KEY_LINK + " INTEGER PRIMARY KEY," + F_KEY_RECIPE + " INTEGER" + NUM1 + " INTEGER"
+            + KEY_LINK + " INTEGER PRIMARY KEY," + F_KEY_RECIPE + " TEXT" + NUM1 + " INTEGER"
             + NUM2 + " INTEGER" + ")";
 
 

@@ -5,7 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,8 +140,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         ContentValues values = new ContentValues();
         values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
         values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
-        values.put(INFO_RECIPE, recipe.getInfoText());
-        values.put(F_KEY_LINK, recipe.getIdIngredient());
+        values.put(INFO_RECIPE, recipe.getInfoText()); // Info text
+        values.put(F_KEY_LINK, recipe.getIdIngredient()); // Reference to Link table where ingredients are stored
 
 
         // Inserting Row
@@ -199,15 +205,15 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_LINK, link.getIdLink()); // Link ID
-        values.put(F_KEY_LINK, link.getIdRecipe()); // Recipe Name
+        values.put(KEY_LINK, link.getIdLink()); // Link ID (id for Ingredient store to Recipe link table)
+        values.put(F_KEY_LINK, link.getIdRecipe()); // Recipe id
 
         for (int i = 0; i < link.getIngredientNum().length; i++) {
 
 
             if (link.getIngredientNum()[i] != 0) {
 
-                values.put("num" + (i + 1), link.getIngredientNum()[i]);
+                values.put("num" + String.valueOf(i + 1), link.getIngredientNum()[i]);
             }
 
         }
@@ -230,7 +236,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+                Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                        cursor.getInt(3));
 
                 // Adding Recipe to list
                 recipeList.add(recipe);
@@ -251,7 +258,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         List<Link> linkList = new ArrayList<Link>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + "recipe";
+        String selectQuery = "SELECT  * FROM " + "link";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -277,5 +284,31 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         // return Link list
         return linkList;
+    }
+
+    public void backUpToSD() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+            // Backup of database to SDCard
+
+            File newFile = new File(Environment.getExternalStorageDirectory(), "bakeBackup.sqlite");
+            InputStream input = new FileInputStream("/data/data/com.MyApplication/databases/bakeManager");
+            OutputStream output = new FileOutputStream(newFile);
+
+            // transfer bytes from the Input File to the Output File
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = input.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+            output.flush();
+            output.close();
+            input.close();
+            db.close();
+
+        } catch (Exception e) {
+        }
     }
 }

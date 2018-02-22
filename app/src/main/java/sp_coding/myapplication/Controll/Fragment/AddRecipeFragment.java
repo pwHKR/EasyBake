@@ -27,6 +27,7 @@ import sp_coding.myapplication.R;
 
 public class AddRecipeFragment extends Fragment {
 
+
     EditText inputName;
     EditText inputInfo;
     EditText ingredient1;
@@ -66,6 +67,7 @@ public class AddRecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_recipe_fragment, container, false);
+
 
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
@@ -132,8 +134,9 @@ public class AddRecipeFragment extends Fragment {
 
                 newRecipe();
 
-                logLink(dbh.getAllLink());
+
                 logRecipe(dbh.getAllRecipes());
+                logLink(dbh.getAllLink());
 
 
 
@@ -168,16 +171,29 @@ public class AddRecipeFragment extends Fragment {
         numArray[0] = Integer.parseInt(ingredient1.getText().toString());
 
         Log.d("intTest", String.valueOf(numArray[0]));
-        numArray[1] = Integer.parseInt(ingredient2.getText().toString());
+
+
+        // numArray[1] = Integer.parseInt(ingredient2.getText().toString());
 
         Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
 
+        Log.d("value222", String.valueOf(link.getIdLink()));
+
+        Log.d("id900", String.valueOf(getNewID("link")));
+
+
         recipe.setIdIngredient(link.getIdLink());
 
-        dbh.addRecipe(recipe);
+
         dbh.addLink(link);
+
+        dbh.addRecipe(recipe);
+
+        dbh.backUpToSD();
+
+
 
     }
 
@@ -199,11 +215,11 @@ public class AddRecipeFragment extends Fragment {
     private void logLink(List<Link> link) {
 
 
-        int temp[] = new int[30];
-
         int loopCount = 0;
 
         for (Link i : link) {
+
+            int temp[];
 
             loopCount++;
 

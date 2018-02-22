@@ -9,7 +9,7 @@ public class Recipe {
     private int id;
     private String name;
     private String infoText;
-    private int idIngredient; // Tänkte att vi skapar en tabbel enbart för ingridenser i ett recpet och detta Id för vara forign key elr nått.
+    private int idIngredient;
 
 
     public Recipe(int id, String name, String infoText) {
@@ -18,6 +18,13 @@ public class Recipe {
         this.infoText = infoText;
 
 
+    }
+
+    public Recipe(int id, String name, String infoText, int idIngredient) {
+        this.id = id;
+        this.name = name;
+        this.infoText = infoText;
+        this.idIngredient = idIngredient;
     }
 
     public Recipe(int id, String name) {
@@ -29,6 +36,7 @@ public class Recipe {
     public int getId() {
         return id;
     }
+
 
     public void setId(int id) {
         this.id = id;

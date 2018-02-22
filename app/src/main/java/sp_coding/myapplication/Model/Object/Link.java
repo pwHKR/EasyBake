@@ -6,8 +6,8 @@ package sp_coding.myapplication.Model.Object;
 
 public class Link {
 
-    private int IdLink;
-    private int IdRecipe;
+    private int IdLink; // Reference to itself
+    private int IdRecipe; // id reference to a Recipe object
 
     private int[] ingredientNum = new int[30];
 
