@@ -72,6 +72,7 @@ public class AddRecipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_recipe_fragment, container, false);
 
+        dbh = new DBHandler(this.getContext());
 
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
@@ -80,35 +81,61 @@ public class AddRecipeFragment extends Fragment {
         ingredient2 = v.findViewById(R.id.ingredient2);
         ingredientList.add(ingredient2);
         ingredient3 = v.findViewById(R.id.ingredient3);
+        ingredientList.add(ingredient3);
         ingredient4 = v.findViewById(R.id.ingredient4);
+        ingredientList.add(ingredient4);
         ingredient5 = v.findViewById(R.id.ingredient5);
+        ingredientList.add(ingredient5);
         ingredient6 = v.findViewById(R.id.ingredient6);
+        ingredientList.add(ingredient6);
         ingredient7 = v.findViewById(R.id.ingredient7);
+        ingredientList.add(ingredient7);
         ingredient8 = v.findViewById(R.id.ingredient8);
+        ingredientList.add(ingredient8);
         ingredient9 = v.findViewById(R.id.ingredient9);
+        ingredientList.add(ingredient9);
         ingredient10 = v.findViewById(R.id.ingredient10);
+        ingredientList.add(ingredient10);
         ingredient11 = v.findViewById(R.id.ingredient11);
+        ingredientList.add(ingredient11);
         ingredient12 = v.findViewById(R.id.ingredient12);
+        ingredientList.add(ingredient12);
         ingredient13 = v.findViewById(R.id.ingredient13);
+        ingredientList.add(ingredient13);
         ingredient14 = v.findViewById(R.id.ingredient14);
+        ingredientList.add(ingredient14);
         ingredient15 = v.findViewById(R.id.ingredient15);
+        ingredientList.add(ingredient15);
         ingredient16 = v.findViewById(R.id.ingredient16);
+        ingredientList.add(ingredient16);
         ingredient17 = v.findViewById(R.id.ingredient17);
+        ingredientList.add(ingredient17);
         ingredient18 = v.findViewById(R.id.ingredient18);
+        ingredientList.add(ingredient18);
         ingredient19 = v.findViewById(R.id.ingredient19);
+        ingredientList.add(ingredient19);
         ingredient20 = v.findViewById(R.id.ingredient20);
+        ingredientList.add(ingredient20);
         ingredient21 = v.findViewById(R.id.ingredient21);
+        ingredientList.add(ingredient21);
         ingredient22 = v.findViewById(R.id.ingredient22);
+        ingredientList.add(ingredient22);
         ingredient23 = v.findViewById(R.id.ingredient23);
+        ingredientList.add(ingredient23);
         ingredient24 = v.findViewById(R.id.ingredient24);
+        ingredientList.add(ingredient24);
         ingredient25 = v.findViewById(R.id.ingredient25);
+        ingredientList.add(ingredient25);
         ingredient26 = v.findViewById(R.id.ingredient26);
+        ingredientList.add(ingredient26);
         ingredient27 = v.findViewById(R.id.ingredient27);
+        ingredientList.add(ingredient27);
         ingredient28 = v.findViewById(R.id.ingredient28);
+        ingredientList.add(ingredient28);
         ingredient29 = v.findViewById(R.id.ingredient29);
+        ingredientList.add(ingredient29);
         ingredient30 = v.findViewById(R.id.ingredient30);
-
-        dbh = new DBHandler(this.getContext());
+        ingredientList.add(ingredient30);
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         bottomNavigationView.setVisibility(View.GONE);
@@ -175,20 +202,13 @@ public class AddRecipeFragment extends Fragment {
 
         for (int i = 0; i < 30; i++) {
 
+            numArray[i] = Integer.parseInt(ingredientList.get(i).getText().toString());
 
         }
-
-
-        numArray[0] = Integer.parseInt(ingredient1.getText().toString());
-
-
-        numArray[1] = Integer.parseInt(ingredient2.getText().toString());
 
         Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
-
-
 
 
         recipe.setIdIngredient(link.getIdLink());
