@@ -21,7 +21,9 @@ public class Table_Recipe implements Table {
 
 
     public static final String CREATE_RECIPE_TABLE = "CREATE TABLE " + TABLE_RECIPE + "("
-            + KEY_ID_RECIPE + " INTEGER PRIMARY KEY," + NAME_RECIPE + " TEXT" + ")";
+            + KEY_ID_RECIPE + " INTEGER PRIMARY KEY," + NAME_RECIPE + " TEXT,"
+            + INFO_RECIPE + " Text," + F_KEY_LINK + " Integer" +
+            ")";
 
 
     @Override

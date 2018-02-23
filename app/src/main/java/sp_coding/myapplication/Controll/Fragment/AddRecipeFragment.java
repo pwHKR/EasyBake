@@ -191,9 +191,6 @@ public class AddRecipeFragment extends Fragment {
 
         dbh.addRecipe(recipe);
 
-        dbh.backUpToSD();
-
-
 
     }
 

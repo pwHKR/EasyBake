@@ -50,8 +50,19 @@ public class Table_Link {
 
 
     public static final String CREATE_LINK_TABLE = "CREATE TABLE " + TABLE_LINK + "("
-            + KEY_LINK + " INTEGER PRIMARY KEY," + F_KEY_RECIPE + " TEXT" + NUM1 + " INTEGER"
-            + NUM2 + " INTEGER" + ")";
+            + KEY_LINK + " INTEGER PRIMARY KEY," + F_KEY_RECIPE + " Integer," + NUM1 + " INTEGER,"
+            + NUM2 + " Integer," + NUM3 + " Integer," + NUM4 + " Integer," + NUM5 + " Integer," +
+            NUM6 + " Integer," + NUM7 + " Integer," + NUM8 + " Integer," + NUM9 + " Integer," +
+            NUM10 + " Integer," + NUM11 + " Integer," + NUM12 + " Integer," + NUM13 + " Integer," +
+            NUM14 + " Integer," + NUM15 + " Integer," + NUM16 + " Integer," + NUM17 + " Integer," +
+            NUM18 + " Integer," + NUM19 + " Integer," + NUM20 + " Integer," + NUM21 + " Integer," +
+            NUM22 + " Integer," + NUM23 + " Integer," + NUM24 + " Integer," + NUM25 + " Integer," +
+            NUM26 + " Integer," + NUM27 + " Integer," + NUM28 + " Integer," + NUM29 + " Integer," +
+            NUM30 + " Integer" +
+            ")";
+
+
+
 
 
 }
