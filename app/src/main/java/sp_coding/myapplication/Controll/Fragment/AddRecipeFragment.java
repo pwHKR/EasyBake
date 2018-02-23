@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
@@ -26,6 +27,8 @@ import sp_coding.myapplication.R;
  */
 
 public class AddRecipeFragment extends Fragment {
+
+    ArrayList<EditText> ingredientList = new ArrayList<>();
 
 
     EditText inputName;
@@ -63,6 +66,7 @@ public class AddRecipeFragment extends Fragment {
 
     DBHandler dbh;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,7 +76,9 @@ public class AddRecipeFragment extends Fragment {
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
         ingredient1 = v.findViewById(R.id.ingredient1);
+        ingredientList.add(ingredient1);
         ingredient2 = v.findViewById(R.id.ingredient2);
+        ingredientList.add(ingredient2);
         ingredient3 = v.findViewById(R.id.ingredient3);
         ingredient4 = v.findViewById(R.id.ingredient4);
         ingredient5 = v.findViewById(R.id.ingredient5);
@@ -166,22 +172,23 @@ public class AddRecipeFragment extends Fragment {
 
         int numArray[] = new int[30];
 
-        Log.d("ingre1", ingredient1.getText().toString());
+
+        for (int i = 0; i < 30; i++) {
+
+
+        }
+
 
         numArray[0] = Integer.parseInt(ingredient1.getText().toString());
 
-        Log.d("intTest", String.valueOf(numArray[0]));
 
-
-        // numArray[1] = Integer.parseInt(ingredient2.getText().toString());
+        numArray[1] = Integer.parseInt(ingredient2.getText().toString());
 
         Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
 
-        Log.d("value222", String.valueOf(link.getIdLink()));
 
-        Log.d("id900", String.valueOf(getNewID("link")));
 
 
         recipe.setIdIngredient(link.getIdLink());
