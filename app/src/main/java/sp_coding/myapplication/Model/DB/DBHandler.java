@@ -121,7 +121,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Ingredient ingredient = new Ingredient(cursor.getInt(0), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
+        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
         // return Ingredient
         cursor.close();
         return ingredient;
@@ -188,7 +188,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // Select All Query
         String selectQuery = "SELECT  * FROM " + "recipe";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
@@ -218,12 +218,12 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         values.put(KEY_LINK, link.getIdLink()); // Link ID (id for Ingredient store to Recipe link table)
         values.put(F_KEY_RECIPE, link.getIdRecipe()); // Recipe id
 
-        for (int i = 0; i < link.getIngredientNum().length; i++) {
+        for (int i = 0; i < link.getListIngredient().length; i++) {
 
 
-            if (link.getIngredientNum()[i] != 0) {
+            if (link.getListIngredient()[i] != 0) {
 
-                values.put("num" + String.valueOf(i + 1), link.getIngredientNum()[i]);
+                values.put("num" + String.valueOf(i + 1), link.getListIngredient()[i]);
             }
 
         }
@@ -237,40 +237,82 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     public List<Link> getAllLink() {
 
-        int numArray[] = new int[30];
-        int linkId = 0;
-        int idRecipe = 0;
+
+        int linkId;
+        int idRecipe;
 
 
         List<Link> linkList = new ArrayList<Link>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + "link";
+        String selectQuery = "SELECT * FROM link";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
+
+                int numArray[] = new int[30];
                 //  Link link = new Link(cursor.getInt(0), cursor.getInt(1),cursor.getInt(2),
                 //    cursor.getInt(3));
 
                 linkId = cursor.getInt(0);
                 idRecipe = cursor.getInt(1);
-                numArray[0] = cursor.getInt(2);
-                numArray[1] = cursor.getInt(3);
+
+                for (int i = 0; i < 29; i++) {
+                    numArray[i] = cursor.getInt(i + 2);
+                }
+
 
 
                 Link link = new Link(linkId, idRecipe, numArray);
 
                 // Adding Link to list
                 linkList.add(link);
+
+                //Arrays.fill(numArray,0);
             } while (cursor.moveToNext());
         }
+
+        cursor.close();
 
         // return Link list
         return linkList;
     }
+
+    public String getIngredientName(int id) {
+
+        String name = "";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String querry = "Select name FROM ingredient WHERE id =" + String.valueOf(id);
+
+        Cursor cursor = db.rawQuery(querry, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                name = cursor.getString(0);
+
+
+            } while (cursor.moveToNext());
+        }
+
+        // return recipe
+
+
+        cursor.close();
+
+        return name;
+
+
+    }
+
+
+
+
 
 
     // Utility methods

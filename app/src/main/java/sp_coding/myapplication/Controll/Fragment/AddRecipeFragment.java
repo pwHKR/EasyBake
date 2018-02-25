@@ -74,6 +74,7 @@ public class AddRecipeFragment extends Fragment {
 
         dbh = new DBHandler(this.getContext());
 
+
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
         ingredient1 = v.findViewById(R.id.ingredient1);
@@ -137,16 +138,20 @@ public class AddRecipeFragment extends Fragment {
         ingredient30 = v.findViewById(R.id.ingredient30);
         ingredientList.add(ingredient30);
 
+
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         bottomNavigationView.setVisibility(View.GONE);
 
         final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
 
         Button exitButton = v.findViewById(R.id.exitBtn);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                testName();
+                logLinkListv2();
 
                 BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
                 bottomNavigationView.setVisibility(View.VISIBLE);
@@ -169,12 +174,12 @@ public class AddRecipeFragment extends Fragment {
 
 
                 logRecipe(dbh.getAllRecipes());
-                logLink(dbh.getAllLink());
 
+                //logLinkList(); //
+                // logLinkListv2();
 
-
-
-
+                // logLink(dbh.getAllLink());
+                //logIngredientStock(dbh.getIngredientStock(5));
 
 
             }
@@ -202,7 +207,10 @@ public class AddRecipeFragment extends Fragment {
 
         for (int i = 0; i < 30; i++) {
 
-            numArray[i] = Integer.parseInt(ingredientList.get(i).getText().toString());
+            if (!ingredientList.get(i).getText().toString().equalsIgnoreCase("")) {
+
+                numArray[i] = Integer.parseInt(ingredientList.get(i).getText().toString());
+            }
 
         }
 
@@ -217,6 +225,8 @@ public class AddRecipeFragment extends Fragment {
         dbh.addLink(link);
 
         dbh.addRecipe(recipe);
+
+        refreshIngredientField();
 
 
     }
@@ -236,22 +246,142 @@ public class AddRecipeFragment extends Fragment {
         }
     }
 
-    private void logLink(List<Link> link) {
+
+    private void logIngredientStock(Link link) {
 
 
-        int loopCount = 0;
+        String ingredientStock = "";
 
-        for (Link i : link) {
+        int temp[];
 
-            int temp[];
 
-            loopCount++;
+        temp = link.getListIngredient();
 
-            temp = i.getIngredientNum();
+        for (int p = 0; p < temp.length; p++) {
 
-            Log.d("Link Element " + String.valueOf(loopCount) + ": ",
-                    "id " + i.getIdLink() + "\n" + "Id Recipe " + i.getIdRecipe() + "\n" + "ingredient 1: " + temp[0] + "\n" + "Ingredient 2 "
-                            + temp[1]);
+
+            ingredientStock = ingredientStock + "ingredient " + (p + 1) + ": " + dbh.getIngredient(p).getName() + "\n";
+        }
+
+        Log.d("Ingredient stock:  ",
+                "id " + link.getIdLink() + "\n" + "Id Recipe " + link.getIdRecipe() + "\n" + ingredientStock);
+
+
+    }
+
+    public void refreshIngredientField() {
+
+
+        ingredientList.clear();
+        ingredientList.trimToSize();
+
+
+        ingredientList.add(ingredient1);
+
+        ingredientList.add(ingredient2);
+
+        ingredientList.add(ingredient3);
+
+        ingredientList.add(ingredient4);
+
+        ingredientList.add(ingredient5);
+
+        ingredientList.add(ingredient6);
+
+        ingredientList.add(ingredient7);
+
+        ingredientList.add(ingredient8);
+
+        ingredientList.add(ingredient9);
+
+        ingredientList.add(ingredient10);
+
+        ingredientList.add(ingredient11);
+
+        ingredientList.add(ingredient12);
+
+        ingredientList.add(ingredient13);
+
+        ingredientList.add(ingredient14);
+
+        ingredientList.add(ingredient15);
+
+        ingredientList.add(ingredient16);
+
+        ingredientList.add(ingredient17);
+
+        ingredientList.add(ingredient18);
+
+        ingredientList.add(ingredient19);
+
+        ingredientList.add(ingredient20);
+
+        ingredientList.add(ingredient21);
+
+        ingredientList.add(ingredient22);
+
+        ingredientList.add(ingredient23);
+
+        ingredientList.add(ingredient24);
+
+        ingredientList.add(ingredient25);
+
+        ingredientList.add(ingredient26);
+
+        ingredientList.add(ingredient27);
+
+        ingredientList.add(ingredient28);
+
+        ingredientList.add(ingredient29);
+
+        ingredientList.add(ingredient30);
+
+
+    }
+
+    private void logLinkList() {
+
+
+        List<Link> list = dbh.getAllLink();
+
+
+        for (Link link : list) {
+
+            // Log.d("Link ID ", link.getIdLink()+"\n");
+            link.ListIterator();
+
         }
     }
+
+    private void logLinkListv2() {
+
+
+        List<Link> list = dbh.getAllLink();
+
+
+        for (Link link : list) {
+
+
+            Log.d("Link ID " + link.getIdLink(), "-----------\n");
+
+
+            for (int i : link.getListIngredient()) {
+
+
+                if (i != 0)
+
+                    Log.d("Included", dbh.getIngredientName(i) + "\n");
+
+
+            }
+
+
+        }
+    }
+
+    private void testName() {
+
+        Log.d("namn", dbh.getIngredientName(16));
+    }
 }
+

@@ -1,5 +1,7 @@
 package sp_coding.myapplication.Model.Object;
 
+import android.util.Log;
+
 /**
  * Created by woojen on 2018-02-15.
  */
@@ -9,7 +11,7 @@ public class Link {
     private int IdLink; // Reference to itself
     private int IdRecipe; // id reference to a Recipe object
 
-    private int[] ingredientNum = new int[30];
+    private int[] listIngredient = new int[30];
 
 
     public int getIdLink() {
@@ -28,17 +30,38 @@ public class Link {
         IdRecipe = idRecipe;
     }
 
-    public Link(int idLink, int idRecipe, int[] ingredientNum) {
+    public Link(int idLink, int idRecipe, int[] listIngredient) {
         IdLink = idLink;
         IdRecipe = idRecipe;
-        this.ingredientNum = ingredientNum;
+        this.listIngredient = listIngredient;
     }
 
-    public int[] getIngredientNum() {
-        return ingredientNum;
+    public int[] getListIngredient() {
+        return listIngredient;
     }
 
-    public void setIngredientNum(int[] ingredientNum) {
-        this.ingredientNum = ingredientNum;
+    public void setListIngredient(int[] listIngredient) {
+        this.listIngredient = listIngredient;
     }
+
+    public void ListIterator() {
+
+        Log.d("Link ID " + getIdLink(), "-----------\n");
+
+
+        for (int i : listIngredient) {
+
+
+            if (i != 0)
+
+                Log.d("Included", +i + "\n");
+
+
+        }
+
+
+    }
+
+
 }
+
