@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
-import sp_coding.myapplication.Model.Object.Link;
-import sp_coding.myapplication.Model.Object.Recipe;
+import sp_coding.myapplication.Model.System.Main.Link;
+import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.R;
 
 /**
@@ -150,7 +150,7 @@ public class AddRecipeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                testName();
+                // testName();
                 logLinkListv2();
 
                 BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
@@ -219,7 +219,7 @@ public class AddRecipeFragment extends Fragment {
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
 
 
-        recipe.setIdIngredient(link.getIdLink());
+        recipe.setIdIngredient(link.getId());
 
 
         dbh.addLink(link);
@@ -264,7 +264,7 @@ public class AddRecipeFragment extends Fragment {
         }
 
         Log.d("Ingredient stock:  ",
-                "id " + link.getIdLink() + "\n" + "Id Recipe " + link.getIdRecipe() + "\n" + ingredientStock);
+                "id " + link.getId() + "\n" + "Id Recipe " + link.getIdRecipe() + "\n" + ingredientStock);
 
 
     }
@@ -347,7 +347,7 @@ public class AddRecipeFragment extends Fragment {
 
         for (Link link : list) {
 
-            // Log.d("Link ID ", link.getIdLink()+"\n");
+            // Log.d("Link ID ", link.getId()+"\n");
             link.ListIterator();
 
         }
@@ -362,7 +362,7 @@ public class AddRecipeFragment extends Fragment {
         for (Link link : list) {
 
 
-            Log.d("Link ID " + link.getIdLink(), "-----------\n");
+            Log.d("Link ID " + link.getId(), "-----------\n");
 
 
             for (int i : link.getListIngredient()) {

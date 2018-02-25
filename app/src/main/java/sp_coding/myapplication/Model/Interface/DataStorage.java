@@ -2,8 +2,9 @@ package sp_coding.myapplication.Model.Interface;
 
 import java.util.List;
 
-import sp_coding.myapplication.Model.Object.Ingredient;
-import sp_coding.myapplication.Model.Object.Recipe;
+import sp_coding.myapplication.Model.System.Main.Ingredient;
+import sp_coding.myapplication.Model.System.Main.Link;
+import sp_coding.myapplication.Model.System.Main.Recipe;
 
 /**
  * Created by woojen on 2018-02-08.
@@ -15,14 +16,9 @@ public interface DataStorage {
 
     // Ingredient storing
 
-    // Set
     void addIngredient(Ingredient ingredient);
 
-    // Get
-
     Ingredient getIngredient(int id);
-
-    // Print
 
     List<Ingredient> getAllIngredients();
 
@@ -30,13 +26,23 @@ public interface DataStorage {
 
     // Recipe storing
 
-
-    // Set
     void addRecipe(Recipe recipe);
 
-
-    // Get
     Recipe getRecipe(int id);
 
+    List<Recipe> getAllRecipes();
+
+
+    // Link storing
+
+    void addLink(Link link);
+
+    List<Link> getAllLink();
+
+    // Storage Utility methods
+
+    String getIngredientName(int id);
+
+    int getCount(String table);
 
 }

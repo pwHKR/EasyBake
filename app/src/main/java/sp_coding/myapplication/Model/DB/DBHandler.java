@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.Interface.DataStorage;
-import sp_coding.myapplication.Model.Object.Ingredient;
-import sp_coding.myapplication.Model.Object.Link;
-import sp_coding.myapplication.Model.Object.Recipe;
-import sp_coding.myapplication.Model.System.Logic;
+import sp_coding.myapplication.Model.System.Main.Ingredient;
+import sp_coding.myapplication.Model.System.Main.Link;
+import sp_coding.myapplication.Model.System.Main.Recipe;
+import sp_coding.myapplication.Model.Utility.Logic;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
@@ -215,7 +215,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_LINK, link.getIdLink()); // Link ID (id for Ingredient store to Recipe link table)
+        values.put(KEY_LINK, link.getId()); // Link ID (id for Ingredient store to Recipe link table)
         values.put(F_KEY_RECIPE, link.getIdRecipe()); // Recipe id
 
         for (int i = 0; i < link.getListIngredient().length; i++) {
