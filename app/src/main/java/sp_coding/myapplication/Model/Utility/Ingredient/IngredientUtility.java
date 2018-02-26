@@ -1,11 +1,9 @@
 package sp_coding.myapplication.Model.Utility.Ingredient;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.util.List;
 
-import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 
@@ -18,11 +16,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 public class IngredientUtility extends Utility {
 
 
-    public void setContext(Context context) {
-        this.context = context;
 
-        dbh = new DBHandler(context);
-    }
 
 
     public IngredientUtility() {
