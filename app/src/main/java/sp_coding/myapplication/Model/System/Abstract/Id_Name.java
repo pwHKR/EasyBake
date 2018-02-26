@@ -7,7 +7,7 @@ package sp_coding.myapplication.Model.System.Abstract;
 public abstract class Id_Name extends Id {
     protected String name;
 
-    public Id_Name(int id, String name) {
+    protected Id_Name(int id, String name) {
         super(id);
         this.name = name;
     }

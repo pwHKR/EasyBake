@@ -16,7 +16,9 @@ import sp_coding.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
     DBHandler dbh = new DBHandler(this);
+
 
 
 
@@ -117,4 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
         TestDB();
     }
+
+
 }

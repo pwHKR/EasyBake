@@ -13,7 +13,7 @@ import sp_coding.myapplication.Model.Interface.DataStorage;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.System.Main.Link;
 import sp_coding.myapplication.Model.System.Main.Recipe;
-import sp_coding.myapplication.Model.Utility.Logic;
+import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
@@ -38,7 +38,8 @@ import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.TABLE_RECIPE;
 
 public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
-    Logic logic = new Logic();
+    IngredientUtility ingredientUtility = new IngredientUtility();
+
 
 
     // All Static variables
@@ -47,6 +48,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     // Database Name
     private static final String DATABASE_NAME = "bakeManager";
+
 
 
     @Override
@@ -111,7 +113,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     public Ingredient getIngredient(int id) {
 
 
-        Logic logic = new Logic();
+        IngredientUtility ingredientUtility = new IngredientUtility();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -121,7 +123,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
+        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), ingredientUtility.convertTinyInt(cursor.getInt(2)));
         // return Ingredient
         cursor.close();
         return ingredient;
@@ -138,7 +140,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), logic.convertTinyInt(cursor.getInt(2)));
+                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), ingredientUtility.convertTinyInt(cursor.getInt(2)));
 
                 // Adding Ingredient to list
                 ingredientList.add(ingredient);
@@ -309,10 +311,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
     }
-
-
-
-
 
 
     // Utility methods

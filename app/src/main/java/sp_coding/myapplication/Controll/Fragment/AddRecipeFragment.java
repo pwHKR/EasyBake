@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
-import sp_coding.myapplication.Model.System.Main.Link;
-import sp_coding.myapplication.Model.System.Main.Recipe;
+import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
+import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;
 
 /**
@@ -28,7 +26,9 @@ import sp_coding.myapplication.R;
 
 public class AddRecipeFragment extends Fragment {
 
-    ArrayList<EditText> ingredientList = new ArrayList<>();
+    ArrayList<EditText> ingredientList;
+    RecipeUtility recipeUtility;
+    LinkUtility linkUtility;
 
 
     EditText inputName;
@@ -72,7 +72,14 @@ public class AddRecipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_recipe_fragment, container, false);
 
-        dbh = new DBHandler(this.getContext());
+        ingredientList = new ArrayList<>();
+        recipeUtility = new RecipeUtility();
+        linkUtility = new LinkUtility();
+
+        recipeUtility.setContext(this.getContext());
+        linkUtility.setContext(this.getContext());
+
+
 
 
         inputName = v.findViewById(R.id.nameInput);
@@ -151,7 +158,7 @@ public class AddRecipeFragment extends Fragment {
             public void onClick(View v) {
 
                 // testName();
-                logLinkListv2();
+                linkUtility.logLinkListv2();
 
                 BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
                 bottomNavigationView.setVisibility(View.VISIBLE);
@@ -170,16 +177,15 @@ public class AddRecipeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                newRecipe();
+                recipeUtility.newRecipe(ingredientList, inputName, inputInfo);
+                refreshIngredientField();
 
 
-                logRecipe(dbh.getAllRecipes());
+                recipeUtility.logRecipe();
 
-                //logLinkList(); //
-                // logLinkListv2();
+                //linkUtility.logLinkList(); //
+                // linkUtility.logLinkListv2();
 
-                // logLink(dbh.getAllLink());
-                //logIngredientStock(dbh.getIngredientStock(5));
 
 
             }
@@ -193,81 +199,8 @@ public class AddRecipeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private int getNewID(String table) {
-
-        int result = dbh.getCount(table) + 1;
-
-        return result;
-    }
-
-    private void newRecipe() {
-
-        int numArray[] = new int[30];
 
 
-        for (int i = 0; i < 30; i++) {
-
-            if (!ingredientList.get(i).getText().toString().equalsIgnoreCase("")) {
-
-                numArray[i] = Integer.parseInt(ingredientList.get(i).getText().toString());
-            }
-
-        }
-
-        Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
-
-        Link link = new Link(getNewID("link"), recipe.getId(), numArray);
-
-
-        recipe.setIdIngredient(link.getId());
-
-
-        dbh.addLink(link);
-
-        dbh.addRecipe(recipe);
-
-        refreshIngredientField();
-
-
-    }
-
-
-    private void logRecipe(List<Recipe> recipe) {
-
-        int loopCount = 0;
-
-        for (Recipe i : recipe) {
-
-            loopCount++;
-
-            Log.d("RecipeElement " + String.valueOf(loopCount) + ": ",
-                    "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n" + "IdLink: "
-                            + i.getIdIngredient());
-        }
-    }
-
-
-    private void logIngredientStock(Link link) {
-
-
-        String ingredientStock = "";
-
-        int temp[];
-
-
-        temp = link.getListIngredient();
-
-        for (int p = 0; p < temp.length; p++) {
-
-
-            ingredientStock = ingredientStock + "ingredient " + (p + 1) + ": " + dbh.getIngredient(p).getName() + "\n";
-        }
-
-        Log.d("Ingredient stock:  ",
-                "id " + link.getId() + "\n" + "Id Recipe " + link.getIdRecipe() + "\n" + ingredientStock);
-
-
-    }
 
     public void refreshIngredientField() {
 
@@ -339,49 +272,7 @@ public class AddRecipeFragment extends Fragment {
 
     }
 
-    private void logLinkList() {
 
 
-        List<Link> list = dbh.getAllLink();
-
-
-        for (Link link : list) {
-
-            // Log.d("Link ID ", link.getId()+"\n");
-            link.ListIterator();
-
-        }
-    }
-
-    private void logLinkListv2() {
-
-
-        List<Link> list = dbh.getAllLink();
-
-
-        for (Link link : list) {
-
-
-            Log.d("Link ID " + link.getId(), "-----------\n");
-
-
-            for (int i : link.getListIngredient()) {
-
-
-                if (i != 0)
-
-                    Log.d("Included", dbh.getIngredientName(i) + "\n");
-
-
-            }
-
-
-        }
-    }
-
-    private void testName() {
-
-        Log.d("namn", dbh.getIngredientName(16));
-    }
 }
 

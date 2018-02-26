@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
-import sp_coding.myapplication.Model.Utility.Logic;
+import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.R;
 
 /**
@@ -26,11 +25,11 @@ import sp_coding.myapplication.R;
 
 public class AddIngredientFragment extends Fragment {
 
-
+    boolean isTrue;
     DBHandler dbh;
-    Logic logic;
+    IngredientUtility ingredientUtility;
 
-    List<Ingredient> forTesting = new ArrayList<>();
+    List<Ingredient> allIngredientList;
 
     @Nullable
     @Override
@@ -42,28 +41,25 @@ public class AddIngredientFragment extends Fragment {
 
         final EditText editText = v.findViewById(R.id.editText);
         final CheckBox checkBox = v.findViewById(R.id.checkBox);
+        allIngredientList = new ArrayList<>();
         dbh = new DBHandler(this.getContext());
-        logic = new Logic();
+        ingredientUtility = new IngredientUtility();
+        ingredientUtility.setContext(this.getContext());
 
         Button send = v.findViewById(R.id.add_ingredient);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean isTrue;
-
 
                 isTrue = checkBox.isChecked();
 
 
-                Log.d("isChecked:", String.valueOf(isTrue));
+                ingredientUtility.NewIngredient(editText.getText().toString(), isTrue);
 
+                allIngredientList = dbh.getAllIngredients();
 
-                NewIngredient(editText.getText().toString(), isTrue);
-
-                forTesting = dbh.getAllIngredients();
-
-                logIngredient(forTesting);
+                ingredientUtility.logIngredient(allIngredientList);
 
 
             }
@@ -78,46 +74,8 @@ public class AddIngredientFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void NewIngredient(String name, boolean inStock) {
-
-        int newId;
-
-        int inStockTinyInt = logic.convertBoolean(inStock);
-
-        Log.d("FCT", String.valueOf(inStockTinyInt));
-
-        newId = getNewID("ingredient");
-
-        Ingredient ingredient = new Ingredient(newId, name, inStockTinyInt);
-
-
-        dbh.addIngredient(ingredient);
-    }
-
-    private int getNewID(String table) {
-
-        int result = dbh.getCount(table) + 1;
-
-        return result;
-    }
-
-
-    // temp  Method used for testing db
-    private void logIngredient(List<Ingredient> ingredients) {
-
-        int loopCount = 0;
-
-        for (Ingredient i : ingredients) {
-
-            loopCount++;
-
-            Log.d("Element " + String.valueOf(loopCount) + ": ",
-                    "name: " + i.getName() + "\n" + "id: " + i.getId() + "\n" + "in stock: "
-                            + i.isInStock());
-        }
-
-
-    }
-
 
 }
+
+
+
