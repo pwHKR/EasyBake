@@ -14,7 +14,7 @@ import sp_coding.myapplication.Controll.Fragment.RecipeFragment;
 import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.R;
 
-public class EasyBake_AP_Coding extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     DBHandler dbh = new DBHandler(this);
 
@@ -103,7 +103,7 @@ public class EasyBake_AP_Coding extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy_bake__ap__coding);
+        setContentView(R.layout.main_activity);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 

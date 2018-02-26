@@ -8,7 +8,7 @@
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context="sp_coding.myapplication.Controll.Activity.EasyBake_AP_Coding">
+    tools:context="sp_coding.myapplication.Controll.Activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/frame"
