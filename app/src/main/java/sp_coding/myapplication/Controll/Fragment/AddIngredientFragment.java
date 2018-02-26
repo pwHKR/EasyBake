@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.DB.DBHandler;
+import sp_coding.myapplication.Model.Interface.Utility.Util;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.R;
@@ -23,7 +24,7 @@ import sp_coding.myapplication.R;
  * Created by andreas on 2018-02-08.
  */
 
-public class AddIngredientFragment extends Fragment {
+public class AddIngredientFragment extends Fragment implements Util {
 
     boolean isTrue;
     DBHandler dbh;
@@ -42,10 +43,7 @@ public class AddIngredientFragment extends Fragment {
         final EditText editText = v.findViewById(R.id.editText);
         final CheckBox checkBox = v.findViewById(R.id.checkBox);
         allIngredientList = new ArrayList<>();
-        dbh = new DBHandler(this.getContext());
-        ingredientUtility = new IngredientUtility();
-        ingredientUtility.setContext(this.getContext());
-
+        IniUtilityClass();
         Button send = v.findViewById(R.id.add_ingredient);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +73,14 @@ public class AddIngredientFragment extends Fragment {
     }
 
 
+    public void IniUtilityClass() {
+
+
+        dbh = new DBHandler(this.getContext());
+        ingredientUtility = new IngredientUtility();
+        ingredientUtility.setContext(this.getContext());
+
+    }
+
+
 }
-
-
-

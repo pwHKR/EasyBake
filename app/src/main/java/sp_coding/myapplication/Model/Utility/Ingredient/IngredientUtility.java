@@ -10,7 +10,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 /**
  * Created by woojen on 2018-02-07.
  *
- * Must set context in order for db object to work
+ * Use with Util Interface on fragments or activity's using DBHandler objects
  */
 
 public class IngredientUtility extends Utility {

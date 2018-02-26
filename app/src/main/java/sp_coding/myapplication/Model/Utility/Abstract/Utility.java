@@ -6,7 +6,9 @@ import sp_coding.myapplication.Model.DB.DBHandler;
 
 /**
  * Created by woojen on 2018-02-26.
- * Must set context in order for db object to work
+ *
+ * Use with Util Interface on fragments or activity's using DBHandler objects
+ *
  */
 
 public abstract class Utility {

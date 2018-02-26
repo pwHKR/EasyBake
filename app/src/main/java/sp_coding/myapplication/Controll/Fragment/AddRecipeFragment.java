@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-import sp_coding.myapplication.Model.DB.DBHandler;
+import sp_coding.myapplication.Model.Interface.Utility.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;
@@ -24,7 +24,7 @@ import sp_coding.myapplication.R;
  * Created by andreas on 2018-02-15.
  */
 
-public class AddRecipeFragment extends Fragment {
+public class AddRecipeFragment extends Fragment implements Util {
 
     ArrayList<EditText> ingredientList;
     RecipeUtility recipeUtility;
@@ -64,7 +64,7 @@ public class AddRecipeFragment extends Fragment {
     EditText ingredient29;
     EditText ingredient30;
 
-    DBHandler dbh;
+
 
 
     @Nullable
@@ -73,11 +73,9 @@ public class AddRecipeFragment extends Fragment {
         View v = inflater.inflate(R.layout.add_recipe_fragment, container, false);
 
         ingredientList = new ArrayList<>();
-        recipeUtility = new RecipeUtility();
-        linkUtility = new LinkUtility();
 
-        recipeUtility.setContext(this.getContext());
-        linkUtility.setContext(this.getContext());
+        IniUtilityClass();
+
 
 
 
@@ -273,6 +271,13 @@ public class AddRecipeFragment extends Fragment {
     }
 
 
+    @Override
+    public void IniUtilityClass() {
+        recipeUtility = new RecipeUtility();
+        linkUtility = new LinkUtility();
 
+        recipeUtility.setContext(this.getContext());
+        linkUtility.setContext(this.getContext());
+    }
 }
 
