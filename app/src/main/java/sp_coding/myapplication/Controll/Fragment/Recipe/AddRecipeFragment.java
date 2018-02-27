@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Controll.Fragment;
+package sp_coding.myapplication.Controll.Fragment.Recipe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-import sp_coding.myapplication.Model.Interface.Utility.Util;
+import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;

@@ -1,6 +1,6 @@
 package sp_coding.myapplication.Model.DB.Table;
 
-import sp_coding.myapplication.Model.Interface.DB.Table;
+import sp_coding.myapplication.Model.DB.Interface.Table;
 
 /**
  * Created by woojen on 2018-02-14.

@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Controll.Fragment;
+package sp_coding.myapplication.Controll.Fragment.Ingredient;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,10 +14,9 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import sp_coding.myapplication.Model.DB.DBHandler;
-import sp_coding.myapplication.Model.Interface.Utility.Util;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
+import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.R;
 
 /**
@@ -27,7 +26,6 @@ import sp_coding.myapplication.R;
 public class AddIngredientFragment extends Fragment implements Util {
 
     boolean isTrue;
-    DBHandler dbh;
     IngredientUtility ingredientUtility;
 
     List<Ingredient> allIngredientList;
@@ -55,7 +53,7 @@ public class AddIngredientFragment extends Fragment implements Util {
 
                 ingredientUtility.NewIngredient(editText.getText().toString(), isTrue);
 
-                allIngredientList = dbh.getAllIngredients();
+                allIngredientList = ingredientUtility.getCompleteList();
 
                 ingredientUtility.logIngredient(allIngredientList);
 
@@ -76,7 +74,6 @@ public class AddIngredientFragment extends Fragment implements Util {
     public void IniUtilityClass() {
 
 
-        dbh = new DBHandler(this.getContext());
         ingredientUtility = new IngredientUtility();
         ingredientUtility.setContext(this.getContext());
 

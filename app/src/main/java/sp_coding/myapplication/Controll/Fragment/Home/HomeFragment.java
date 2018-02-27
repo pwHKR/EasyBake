@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Controll.Fragment;
+package sp_coding.myapplication.Controll.Fragment.Home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Model.Interface.Utility;
+package sp_coding.myapplication.Model.Utility.Interface;
 
 /**
  * Created by woojen on 2018-02-26.
@@ -11,7 +11,7 @@ package sp_coding.myapplication.Model.Interface.Utility;
  * <p>
  * // public void IniUtilityClass() {
  * <p>
- * dbh = new DBHandler(this.getContext());
+
  * ingredientUtility = new IngredientUtility();
  * ingredientUtility.setContext(this.getContext());
  */

@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Model.Interface.Storage;
+package sp_coding.myapplication.Model.DB.Interface;
 
 import java.util.List;
 

@@ -16,9 +16,6 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 public class IngredientUtility extends Utility {
 
 
-
-
-
     public IngredientUtility() {
 
     }
@@ -82,6 +79,7 @@ public class IngredientUtility extends Utility {
 
     public void logIngredient(List<Ingredient> ingredients) {
 
+
         int loopCount = 0;
 
         for (Ingredient i : ingredients) {
@@ -94,6 +92,13 @@ public class IngredientUtility extends Utility {
         }
 
     }
+
+    public List<Ingredient> getCompleteList() {
+
+        return dbh.getAllIngredients();
+    }
+
+
 
 
 }

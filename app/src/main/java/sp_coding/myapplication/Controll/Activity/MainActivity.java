@@ -8,9 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import sp_coding.myapplication.Controll.Fragment.HomeFragment;
-import sp_coding.myapplication.Controll.Fragment.IngredientFragment;
-import sp_coding.myapplication.Controll.Fragment.RecipeFragment;
+import sp_coding.myapplication.Controll.Fragment.Home.HomeFragment;
+import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
+import sp_coding.myapplication.Controll.Fragment.Recipe.RecipeFragment;
 import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.R;
 

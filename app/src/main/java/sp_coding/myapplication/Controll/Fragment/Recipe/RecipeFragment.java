@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Controll.Fragment;
+package sp_coding.myapplication.Controll.Fragment.Recipe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ public class RecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.recipe_fragment, container, false);
-        Button button = (Button) v.findViewById(R.id.add_recipe);
+        Button button = v.findViewById(R.id.add_recipe);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

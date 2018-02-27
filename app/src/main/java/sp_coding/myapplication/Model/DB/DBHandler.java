@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import sp_coding.myapplication.Model.Interface.Storage.DataStorage;
+import sp_coding.myapplication.Model.DB.Interface.DataStorage;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.System.Main.Link;
 import sp_coding.myapplication.Model.System.Main.Recipe;

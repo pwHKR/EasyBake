@@ -1,4 +1,4 @@
-package sp_coding.myapplication.Controll.Fragment;
+package sp_coding.myapplication.Controll.Fragment.Ingredient;
 
 
 import android.os.Bundle;
@@ -20,7 +20,7 @@ public class IngredientFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.ingredient_fragment, container, false);
 
-        Button button = (Button) v.findViewById(R.id.addIngredient);
+        Button button = v.findViewById(R.id.addIngredient);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
