@@ -14,7 +14,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
  * Created by woojen on 2018-02-26.
  *
  *
- * Use with Util Interface on fragments or activity's using DBHandler objects
+ * Use with Util Interface on fragments or activity's
  */
 
 public class RecipeUtility extends Utility {

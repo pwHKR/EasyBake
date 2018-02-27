@@ -38,15 +38,24 @@ import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.TABLE_RECIPE;
 
 public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
-    IngredientUtility ingredientUtility = new IngredientUtility();
-
-
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
     private static final String DATABASE_NAME = "bakeManager";
+
+    private static DBHandler sInstance;
+
+    public static synchronized DBHandler getInstance(Context context) {
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+
+        if (sInstance == null) {
+            sInstance = new DBHandler(context.getApplicationContext());
+        }
+        return sInstance;
+    }
 
 
 
@@ -87,7 +96,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
-    public DBHandler(Context context) {
+    private DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -122,7 +131,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), ingredientUtility.convertTinyInt(cursor.getInt(2)));
+        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2)));
         // return Ingredient
         cursor.close();
         return ingredient;
@@ -139,7 +148,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), ingredientUtility.convertTinyInt(cursor.getInt(2)));
+                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2)));
 
                 // Adding Ingredient to list
                 ingredientList.add(ingredient);

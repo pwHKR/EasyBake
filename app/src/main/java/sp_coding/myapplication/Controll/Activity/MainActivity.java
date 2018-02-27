@@ -11,56 +11,10 @@ import android.view.MenuItem;
 import sp_coding.myapplication.Controll.Fragment.Home.HomeFragment;
 import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
 import sp_coding.myapplication.Controll.Fragment.Recipe.RecipeFragment;
-import sp_coding.myapplication.Model.DB.DBHandler;
 import sp_coding.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    DBHandler dbh = new DBHandler(this);
-
-
-
-
-    public void TestDB() {
-
-
-
-
-       /* Ingredient ingredient1 = new Ingredient(0, "Morot", true);
-        Ingredient ingredient2 = new Ingredient(1, "Apelsin", false);
-
-        Ingredient morotTest;
-        Ingredient apelsinTest;
-
-        dbh.addIngredient(ingredient1);
-        dbh.addIngredient(ingredient2);
-
-
-        morotTest = dbh.getIngredient(0);
-        apelsinTest = dbh.getIngredient(1);
-
-        Log.d("READING FROM DB:", morotTest.toString());
-        Log.d("READING FROM DB2:", apelsinTest.toString());
-
-        Recipe recipe1 = new Recipe(0, "recept1");
-        Recipe recipe2 = new Recipe(1, "recept2");
-
-        dbh.addRecipe(recipe1);
-        dbh.addRecipe(recipe2);
-
-        Recipe rec1Test;
-        Recipe rec2Test;
-
-        rec1Test = dbh.getRecipe(0);
-        rec2Test = dbh.getRecipe(1);
-
-        Log.d("Reading from DB table 2", rec1Test.toString());
-        Log.d("Reading from DB table 2", rec2Test.toString());
-
-*/
-
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -117,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame, homeFragment);
         fragmentTransaction.commit();
 
-        TestDB();
     }
 
 

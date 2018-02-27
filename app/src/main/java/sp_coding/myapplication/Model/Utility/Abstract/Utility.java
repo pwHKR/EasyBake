@@ -7,7 +7,7 @@ import sp_coding.myapplication.Model.DB.DBHandler;
 /**
  * Created by woojen on 2018-02-26.
  *
- * Use with Util Interface on fragments or activity's using DBHandler objects
+ * Use childs classes with Util Interface on fragments or activity's
  *
  */
 
@@ -21,7 +21,9 @@ public abstract class Utility {
     public void setContext(Context context) {
         this.context = context;
 
-        dbh = new DBHandler(context);
+        //dbh = new DBHandler(context);
+
+        dbh = DBHandler.getInstance(context);
     }
 
     protected int getNewID(String table) {

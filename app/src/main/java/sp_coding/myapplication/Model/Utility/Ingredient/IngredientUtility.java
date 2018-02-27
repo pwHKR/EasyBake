@@ -10,7 +10,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 /**
  * Created by woojen on 2018-02-07.
  *
- * Use with Util Interface on fragments or activity's using DBHandler objects
+ * Use with Util Interface on fragments or activity's
  */
 
 public class IngredientUtility extends Utility {
@@ -23,7 +23,7 @@ public class IngredientUtility extends Utility {
 
     // Convert Int to Boolean
 
-    public boolean convertTinyInt(int tinyInt) {
+    public static boolean convertTinyInt(int tinyInt) {
 
 
         boolean result;
@@ -37,7 +37,7 @@ public class IngredientUtility extends Utility {
 
     // Convert boolean to Int
 
-    public int convertBoolean(boolean input) {
+    public static int convertBoolean(boolean input) {
 
 
         int result = 0;
