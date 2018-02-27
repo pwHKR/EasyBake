@@ -42,7 +42,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
 
-    // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
 

@@ -65,8 +65,6 @@ public class AddRecipeFragment extends Fragment implements Util {
     EditText ingredient30;
 
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -77,7 +75,71 @@ public class AddRecipeFragment extends Fragment implements Util {
         IniUtilityClass();
 
 
+        Ini(v);
 
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+        bottomNavigationView.setVisibility(View.GONE);
+
+        final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
+
+        Button exitButton = v.findViewById(R.id.exitBtn);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // testName();
+                linkUtility.logLinkListv2();
+
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
+                RecipeFragment recipeFragment = new RecipeFragment();
+                FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                fragmentTransaction1.replace(R.id.frame, recipeFragment);
+                fragmentTransaction1.commit();
+
+            }
+        });
+
+        Button button = v.findViewById(R.id.createRecipeBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                recipeUtility.newRecipe(ingredientList, inputName, inputInfo);
+                refreshIngredientField();
+
+
+                recipeUtility.logRecipe();
+
+                //linkUtility.logLinkList(); //
+                // linkUtility.logLinkListv2();
+
+
+            }
+        });
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    @Override
+    public void IniUtilityClass() {
+        recipeUtility = new RecipeUtility();
+        linkUtility = new LinkUtility();
+
+        recipeUtility.setContext(this.getContext());
+        linkUtility.setContext(this.getContext());
+    }
+
+    public void Ini(View v) {
 
 
         inputName = v.findViewById(R.id.nameInput);
@@ -144,61 +206,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         ingredientList.add(ingredient30);
 
 
-        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
-        bottomNavigationView.setVisibility(View.GONE);
-
-        final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
-
-        Button exitButton = v.findViewById(R.id.exitBtn);
-        exitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // testName();
-                linkUtility.logLinkListv2();
-
-                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
-                bottomNavigationView.setVisibility(View.VISIBLE);
-
-                RecipeFragment recipeFragment = new RecipeFragment();
-                FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
-                fragmentTransaction1.replace(R.id.frame, recipeFragment);
-                fragmentTransaction1.commit();
-
-            }
-        });
-
-        Button button = v.findViewById(R.id.createRecipeBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                recipeUtility.newRecipe(ingredientList, inputName, inputInfo);
-                refreshIngredientField();
-
-
-                recipeUtility.logRecipe();
-
-                //linkUtility.logLinkList(); //
-                // linkUtility.logLinkListv2();
-
-
-
-            }
-        });
-
-        return v;
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-
-
 
     public void refreshIngredientField() {
 
@@ -268,16 +276,6 @@ public class AddRecipeFragment extends Fragment implements Util {
         ingredientList.add(ingredient30);
 
 
-    }
-
-
-    @Override
-    public void IniUtilityClass() {
-        recipeUtility = new RecipeUtility();
-        linkUtility = new LinkUtility();
-
-        recipeUtility.setContext(this.getContext());
-        linkUtility.setContext(this.getContext());
     }
 }
 
