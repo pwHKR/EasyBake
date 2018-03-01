@@ -83,246 +83,25 @@
                 android:hint="Information"
                 android:inputType="textMultiLine" />
 
-            <EditText
-                android:id="@+id/ingredient1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 1"
-                android:inputType="textPersonName" />
+            <Button
+                android:id="@+id/add_ingredient_for_recipe"
 
-            <EditText
-                android:id="@+id/ingredient2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 2"
-                android:inputType="textPersonName" />
+                android:layout_width="310dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@drawable/buttonshape2"
 
-            <EditText
-                android:id="@+id/ingredient3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 3"
-                android:inputType="textPersonName" />
+                android:text="+ Add Ingredient"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
 
-            <EditText
-                android:id="@+id/ingredient4"
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 4"
-                android:inputType="textPersonName" />
+                android:layout_height="match_parent" />
 
-            <EditText
-                android:id="@+id/ingredient5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 5"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 6"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 7"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 8"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 9"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 10"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 11"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 12"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 13"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 14"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 15"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 16"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 17"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 18"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 19"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient20"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 20"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 21"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 22"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient23"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 23"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient24"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 24"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient25"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 25"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 26"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient27"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 27"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 28"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient29"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 29"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/ingredient30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ingredient 30"
-                android:inputType="textPersonName" />
         </LinearLayout>
+
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

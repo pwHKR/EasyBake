@@ -20,7 +20,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 public class RecipeUtility extends Utility {
 
 
-    public void newRecipe(ArrayList<EditText> ingredientList, EditText inputName,
+    public void newRecipe(ArrayList<String> ingredientList, EditText inputName,
                           EditText inputInfo) {
 
         int numArray[] = new int[30];
@@ -28,9 +28,9 @@ public class RecipeUtility extends Utility {
 
         for (int i = 0; i < 30; i++) {
 
-            if (!ingredientList.get(i).getText().toString().equalsIgnoreCase("")) {
+            if (!ingredientList.get(i).toString().equalsIgnoreCase("")) {
 
-                numArray[i] = Integer.parseInt(ingredientList.get(i).getText().toString());
+                numArray[i] = Integer.parseInt(ingredientList.get(i).toString());
             }
 
         }
