@@ -160,6 +160,30 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         return ingredientList;
     }
 
+
+    public List<String> getAllIngredientNames() {
+        List<String> ingredientList = new ArrayList<>();
+        // Select All Query
+        String selectQuery = "SELECT name FROM " + "ingredient";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                String ingredientName = (cursor.getString(1));
+
+                // Adding Ingredient to list
+                ingredientList.add(ingredientName);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        // return contact list
+        return ingredientList;
+    }
+
     // Recipe table methods
 
     public void addRecipe(Recipe recipe) {

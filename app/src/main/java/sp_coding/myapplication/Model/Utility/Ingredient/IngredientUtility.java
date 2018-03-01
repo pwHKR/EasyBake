@@ -14,14 +14,11 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
  */
 
 public class IngredientUtility extends Utility {
-
-
     public IngredientUtility() {
-
     }
 
 
-    // Convert Int to Boolean
+// Convert Int to Boolean
 
     public static boolean convertTinyInt(int tinyInt) {
 
