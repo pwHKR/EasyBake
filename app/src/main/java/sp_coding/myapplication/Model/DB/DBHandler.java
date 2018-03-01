@@ -166,13 +166,13 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // Select All Query
         String selectQuery = "SELECT name FROM " + "ingredient";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                String ingredientName = (cursor.getString(1));
+                String ingredientName = cursor.getString(0);
 
                 // Adding Ingredient to list
                 ingredientList.add(ingredientName);
