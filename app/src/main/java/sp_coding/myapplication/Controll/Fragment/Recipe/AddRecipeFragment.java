@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import sp_coding.myapplication.Controll.Activity.MainActivity;
+import sp_coding.myapplication.Model.System.Main.Ingredient;
+import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
@@ -30,12 +33,13 @@ import sp_coding.myapplication.R;
 
 public class AddRecipeFragment extends Fragment implements Util {
 
-    ArrayList<String> ingredientList = new ArrayList<>();
+    ArrayList<String> ingredientList;
+    RecyclerView recyclerView;
     SpinnerDialog spinnerDialog;
 
     RecipeUtility recipeUtility;
     LinkUtility linkUtility;
-
+    IngredientUtility ingredientUtility;
 
     EditText inputName;
     EditText inputInfo;
@@ -48,6 +52,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         ingredientList = new ArrayList<>();
 
+        Ini(v);
         IniUtilityClass();
 
         initItems();
@@ -56,6 +61,7 @@ public class AddRecipeFragment extends Fragment implements Util {
             @Override
             public void onClick(String item, int position) {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -109,6 +115,10 @@ public class AddRecipeFragment extends Fragment implements Util {
                 //linkUtility.logLinkList(); //
                 // linkUtility.logLinkListv2();
 
+                RecipeFragment recipeFragment = new RecipeFragment();
+                FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                fragmentTransaction1.replace(R.id.frame, recipeFragment);
+                fragmentTransaction1.commit();
 
             }
         });
@@ -118,9 +128,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
     private void initItems() {
 
-        for(int i = 0; i < 30; i++) {
-            ingredientList.add("Item" + (i + 1));
-        }
+        ingredientList = (ArrayList<String>) ingredientUtility.getCompleteNameList();
 
     }
 
@@ -134,9 +142,11 @@ public class AddRecipeFragment extends Fragment implements Util {
     public void IniUtilityClass() {
         recipeUtility = new RecipeUtility();
         linkUtility = new LinkUtility();
+        ingredientUtility = new IngredientUtility();
 
         recipeUtility.setContext(this.getContext());
         linkUtility.setContext(this.getContext());
+        ingredientUtility.setContext(this.getContext());
     }
 
     public void Ini(View v) {
@@ -144,6 +154,8 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
+        recyclerView = v.findViewById(R.id.ingredientRecyclerView);
+        ingredientList = new ArrayList<>();
 
 
     }

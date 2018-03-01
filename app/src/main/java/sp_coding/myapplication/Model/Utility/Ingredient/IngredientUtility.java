@@ -95,6 +95,10 @@ public class IngredientUtility extends Utility {
         return dbh.getAllIngredients();
     }
 
+    public List<String> getCompleteNameList() {
+        return dbh.getAllIngredientNames();
+    }
+
 
 
 

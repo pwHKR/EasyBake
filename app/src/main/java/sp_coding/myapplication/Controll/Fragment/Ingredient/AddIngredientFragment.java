@@ -58,6 +58,8 @@ public class AddIngredientFragment extends Fragment implements Util {
                 ingredientUtility.logIngredient(allIngredientList);
 
 
+
+
             }
         });
 
