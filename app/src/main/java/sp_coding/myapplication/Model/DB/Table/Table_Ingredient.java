@@ -16,12 +16,13 @@ public class Table_Ingredient implements Table {
     public static final String KEY_INGREDIENT = "id";
     public static final String NAME_INGREDIENT = "name";
     public static final String BOOLEAN_INGREDIENT = "inStock";
+    public static final String BOOLEAN_INRECIPE = "inRecipe";
 
     // Create statement
 
     public static final String CREATE_INGREDIENT_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
             + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + NAME_INGREDIENT + " TEXT,"
-            + BOOLEAN_INGREDIENT + " INTEGER"
+            + BOOLEAN_INGREDIENT + " INTEGER," + BOOLEAN_INRECIPE + " INTEGER"
             + ")";
 
 
@@ -29,7 +30,7 @@ public class Table_Ingredient implements Table {
     public String printTable() {
 
         String output = "Table: " + TABLE_INGREDIENT + "\n" + "-----------" +
-                KEY_INGREDIENT + "\n" + NAME_INGREDIENT + "\n" + BOOLEAN_INGREDIENT;
+                KEY_INGREDIENT + "\n" + NAME_INGREDIENT + "\n" + BOOLEAN_INGREDIENT + "\n" + BOOLEAN_INRECIPE;
 
         return output;
     }

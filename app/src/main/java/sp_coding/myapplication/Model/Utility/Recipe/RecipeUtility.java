@@ -20,17 +20,26 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 public class RecipeUtility extends Utility {
 
 
-    public void newRecipe(ArrayList<String> ingredientList, EditText inputName,
+    public void newRecipe(ArrayList<String> ingredientNameList, EditText inputName,
                           EditText inputInfo) {
+
 
         int numArray[] = new int[30];
 
 
         for (int i = 0; i < 30; i++) {
 
-            if (!ingredientList.get(i).toString().equalsIgnoreCase("")) {
 
-                numArray[i] = Integer.parseInt(ingredientList.get(i).toString());
+            if (!ingredientNameList.get(i).equalsIgnoreCase("")) {
+
+                int id = dbh.getIngredientId(ingredientNameList.get(i));
+
+
+                numArray[i] = id;
+
+
+                dbh.setIngredient_InRecipe(id);
+
             }
 
         }
@@ -64,6 +73,16 @@ public class RecipeUtility extends Utility {
                     "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n" + "IdLink: "
                             + i.getIdIngredient());
         }
+    }
+
+    public void tempTest() {
+
+        int id;
+
+        id = dbh.getIngredientId("kaka");
+
+        Log.d("TestID", String.valueOf(id));
+
     }
 
 

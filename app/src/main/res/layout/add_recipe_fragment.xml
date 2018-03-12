@@ -73,6 +73,12 @@
                 android:inputType="textPersonName"
                 android:textSize="30dp" />
 
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OK" />
+
             <EditText
                 android:id="@+id/infoInput"
                 android:layout_width="match_parent"

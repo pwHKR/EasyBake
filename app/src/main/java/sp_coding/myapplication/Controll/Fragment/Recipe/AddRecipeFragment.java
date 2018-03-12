@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
-import sp_coding.myapplication.Controll.Activity.MainActivity;
-import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -34,6 +32,7 @@ import sp_coding.myapplication.R;
 public class AddRecipeFragment extends Fragment implements Util {
 
     ArrayList<String> ingredientList;
+    ArrayList<String> selectedIngredient;
     RecyclerView recyclerView;
     SpinnerDialog spinnerDialog;
 
@@ -44,10 +43,12 @@ public class AddRecipeFragment extends Fragment implements Util {
     EditText inputName;
     EditText inputInfo;
 
+    String currentItem;
+
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.add_recipe_fragment, container, false);
 
         ingredientList = new ArrayList<>();
@@ -56,11 +57,23 @@ public class AddRecipeFragment extends Fragment implements Util {
         IniUtilityClass();
 
         initItems();
-        spinnerDialog = new SpinnerDialog(getActivity(), ingredientList, "Select Ingredient" );
-        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+
+        createSpinner();
+
+        Button ok = v.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(String item, int position) {
-                Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+
+                selectedIngredient.add(currentItem);
+
+                //ingredientList.remove(currentItem);
+                //ingredientList.trimToSize();
+
+
+                //createSpinner();
+
+
 
             }
         });
@@ -80,6 +93,8 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
+
+        recipeUtility.tempTest();
 
         Button exitButton = v.findViewById(R.id.exitBtn);
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -105,15 +120,16 @@ public class AddRecipeFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
+                size30();
 
-                recipeUtility.newRecipe(ingredientList, inputName, inputInfo);
-                refreshIngredientField();
+                recipeUtility.newRecipe(selectedIngredient, inputName, inputInfo);
+                //refreshIngredientField();
 
 
                 recipeUtility.logRecipe();
 
                 //linkUtility.logLinkList(); //
-                // linkUtility.logLinkListv2();
+                linkUtility.logLinkListv2();
 
                 RecipeFragment recipeFragment = new RecipeFragment();
                 FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
@@ -131,6 +147,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         ingredientList = (ArrayList<String>) ingredientUtility.getCompleteNameList();
 
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -156,6 +173,9 @@ public class AddRecipeFragment extends Fragment implements Util {
         inputInfo = v.findViewById(R.id.infoInput);
         recyclerView = v.findViewById(R.id.ingredientRecyclerView);
         ingredientList = new ArrayList<>();
+        selectedIngredient = new ArrayList<>();
+
+
 
 
     }
@@ -168,5 +188,40 @@ public class AddRecipeFragment extends Fragment implements Util {
 
 
     }
+
+    private void size30() {
+
+
+        for (int i = selectedIngredient.size(); i < 30; i++) {
+
+            selectedIngredient.add("");
+
+        }
+    }
+
+    public void createSpinner() {
+
+
+        spinnerDialog = new SpinnerDialog(getActivity(), ingredientList, "Select Ingredient");
+
+
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String item, int position) {
+                Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+
+
+                currentItem = item;
+
+                //ingredientList.remove(item);
+
+
+            }
+        });
+    }
+
 }
+
+
+
 

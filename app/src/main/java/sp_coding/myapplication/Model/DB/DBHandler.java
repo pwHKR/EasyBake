@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INRECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
@@ -112,6 +114,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         values.put(BOOLEAN_INGREDIENT, ingredient.getInStock_TinyInt()); // If Ingredient in stock
 
 
+
         // Inserting Row
         db.insert(TABLE_INGREDIENT, null, values);
         db.close(); // Closing database connection
@@ -120,18 +123,28 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     public Ingredient getIngredient(int id) {
 
+        Ingredient ingredient = null;
 
-        IngredientUtility ingredientUtility = new IngredientUtility();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_INGREDIENT, new String[]{KEY_INGREDIENT,
-                        NAME_INGREDIENT, BOOLEAN_INGREDIENT}, KEY_INGREDIENT + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+        String selectQuery = "SELECT  * FROM " + "ingredient WHERE id =" + String.valueOf(id);
 
-        Ingredient ingredient = new Ingredient(Integer.valueOf(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2)));
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2))
+                        , IngredientUtility.convertTinyInt(cursor.getInt(3)));
+
+            } while (cursor.moveToNext());
+        }
+
+
+
+
+
         // return Ingredient
         cursor.close();
         return ingredient;
@@ -148,7 +161,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2)));
+                Ingredient ingredient = new Ingredient(Integer.parseInt(cursor.getString(0)), cursor.getString(1), IngredientUtility.convertTinyInt(cursor.getInt(2))
+                        , IngredientUtility.convertTinyInt(cursor.getInt(3)));
 
                 // Adding Ingredient to list
                 ingredientList.add(ingredient);
@@ -340,6 +354,76 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         cursor.close();
 
         return name;
+
+
+    }
+
+    public void deleteIngredient(int id) {
+
+        Ingredient ingredient;
+
+        ingredient = getIngredient(id);
+
+        if (ingredient.isInRecipe()) {
+
+            Log.d("DELETE ERR", "Cant delete an Ingredient already in a recipe");
+        } else {
+
+            SQLiteDatabase db = getWritableDatabase();
+            db.beginTransaction();
+
+
+            try {
+
+
+                db.delete(TABLE_INGREDIENT, "id =" + String.valueOf(id), null);
+
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                Log.d("Exception", "Exeption while trying to delete Ingredient");
+            } finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+    public void setIngredient_InRecipe(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("UPDATE " + TABLE_INGREDIENT + " SET " + BOOLEAN_INRECIPE + " = 1 WHERE " + KEY_INGREDIENT + " = id");
+
+        db.close();
+
+
+    }
+
+
+    public int getIngredientId(String name) {
+
+        int id = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String querry = "Select id FROM ingredient WHERE name ='" + name + "'";
+
+        Cursor cursor = db.rawQuery(querry, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                id = cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+
+        // return recipe
+
+
+        cursor.close();
+
+        return id;
 
 
     }

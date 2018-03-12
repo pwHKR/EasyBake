@@ -12,6 +12,16 @@ public class Ingredient extends Id_Name {
     private boolean inStock;
     private int inStock_TinyInt;
 
+    public boolean isInRecipe() {
+        return InRecipe;
+    }
+
+    public void setInRecipe(boolean inRecipe) {
+        InRecipe = inRecipe;
+    }
+
+    private boolean InRecipe;
+
     public Ingredient(int id, String name, boolean inStock) {
 
         super(id, name);
@@ -24,6 +34,13 @@ public class Ingredient extends Id_Name {
 
         this.inStock_TinyInt = inStock_TinyInt;
     }
+
+    public Ingredient(int id, String name, boolean inStock, boolean inRecipe) {
+        super(id, name);
+        this.inStock = inStock;
+        InRecipe = inRecipe;
+    }
+
 
 
     public boolean isInStock() {
