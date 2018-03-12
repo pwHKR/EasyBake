@@ -53,6 +53,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         ingredientList = new ArrayList<>();
 
+
         Ini(v);
         IniUtilityClass();
 
@@ -60,12 +61,29 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         createSpinner();
 
+        recipeUtility.tempTest();
+
         Button ok = v.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                selectedIngredient.add(currentItem);
+                boolean flag = false;
+
+                for (String s : selectedIngredient) {
+
+                    if (s.equalsIgnoreCase(currentItem)) {
+
+                        flag = true;
+
+                    }
+
+                }
+
+
+                if (!flag) {
+                    selectedIngredient.add(currentItem);
+                }
 
                 //ingredientList.remove(currentItem);
                 //ingredientList.trimToSize();
@@ -94,7 +112,6 @@ public class AddRecipeFragment extends Fragment implements Util {
         final Toolbar myToolbar = v.findViewById(R.id.my_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
 
-        recipeUtility.tempTest();
 
         Button exitButton = v.findViewById(R.id.exitBtn);
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +188,6 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         inputName = v.findViewById(R.id.nameInput);
         inputInfo = v.findViewById(R.id.infoInput);
-        recyclerView = v.findViewById(R.id.ingredientRecyclerView);
         ingredientList = new ArrayList<>();
         selectedIngredient = new ArrayList<>();
 

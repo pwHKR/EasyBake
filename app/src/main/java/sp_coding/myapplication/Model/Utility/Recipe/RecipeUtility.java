@@ -9,6 +9,7 @@ import java.util.List;
 import sp_coding.myapplication.Model.System.Main.Link;
 import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Abstract.Utility;
+import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 
 /**
  * Created by woojen on 2018-02-26.
@@ -77,11 +78,11 @@ public class RecipeUtility extends Utility {
 
     public void tempTest() {
 
-        int id;
+        IngredientUtility ingredientUtility = new IngredientUtility();
 
-        id = dbh.getIngredientId("kaka");
+        dbh.setIngredientInStock(4, true);
 
-        Log.d("TestID", String.valueOf(id));
+        ingredientUtility.logIngredient(dbh.getAllIngredients());
 
     }
 

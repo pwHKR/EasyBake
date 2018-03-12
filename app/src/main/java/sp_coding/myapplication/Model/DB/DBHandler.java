@@ -398,6 +398,22 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     }
 
+    public void setIngredientInStock(int id, boolean value) {
+
+
+        int tiny = IngredientUtility.convertBoolean(value);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL("UPDATE " + TABLE_INGREDIENT + " SET " + BOOLEAN_INRECIPE + " = " + String.valueOf(tiny) + " WHERE" + KEY_INGREDIENT + "= id ");
+
+
+        db.close();
+
+
+    }
+
+
 
     public int getIngredientId(String name) {
 
