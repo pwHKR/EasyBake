@@ -12,9 +12,10 @@
         android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="401dp"
         android:background="#1C83CE"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,64 +47,65 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="14dp"
+            android:ems="10"
+            android:hint="Recipe Name"
+            android:inputType="textPersonName"
+            android:textSize="30dp" />
 
-            <EditText
-                android:id="@+id/nameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="14dp"
-                android:ems="10"
-                android:hint="Recipe Name"
-                android:inputType="textPersonName"
-                android:textSize="30dp" />
+        <EditText
+            android:id="@+id/infoInput"
+            android:layout_width="match_parent"
+            android:layout_height="214dp"
 
-            <Button
-                android:id="@+id/ok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="OK" />
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Information"
+            android:inputType="textMultiLine" />
 
-            <EditText
-                android:id="@+id/infoInput"
-                android:layout_width="match_parent"
-                android:layout_height="214dp"
+        <Button
+            android:id="@+id/add_ingredient_for_recipe"
 
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Information"
-                android:inputType="textMultiLine" />
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@drawable/buttonshape2"
 
-            <Button
-                android:id="@+id/add_ingredient_for_recipe"
+            android:text="+ Add Ingredient"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
 
-                android:layout_width="310dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@drawable/buttonshape2"
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK" />
 
-                android:text="+ Add Ingredient"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
-
-    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

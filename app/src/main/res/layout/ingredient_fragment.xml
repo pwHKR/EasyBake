@@ -41,12 +41,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textGrid" />
 
     <Button
-        android:id="@+id/inStockIngredient"
-        android:layout_width="196dp"
+        android:id="@+id/deleteIngredient"
+        android:layout_width="325dp"
         android:layout_height="57dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/buttonshape"
-        android:text="In Stock"
+        android:text="Delete Ingredient"
         android:textColor="#1C83CE"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
