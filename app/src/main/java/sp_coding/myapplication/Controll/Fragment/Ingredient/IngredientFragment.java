@@ -12,21 +12,19 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
-import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
-import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
-import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;
 
 
 public class IngredientFragment extends Fragment implements Util {
 
     IngredientUtility ingredientUtility;
-    ArrayList<String> ingredientList;
+    List<String> ingredientList;
     SpinnerDialog spinnerDialog;
 
     @Nullable
@@ -34,8 +32,10 @@ public class IngredientFragment extends Fragment implements Util {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.ingredient_fragment, container, false);
 
-        Ini(v);
-        initItems();
+
+        IniUtilityClass();
+        ingredientList = ingredientUtility.getCompleteNameList();
+
         createSpinner();
 
         Button addIngredientButton = v.findViewById(R.id.addIngredient);
@@ -64,19 +64,11 @@ public class IngredientFragment extends Fragment implements Util {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    private void initItems() {
-
-        ingredientList = (ArrayList<String>) ingredientUtility.getCompleteNameList();
 
     }
 
-    public void Ini(View v) {
 
-        ingredientList = new ArrayList<>();
 
-    }
 
     @Override
     public void IniUtilityClass() {
@@ -85,10 +77,11 @@ public class IngredientFragment extends Fragment implements Util {
         ingredientUtility.setContext(this.getContext());
     }
 
+
     public void createSpinner() {
 
 
-        spinnerDialog = new SpinnerDialog(getActivity(), ingredientList, "Select Ingredient");
+        spinnerDialog = new SpinnerDialog(getActivity(), (ArrayList<String>) ingredientList, "Select Ingredient");
 
 
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
