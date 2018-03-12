@@ -82,7 +82,7 @@ public class RecipeUtility extends Utility {
 
         dbh.setIngredientInStock(4, false);
 
-        ingredientUtility.logIngredient(dbh.getAllIngredients());
+        ingredientUtility.logIngredient();
 
     }
 

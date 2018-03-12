@@ -74,8 +74,9 @@ public class IngredientUtility extends Utility {
     }
 
 
-    public void logIngredient(List<Ingredient> ingredients) {
+    public void logIngredient() {
 
+        List<Ingredient> ingredients = dbh.getAllIngredients();
 
         int loopCount = 0;
 
@@ -103,6 +104,13 @@ public class IngredientUtility extends Utility {
     public void delete(String ingredientName) {
 
         dbh.deleteIngredient(dbh.getIngredientId(ingredientName));
+
+
+    }
+
+    public void setinStock(String ingredientName, boolean isInStock) {
+
+        dbh.setIngredientInStock(dbh.getIngredientId(ingredientName), isInStock);
 
 
     }

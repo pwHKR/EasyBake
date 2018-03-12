@@ -55,7 +55,7 @@ public class AddIngredientFragment extends Fragment implements Util {
 
                 allIngredientList = ingredientUtility.getCompleteList();
 
-                ingredientUtility.logIngredient(allIngredientList);
+                ingredientUtility.logIngredient();
 
 
 

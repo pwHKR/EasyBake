@@ -2,13 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ingredient_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:weightSum="10"
 
-    android:id="@+id/ingredient_layout"
+    android:weightSum="10"
     tools:layout_editor_absoluteY="25dp">
 
     <TextView
@@ -43,16 +43,50 @@
     <Button
         android:id="@+id/deleteIngredient"
         android:layout_width="325dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="152dp"
+        android:layout_marginTop="266dp"
         android:background="@drawable/buttonshape"
         android:text="Delete Ingredient"
         android:textColor="#1C83CE"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textGrid" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/inStock"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/buttonshape"
+        android:text="setInStock"
+        android:textColor="#1C83CE"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGrid"
+        app:layout_constraintVertical_bias="0.731" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/inStock"
+        app:layout_constraintTop_toBottomOf="@+id/deleteIngredient"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </android.support.constraint.ConstraintLayout>

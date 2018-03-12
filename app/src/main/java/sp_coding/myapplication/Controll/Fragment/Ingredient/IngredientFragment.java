@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ public class IngredientFragment extends Fragment implements Util {
     IngredientUtility ingredientUtility;
     List<String> ingredientList;
     SpinnerDialog spinnerDialog;
-    private String currentItem;
+    boolean buttonFlag;  // False if delete button, true if set in stock button
+    boolean checkboxValue;
+
 
     @Nullable
     @Override
@@ -37,7 +40,12 @@ public class IngredientFragment extends Fragment implements Util {
         IniUtilityClass();
         ingredientList = ingredientUtility.getCompleteNameList();
 
+        ingredientUtility.logIngredient();
+
+        final CheckBox checkBox = v.findViewById(R.id.checkBox3);
+
         createSpinner();
+
 
         Button addIngredientButton = v.findViewById(R.id.addIngredient);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +58,27 @@ public class IngredientFragment extends Fragment implements Util {
             }
         });
 
-        Button inStockButton = v.findViewById(R.id.deleteIngredient);
-        inStockButton.setOnClickListener(new View.OnClickListener() {
+
+        Button stockButton = v.findViewById(R.id.inStock);
+        stockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                buttonFlag = true;
+
+                checkboxValue = checkBox.isChecked();
+
+                spinnerDialog.showSpinerDialog();
+            }
+        });
+
+        Button removeIngredient = v.findViewById(R.id.deleteIngredient);
+        removeIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinnerDialog.showSpinerDialog();
+
+                buttonFlag = false;
 
             }
         });
@@ -91,13 +115,26 @@ public class IngredientFragment extends Fragment implements Util {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
 
 
-                ingredientUtility.delete(item);
+                if (!buttonFlag) {
 
-                IngredientFragment ingredientFragmentR = new IngredientFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
-                fragmentTransaction.commit();
+                    ingredientUtility.delete(item);
 
+                    IngredientFragment ingredientFragmentR = new IngredientFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
+                    fragmentTransaction.commit();
+                } else {
+
+
+                    ingredientUtility.setinStock(item, checkboxValue);
+
+
+                    IngredientFragment ingredientFragmentR = new IngredientFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
+                    fragmentTransaction.commit();
+
+                }
 
 
 
