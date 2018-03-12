@@ -6,12 +6,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,8 +35,9 @@ public class AddRecipeFragment extends Fragment implements Util {
 
     ArrayList<String> ingredientList;
     ArrayList<String> selectedIngredient;
-
     SpinnerDialog spinnerDialog;
+    ListView listView;
+    ArrayAdapter<String> adapter;
 
     RecipeUtility recipeUtility;
     LinkUtility linkUtility;
@@ -43,7 +47,6 @@ public class AddRecipeFragment extends Fragment implements Util {
     EditText inputInfo;
 
     String currentItem;
-
 
     @Nullable
     @Override
@@ -60,7 +63,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         createSpinner();
 
-        recipeUtility.tempTest();
+        //recipeUtility.tempTest();
 
         Button ok = v.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,7 @@ public class AddRecipeFragment extends Fragment implements Util {
                 if (!flag) {
                     selectedIngredient.add(currentItem);
                 }
+
 
                 //ingredientList.remove(currentItem);
                 //ingredientList.trimToSize();
@@ -152,6 +156,9 @@ public class AddRecipeFragment extends Fragment implements Util {
                 fragmentTransaction1.replace(R.id.frame, recipeFragment);
                 fragmentTransaction1.commit();
 
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -189,8 +196,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         inputInfo = v.findViewById(R.id.infoInput);
         ingredientList = new ArrayList<>();
         selectedIngredient = new ArrayList<>();
-
-
+        listView = v.findViewById(R.id.listView);
 
 
     }
