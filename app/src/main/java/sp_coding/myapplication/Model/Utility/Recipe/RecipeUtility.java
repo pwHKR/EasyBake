@@ -80,7 +80,7 @@ public class RecipeUtility extends Utility {
 
         IngredientUtility ingredientUtility = new IngredientUtility();
 
-        dbh.setIngredientInStock(4, true);
+        dbh.setIngredientInStock(4, false);
 
         ingredientUtility.logIngredient(dbh.getAllIngredients());
 

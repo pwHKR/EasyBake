@@ -403,10 +403,11 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         int tiny = IngredientUtility.convertBoolean(value);
 
+
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("UPDATE " + TABLE_INGREDIENT + " SET " + BOOLEAN_INRECIPE + " = " + String.valueOf(tiny) + " WHERE" + KEY_INGREDIENT + "= id ");
-
+        
+        db.execSQL("UPDATE ingredient SET inStock =" + tiny + " WHERE id = " + String.valueOf(id));
 
         db.close();
 
