@@ -406,7 +406,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        
+
         db.execSQL("UPDATE ingredient SET inStock =" + tiny + " WHERE id = " + String.valueOf(id));
 
         db.close();
