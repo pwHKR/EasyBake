@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ public class AddRecipeFragment extends Fragment implements Util {
     EditText inputName;
     EditText inputInfo;
 
-    String currentItem;
+    private String currentItem;
 
     @Nullable
     @Override

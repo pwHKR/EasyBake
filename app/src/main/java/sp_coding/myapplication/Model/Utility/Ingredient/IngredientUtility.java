@@ -100,6 +100,12 @@ public class IngredientUtility extends Utility {
     }
 
 
+    public void delete(String ingredientName) {
+
+        dbh.deleteIngredient(dbh.getIngredientId(ingredientName));
+
+
+    }
 
 
 }

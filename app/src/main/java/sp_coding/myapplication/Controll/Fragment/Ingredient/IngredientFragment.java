@@ -26,6 +26,7 @@ public class IngredientFragment extends Fragment implements Util {
     IngredientUtility ingredientUtility;
     List<String> ingredientList;
     SpinnerDialog spinnerDialog;
+    private String currentItem;
 
     @Nullable
     @Override
@@ -90,8 +91,14 @@ public class IngredientFragment extends Fragment implements Util {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
 
 
+                ingredientUtility.delete(item);
 
-                //ingredientList.remove(item);
+                IngredientFragment ingredientFragmentR = new IngredientFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
+                fragmentTransaction.commit();
+
+
 
 
             }

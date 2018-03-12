@@ -17,7 +17,6 @@ import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
-import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INRECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
@@ -376,7 +375,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
             try {
 
 
-                db.delete(TABLE_INGREDIENT, "id =" + String.valueOf(id), null);
+                db.execSQL("DELETE FROM ingredient WHERE id = " + String.valueOf(id));
 
                 db.setTransactionSuccessful();
             } catch (Exception e) {
@@ -391,7 +390,9 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("UPDATE " + TABLE_INGREDIENT + " SET " + BOOLEAN_INRECIPE + " = 1 WHERE " + KEY_INGREDIENT + " = id");
+        db.execSQL("UPDATE ingredient SET inRecipe = 1  WHERE id = " + String.valueOf(id));
+
+
 
         db.close();
 
