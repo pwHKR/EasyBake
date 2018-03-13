@@ -1,6 +1,9 @@
 package sp_coding.myapplication.Controll.Fragment.Ingredient;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +20,7 @@ import java.util.List;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+import sp_coding.myapplication.Controll.Activity.MainActivity;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.R;
@@ -28,8 +32,6 @@ public class IngredientFragment extends Fragment implements Util {
     List<String> ingredientList;
     SpinnerDialog spinnerDialog;
     boolean buttonFlag;  // False if delete button, true if set in stock button
-    boolean checkboxValue;
-
 
     @Nullable
     @Override
@@ -41,8 +43,6 @@ public class IngredientFragment extends Fragment implements Util {
         ingredientList = ingredientUtility.getCompleteNameList();
 
         ingredientUtility.logIngredient();
-
-        final CheckBox checkBox = v.findViewById(R.id.checkBox3);
 
         createSpinner();
 
@@ -59,7 +59,7 @@ public class IngredientFragment extends Fragment implements Util {
         });
 
 
-        Button stockButton = v.findViewById(R.id.inStock);
+        /*Button stockButton = v.findViewById(R.id.inStock);
         stockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,15 +70,13 @@ public class IngredientFragment extends Fragment implements Util {
 
                 spinnerDialog.showSpinerDialog();
             }
-        });
+        });*/
 
-        Button removeIngredient = v.findViewById(R.id.deleteIngredient);
+        Button removeIngredient = v.findViewById(R.id.manageIngredients);
         removeIngredient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 spinnerDialog.showSpinerDialog();
-
-                buttonFlag = false;
 
             }
         });
@@ -111,32 +109,51 @@ public class IngredientFragment extends Fragment implements Util {
 
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
-            public void onClick(String item, int position) {
+            public void onClick(final String item, int position) {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
 
+                final AlertDialog alertDialog;
 
-                if (!buttonFlag) {
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getActivity());
 
-                    ingredientUtility.delete(item);
+                alertDialogBuilder.setTitle("Choose Option");
 
-                    IngredientFragment ingredientFragmentR = new IngredientFragment();
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
-                    fragmentTransaction.commit();
-                } else {
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        IngredientFragment ingredientFragmentR = new IngredientFragment();
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
+                        fragmentTransaction.commit();
+                    }
+                });
 
-                    ingredientUtility.setinStock(item, checkboxValue);
+                final CharSequence[] choices = {" In Stock "," Not In Stock "," Delete "};
 
+                alertDialogBuilder.setSingleChoiceItems(choices, -1, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int choice) {
 
-                    IngredientFragment ingredientFragmentR = new IngredientFragment();
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.frame, ingredientFragmentR);
-                    fragmentTransaction.commit();
+                        switch(choice) {
+                            case 0:
+                                ingredientUtility.setinStock(item, true);
+                                break;
+                            case 1:
+                                ingredientUtility.setinStock(item, false);
+                                break;
+                            case 2:
+                                ingredientUtility.delete(item);
+                                break;
 
-                }
+                        }
 
+                        dialog.dismiss();
+                    }
+                });
 
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
 
             }
         });
