@@ -31,6 +31,7 @@ public class IngredientFragment extends Fragment implements Util {
     IngredientUtility ingredientUtility;
     List<String> ingredientList;
     SpinnerDialog spinnerDialog;
+    String selectedItem;
     boolean buttonFlag;  // False if delete button, true if set in stock button
 
     @Nullable
@@ -109,8 +110,10 @@ public class IngredientFragment extends Fragment implements Util {
 
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
-            public void onClick(final String item, int position) {
+            public void onClick(String item, int position) {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+
+                selectedItem = item;
 
                 final AlertDialog alertDialog;
 
@@ -137,13 +140,13 @@ public class IngredientFragment extends Fragment implements Util {
 
                         switch(choice) {
                             case 0:
-                                ingredientUtility.setinStock(item, true);
+                                ingredientUtility.setinStock(selectedItem, true);
                                 break;
                             case 1:
-                                ingredientUtility.setinStock(item, false);
+                                ingredientUtility.setinStock(selectedItem, false);
                                 break;
                             case 2:
-                                ingredientUtility.delete(item);
+                                ingredientUtility.delete(selectedItem);
                                 break;
 
                         }

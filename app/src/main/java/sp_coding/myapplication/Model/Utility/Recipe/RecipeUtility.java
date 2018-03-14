@@ -76,6 +76,10 @@ public class RecipeUtility extends Utility {
         }
     }
 
+    public List<String> getCompleteNameList() {
+        return dbh.getAllRecipeNames();
+    }
+
     public void tempTest() {
 
         IngredientUtility ingredientUtility = new IngredientUtility();
