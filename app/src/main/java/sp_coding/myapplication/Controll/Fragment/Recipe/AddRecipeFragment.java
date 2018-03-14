@@ -1,5 +1,7 @@
 package sp_coding.myapplication.Controll.Fragment.Recipe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -139,24 +142,51 @@ public class AddRecipeFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
-                size30();
+                if(inputName.getText().toString().isEmpty()){
 
-                recipeUtility.newRecipe(selectedIngredient, inputName, inputInfo);
-                //refreshIngredientField();
+                    final AlertDialog alertDialog;
+
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            getActivity());
+
+                    alertDialogBuilder.setTitle("Warning!");
+                    alertDialogBuilder.setMessage("You need to enter a recipe name!");
+
+                    alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            AddRecipeFragment addRecipeFragment = new AddRecipeFragment();
+                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.frame, addRecipeFragment);
+                            fragmentTransaction.commit();
+                        }
+                    });
+
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
 
 
-                recipeUtility.logRecipe();
+                } else {
+                    size30();
 
-                //linkUtility.logLinkList(); //
-                linkUtility.logLinkListv2();
+                    recipeUtility.newRecipe(selectedIngredient, inputName, inputInfo);
+                    //refreshIngredientField();
 
-                RecipeFragment recipeFragment = new RecipeFragment();
-                FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
-                fragmentTransaction1.replace(R.id.frame, recipeFragment);
-                fragmentTransaction1.commit();
 
-                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
-                bottomNavigationView.setVisibility(View.VISIBLE);
+                    recipeUtility.logRecipe();
+
+                    //linkUtility.logLinkList(); //
+                    linkUtility.logLinkListv2();
+
+                    RecipeFragment recipeFragment = new RecipeFragment();
+                    FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.frame, recipeFragment);
+                    fragmentTransaction1.commit();
+
+                    BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
 
             }
         });
