@@ -90,6 +90,7 @@ public class AddIngredientFragment extends Fragment implements Util {
 
     }
 
+    // Return to ingredient fragment
     public void goBack(){
         IngredientFragment ingredientFragment = new IngredientFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
