@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,14 @@ public class AddIngredientFragment extends Fragment implements Util {
             }
         });
 
+        Button cancelBtn = v.findViewById(R.id.cancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBack();
+            }
+        });
+
 
         return v;
     }
@@ -79,6 +88,16 @@ public class AddIngredientFragment extends Fragment implements Util {
         ingredientUtility = new IngredientUtility();
         ingredientUtility.setContext(this.getContext());
 
+    }
+
+    public void goBack(){
+        IngredientFragment ingredientFragment = new IngredientFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, ingredientFragment);
+        fragmentTransaction.commit();
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
 
