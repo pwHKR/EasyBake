@@ -5,6 +5,8 @@
     
     <TextView
         android:id="@+id/txtitem"
+        android:textSize="30dp"
+        android:textColor="#1C83CE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

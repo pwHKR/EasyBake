@@ -33,14 +33,11 @@ public class HomeFragment extends Fragment implements Util {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment, container, false);
 
-        //Add recipe names to ArrayList
-        //recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
-        ListView listView = v.findViewById(R.id.recipeListView);
+        IniUtilityClass();
 
-        //For Testing ListView function
-        String[] items={"Test1","Test2","Test3"};
-        recipeList=new ArrayList<String>(Arrays.asList(items));
-        //For testing ListView function
+        //Add recipe names to ArrayList
+        recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
+        ListView listView = v.findViewById(R.id.recipeListView);
 
         //Add info to adapter
         adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);

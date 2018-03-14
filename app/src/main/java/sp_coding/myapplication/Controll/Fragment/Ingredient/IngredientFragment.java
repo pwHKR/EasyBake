@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import sp_coding.myapplication.Controll.Activity.MainActivity;
+import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.R;
@@ -133,7 +135,7 @@ public class IngredientFragment extends Fragment implements Util {
                     }
                 });
 
-                final CharSequence[] choices = {" In Stock "," Not In Stock "," Delete "};
+                CharSequence[] choices = {" In Stock "," Not In Stock "," Delete "};
 
                 alertDialogBuilder.setSingleChoiceItems(choices, -1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int choice) {
@@ -141,12 +143,17 @@ public class IngredientFragment extends Fragment implements Util {
                         switch(choice) {
                             case 0:
                                 ingredientUtility.setinStock(selectedItem, true);
+                                Log.d("Test", "case1");
+
                                 break;
                             case 1:
                                 ingredientUtility.setinStock(selectedItem, false);
+                                Log.d("Test", "case2");
                                 break;
                             case 2:
                                 ingredientUtility.delete(selectedItem);
+                                refreshFragment();
+                                Log.d("Test", "case3");
                                 break;
 
                         }
@@ -160,5 +167,12 @@ public class IngredientFragment extends Fragment implements Util {
 
             }
         });
+    }
+
+    public void refreshFragment(){
+        IngredientFragment ingredientFragment = new IngredientFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, ingredientFragment);
+        fragmentTransaction.commit();
     }
 }
