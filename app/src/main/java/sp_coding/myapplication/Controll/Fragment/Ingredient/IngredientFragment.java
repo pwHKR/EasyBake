@@ -2,7 +2,6 @@ package sp_coding.myapplication.Controll.Fragment.Ingredient;
 
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,8 +19,6 @@ import java.util.List;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
-import sp_coding.myapplication.Controll.Activity.MainActivity;
-import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.R;
@@ -144,11 +140,13 @@ public class IngredientFragment extends Fragment implements Util {
                             case 0:
                                 ingredientUtility.setinStock(selectedItem, true);
                                 Log.d("Test", "case1");
+                                ingredientUtility.logIngredient();
 
                                 break;
                             case 1:
                                 ingredientUtility.setinStock(selectedItem, false);
                                 Log.d("Test", "case2");
+                                ingredientUtility.logIngredient();
                                 break;
                             case 2:
                                 ingredientUtility.delete(selectedItem);
