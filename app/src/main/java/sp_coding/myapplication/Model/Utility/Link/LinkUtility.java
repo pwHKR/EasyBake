@@ -38,7 +38,7 @@ public class LinkUtility extends Utility {
         for (Link link : list) {
 
 
-            Log.d("Link ID " + link.getId(), "-----------\n");
+            Log.d("Link ID " + link.getId(), "\n Recipe id" + link.getIdRecipe() + "-----------\n");
 
 
             for (int i : link.getListIngredient()) {
@@ -55,4 +55,29 @@ public class LinkUtility extends Utility {
         }
     }
 
+
+    public void printIngredients(String name) {
+
+        Link link = dbh.getLinkIngredient(dbh.getRecipeId(name));
+
+        for (int i : link.getListIngredient()) {
+
+
+            if (i != 0)
+
+                // "dbh.getIngredientName(i) " i denna if sats och for loop ger dig alla ingredienser
+
+                Log.d("Included", dbh.getIngredientName(i) + "\n");
+
+
+        }
+
+
+    }
 }
+
+
+
+
+
+

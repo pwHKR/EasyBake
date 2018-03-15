@@ -21,16 +21,18 @@ import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
+import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 import sp_coding.myapplication.R;
 
 
 public class IngredientFragment extends Fragment implements Util {
 
-    IngredientUtility ingredientUtility;
-    List<String> ingredientList;
-    SpinnerDialog spinnerDialog;
-    String selectedItem;
-    boolean buttonFlag;  // False if delete button, true if set in stock button
+    private IngredientUtility ingredientUtility;
+    private LinkUtility linkUtility;
+    private List<String> ingredientList;
+    private SpinnerDialog spinnerDialog;
+    private String selectedItem;
+    private boolean inRecipe;
 
     @Nullable
     @Override
@@ -45,6 +47,9 @@ public class IngredientFragment extends Fragment implements Util {
 
         createSpinner();
 
+        //linkUtility.testTemp();
+
+
 
         Button addIngredientButton = v.findViewById(R.id.addIngredient);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -57,19 +62,6 @@ public class IngredientFragment extends Fragment implements Util {
             }
         });
 
-
-        /*Button stockButton = v.findViewById(R.id.inStock);
-        stockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                buttonFlag = true;
-
-                checkboxValue = checkBox.isChecked();
-
-                spinnerDialog.showSpinerDialog();
-            }
-        });*/
 
         Button removeIngredient = v.findViewById(R.id.manageIngredients);
         removeIngredient.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +82,15 @@ public class IngredientFragment extends Fragment implements Util {
     }
 
 
-
-
     @Override
     public void IniUtilityClass() {
         ingredientUtility = new IngredientUtility();
 
         ingredientUtility.setContext(this.getContext());
+
+        linkUtility = new LinkUtility();
+
+        linkUtility.setContext(this.getContext());
     }
 
 
@@ -131,12 +125,12 @@ public class IngredientFragment extends Fragment implements Util {
                     }
                 });
 
-                CharSequence[] choices = {" In Stock "," Not In Stock "," Delete "};
+                CharSequence[] choices = {" In Stock ", " Not In Stock ", " Delete "};
 
                 alertDialogBuilder.setSingleChoiceItems(choices, -1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int choice) {
 
-                        switch(choice) {
+                        switch (choice) {
                             case 0:
                                 ingredientUtility.setinStock(selectedItem, true);
                                 Log.d("Test", "case1");
@@ -149,7 +143,7 @@ public class IngredientFragment extends Fragment implements Util {
                                 ingredientUtility.logIngredient();
                                 break;
                             case 2:
-                                ingredientUtility.delete(selectedItem);
+                                inRecipe = ingredientUtility.delete(selectedItem);
                                 refreshFragment();
                                 Log.d("Test", "case3");
                                 break;
@@ -167,7 +161,7 @@ public class IngredientFragment extends Fragment implements Util {
         });
     }
 
-    public void refreshFragment(){
+    public void refreshFragment() {
         IngredientFragment ingredientFragment = new IngredientFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, ingredientFragment);

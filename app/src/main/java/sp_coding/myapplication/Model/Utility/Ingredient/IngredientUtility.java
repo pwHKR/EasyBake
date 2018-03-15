@@ -101,10 +101,13 @@ public class IngredientUtility extends Utility {
     }
 
 
-    public void delete(String ingredientName) {
+    public boolean delete(String ingredientName) {
 
-        dbh.deleteIngredient(dbh.getIngredientId(ingredientName));
+        boolean inRecipe;
 
+        inRecipe = dbh.deleteIngredient(dbh.getIngredientId(ingredientName));
+
+        return inRecipe;
 
     }
 

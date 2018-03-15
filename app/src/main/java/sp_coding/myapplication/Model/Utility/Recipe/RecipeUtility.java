@@ -10,6 +10,7 @@ import sp_coding.myapplication.Model.System.Main.Link;
 import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
+import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 
 /**
  * Created by woojen on 2018-02-26.
@@ -47,13 +48,17 @@ public class RecipeUtility extends Utility {
 
         Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
+
         Link link = new Link(getNewID("link"), recipe.getId(), numArray);
 
 
-        recipe.setIdIngredient(link.getId());
+
 
 
         dbh.addLink(link);
+
+
+        recipe.setIdIngredient(dbh.getMaxLinkId());
 
         dbh.addRecipe(recipe);
 
@@ -71,8 +76,8 @@ public class RecipeUtility extends Utility {
             loopCount++;
 
             Log.d("RecipeElement " + String.valueOf(loopCount) + ": ",
-                    "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n" + "IdLink: "
-                            + i.getIdIngredient());
+                    "name " + i.getName() + "\n" + "Info text: " + i.getInfoText() + "\n" + "id: " + i.getId() + "\n"
+            );
         }
     }
 
@@ -90,12 +95,17 @@ public class RecipeUtility extends Utility {
 
     }
 
-    public String checkRecipeName(String name) {
-        return dbh.checkIfRecipeNameExists(name);
-    }
+    public void tempTest2() {
 
-    public String getRecipeInfoText(String name) {
-        return dbh.getRecipeInfo(name);
+        RecipeUtility recipeUtility = new RecipeUtility();
+        LinkUtility linkUtility = new LinkUtility();
+
+        dbh.deleteRecipeAndLink(2);
+
+        logRecipe();
+
+
+
     }
 
 

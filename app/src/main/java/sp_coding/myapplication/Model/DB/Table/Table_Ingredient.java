@@ -21,7 +21,7 @@ public class Table_Ingredient implements Table {
     // Create statement
 
     public static final String CREATE_INGREDIENT_TABLE = "CREATE TABLE " + TABLE_INGREDIENT + "("
-            + KEY_INGREDIENT + " INTEGER PRIMARY KEY," + NAME_INGREDIENT + " TEXT,"
+            + KEY_INGREDIENT + " INTEGER PRIMARY KEY AUTOINCREMENT," + NAME_INGREDIENT + " TEXT,"
             + BOOLEAN_INGREDIENT + " INTEGER," + BOOLEAN_INRECIPE + " INTEGER"
             + ")";
 

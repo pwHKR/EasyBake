@@ -18,6 +18,8 @@ import java.util.List;
 import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
+import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
+import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;
 
 /**
@@ -28,6 +30,8 @@ public class AddIngredientFragment extends Fragment implements Util {
 
     boolean isTrue;
     IngredientUtility ingredientUtility;
+    RecipeUtility recipeUtility;
+    LinkUtility linkUtility;
 
     List<Ingredient> allIngredientList;
 
@@ -68,6 +72,13 @@ public class AddIngredientFragment extends Fragment implements Util {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                // recipeUtility.tempTest2(); // test metod for delete recipe
+
+                //linkUtility.printIngredients("second");
+
+
                 goBack();
             }
         });
@@ -84,9 +95,14 @@ public class AddIngredientFragment extends Fragment implements Util {
 
     public void IniUtilityClass() {
 
+        recipeUtility = new RecipeUtility();
+        recipeUtility.setContext(this.getContext());
 
         ingredientUtility = new IngredientUtility();
         ingredientUtility.setContext(this.getContext());
+
+        linkUtility = new LinkUtility();
+        linkUtility.setContext(this.getContext());
 
     }
 

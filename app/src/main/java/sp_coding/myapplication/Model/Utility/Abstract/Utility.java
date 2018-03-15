@@ -26,6 +26,8 @@ public abstract class Utility {
         dbh = DBHandler.getInstance(context);
     }
 
+
+    // Currently not used since auto increment is handeld by sqlite. Keep for now if needed later on
     protected int getNewID(String table) {
 
         int result = dbh.getCount(table) + 1;

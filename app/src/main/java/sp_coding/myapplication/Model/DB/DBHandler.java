@@ -19,12 +19,10 @@ import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.DEFAULT_INGREDIENT;
-import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.TABLE_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Link.CREATE_LINK_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Link.F_KEY_RECIPE;
-import static sp_coding.myapplication.Model.DB.Table.Table_Link.KEY_LINK;
 import static sp_coding.myapplication.Model.DB.Table.Table_Link.TABLE_LINK;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.CREATE_RECIPE_TABLE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.F_KEY_LINK;
@@ -121,7 +119,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_INGREDIENT, ingredient.getId()); // Ingredient ID
+        //values.put(KEY_INGREDIENT, ingredient.getId()); // Ingredient ID
         values.put(NAME_INGREDIENT, ingredient.getName()); // Ingredient Name
         values.put(BOOLEAN_INGREDIENT, ingredient.getInStock_TinyInt()); // If Ingredient in stock
 
@@ -216,7 +214,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
+        //values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
         values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
         values.put(INFO_RECIPE, recipe.getInfoText()); // Info text
         values.put(F_KEY_LINK, recipe.getIdIngredient()); // Reference to Link table where ingredients are stored
@@ -275,7 +273,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_LINK, link.getId()); // Link ID (id for Ingredient store to Recipe link table)
+        //values.put(KEY_LINK, link.getId()); // Link ID (id for Ingredient store to Recipe link table)
         values.put(F_KEY_RECIPE, link.getIdRecipe()); // Recipe id
 
         for (int i = 0; i < link.getListIngredient().length; i++) {
@@ -374,6 +372,40 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     }
 
+
+    public int getRecipeId(String name) {
+
+        int id = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String querry = "Select id FROM recipe WHERE name = '" + name + "'";
+
+        Cursor cursor = db.rawQuery(querry, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                id = cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+
+        // return recipe
+
+
+        cursor.close();
+
+        db.close();
+
+        return id;
+
+
+    }
+
+
+
     public List<String> getAllRecipeNames() {
         List<String> recipeList = new ArrayList<>();
         // Select All Query
@@ -399,7 +431,9 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         return recipeList;
     }
 
-    public void deleteIngredient(int id) {
+    public boolean deleteIngredient(int id) {
+
+        boolean inRecipe = false;
 
         Ingredient ingredient;
 
@@ -408,6 +442,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         if (ingredient.isInRecipe()) {
 
             Log.d("DELETE ERR", "Cant delete an Ingredient already in a recipe");
+
+            inRecipe = true;
         } else {
 
             SQLiteDatabase db = getWritableDatabase();
@@ -420,12 +456,16 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
                 db.execSQL("DELETE FROM ingredient WHERE id = " + String.valueOf(id));
 
                 db.setTransactionSuccessful();
+
+                inRecipe = false;
             } catch (Exception e) {
                 Log.d("Exception", "Exeption while trying to delete Ingredient");
             } finally {
                 db.endTransaction();
             }
         }
+
+        return inRecipe;
     }
 
     public void setIngredient_InRecipe(int id) {
@@ -491,6 +531,72 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
+    public int[] getRecipeIds(int ingredientId) {
+
+
+        int recipeids[] = new int[30];
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        //select idRecipe from link where num2 = 2;
+
+        for (int i = 1; i < 30; i++) {
+
+            String querry = " select idRecipe from link where num" + i + "= " + String.valueOf(ingredientId);
+
+            Cursor cursor = db.rawQuery(querry, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+
+                    recipeids[i] = cursor.getInt(0);
+
+
+                } while (cursor.moveToNext());
+            }
+
+            // return recipe
+
+            cursor.close();
+        }
+
+
+        db.close();
+
+        return recipeids;
+
+
+    }
+
+
+    public void deleteRecipeAndLink(int recipeId) {
+
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+
+        try {
+
+
+            db.execSQL("DELETE FROM link WHERE IdRecipe = " + String.valueOf(recipeId));
+            db.execSQL("DELETE FROM recipe WHERE id = " + String.valueOf(recipeId));
+
+
+            db.setTransactionSuccessful();
+
+        } catch (Exception e) {
+            Log.d("Exception", "Exeption while trying to delete Recipe");
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+
+
+
+
+
     // Utility methods
 
     public int getCount(String table) {
@@ -508,48 +614,66 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     }
 
-    public String checkIfRecipeNameExists(String name) {
-        String recipeName = "";
+    public Link getLinkIngredient(int recipeID) {
 
-        String selectQuery = "SELECT name FROM recipe WHERE name = '" + name + "'" ;
+
+        int linkId;
+        int idRecipe;
+
+        Link link = null;
+
+
+        // Select All Query
+        String selectQuery = "SELECT * FROM link where IdRecipe = " + String.valueOf(recipeID);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                recipeName = cursor.getString(0);
 
+                int numArray[] = new int[30];
+                //  Link link = new Link(cursor.getInt(0), cursor.getInt(1),cursor.getInt(2),
+                //    cursor.getInt(3));
+
+                linkId = cursor.getInt(0);
+                idRecipe = cursor.getInt(1);
+
+                for (int i = 0; i < 29; i++) {
+                    numArray[i] = cursor.getInt(i + 2);
+                }
+
+
+                link = new Link(linkId, idRecipe, numArray);
+
+                // Adding Link to list
+
+
+                //Arrays.fill(numArray,0);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        // return contact list
 
         db.close();
-        return recipeName;
+
+        // return Link list
+        return link;
     }
 
-    public String getRecipeInfo(String name) {
-        String recipeInfo = "";
+    public int getMaxLinkId() {
 
-        String selectQuery = "SELECT infoText FROM recipe WHERE name = '" + name + "'" ;
 
+        int max = 0;
+
+        String countQuery = "SELECT MAX(IdLink) FROM link";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                recipeInfo = cursor.getString(0);
-
-            } while (cursor.moveToNext());
-        }
-
+        Cursor cursor = db.rawQuery(countQuery, null);
+        max = cursor.getCount();
         cursor.close();
-        // return contact list
 
-        db.close();
-        return recipeInfo;
+        return max;
     }
 
 
