@@ -508,5 +508,27 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
     }
 
+    public String checkIfRecipeNameExists(String name) {
+        String recipeName = "";
+
+        String selectQuery = "SELECT name FROM recipe WHERE name = '" + name + "'" ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                recipeName = cursor.getString(0);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        // return contact list
+
+        db.close();
+        return recipeName;
+    }
+
 
 }

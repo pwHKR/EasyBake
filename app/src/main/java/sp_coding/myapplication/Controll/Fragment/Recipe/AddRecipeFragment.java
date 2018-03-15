@@ -39,6 +39,7 @@ public class AddRecipeFragment extends Fragment implements Util {
     SpinnerDialog spinnerDialog;
     ListView listView;
     ArrayAdapter<String> adapter;
+    String checkedRecipeName;
 
     RecipeUtility recipeUtility;
     LinkUtility linkUtility;
@@ -141,6 +142,8 @@ public class AddRecipeFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
+                checkedRecipeName = recipeUtility.checkRecipeName(inputName.getText().toString());
+
                 if(inputName.getText().toString().isEmpty()){
 
                     final AlertDialog alertDialog;
@@ -165,6 +168,30 @@ public class AddRecipeFragment extends Fragment implements Util {
                     alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
 
+
+                } else if (inputName.getText().toString().equals(checkedRecipeName)){
+
+                    final AlertDialog alertDialog;
+
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            getActivity());
+
+                    alertDialogBuilder.setTitle("Warning!");
+                    alertDialogBuilder.setMessage("A recipe with that name already exists");
+
+                    alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            AddRecipeFragment addRecipeFragment = new AddRecipeFragment();
+                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.frame, addRecipeFragment);
+                            fragmentTransaction.commit();
+                        }
+                    });
+
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
 
                 } else {
                     size30();
