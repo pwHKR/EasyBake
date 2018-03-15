@@ -35,6 +35,7 @@ import sp_coding.myapplication.R;
 public class AddRecipeFragment extends Fragment implements Util {
 
     ArrayList<String> ingredientList;
+    ArrayList<String> ingredientsForListView;
     ArrayList<String> selectedIngredient;
     SpinnerDialog spinnerDialog;
     ListView listView;
@@ -67,7 +68,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         //recipeUtility.tempTest();
 
-        Button ok = v.findViewById(R.id.ok);
+        /*Button ok = v.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +100,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
 
             }
-        });
+        });*/
 
         Button addIngredientButton = v.findViewById(R.id.add_ingredient_for_recipe);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -183,10 +184,6 @@ public class AddRecipeFragment extends Fragment implements Util {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            AddRecipeFragment addRecipeFragment = new AddRecipeFragment();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.replace(R.id.frame, addRecipeFragment);
-                            fragmentTransaction.commit();
                         }
                     });
 
@@ -196,7 +193,7 @@ public class AddRecipeFragment extends Fragment implements Util {
                 } else {
                     size30();
 
-                    recipeUtility.newRecipe(selectedIngredient, inputName, inputInfo);
+                    recipeUtility.newRecipe(ingredientsForListView, inputName, inputInfo);
                     //refreshIngredientField();
 
 
@@ -252,6 +249,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         ingredientList = new ArrayList<>();
         selectedIngredient = new ArrayList<>();
         listView = v.findViewById(R.id.ingredientListView);
+        ingredientsForListView = new ArrayList<>();
 
 
     }
@@ -270,7 +268,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         for (int i = selectedIngredient.size(); i < 30; i++) {
 
-            selectedIngredient.add("");
+            ingredientsForListView.add("");
 
         }
     }
@@ -286,8 +284,31 @@ public class AddRecipeFragment extends Fragment implements Util {
             public void onClick(String item, int position) {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
 
+                if(ingredientsForListView.contains(item)){
+                    final AlertDialog alertDialog;
 
-                currentItem = item;
+                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            getActivity());
+
+                    alertDialogBuilder.setTitle("Alert!");
+                    alertDialogBuilder.setMessage("The ingredient has already been added");
+
+                    alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                } else {
+                    ingredientsForListView.add(item);
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, ingredientsForListView);
+                    listView.setAdapter(adapter);
+                }
+
+                //currentItem = item;
 
                 //ingredientList.remove(item);
 

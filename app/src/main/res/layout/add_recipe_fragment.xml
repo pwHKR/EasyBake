@@ -12,7 +12,7 @@
         android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="401dp"
+        android:layout_marginBottom="351dp"
         android:background="#1C83CE"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintBottom_toTopOf="@+id/ingredientListView"
@@ -89,19 +89,13 @@
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="OK" />
-
     </LinearLayout>
 
     <ListView
         android:id="@+id/ingredientListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
