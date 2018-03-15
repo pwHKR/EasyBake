@@ -18,6 +18,7 @@ import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.BOOLEAN_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.CREATE_INGREDIENT_TABLE;
+import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.DEFAULT_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.KEY_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.NAME_INGREDIENT;
 import static sp_coding.myapplication.Model.DB.Table.Table_Ingredient.TABLE_INGREDIENT;
@@ -78,6 +79,18 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // Create Link_Table
 
         db.execSQL(CREATE_LINK_TABLE);
+
+        // Insert Default Ingredients
+
+        for (String defaultIngredient : DEFAULT_INGREDIENT) {
+
+            db.execSQL(defaultIngredient);
+        }
+
+
+
+
+
 
 
     }
@@ -324,6 +337,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         cursor.close();
 
+        db.close();
+
         // return Link list
         return linkList;
     }
@@ -352,6 +367,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         cursor.close();
 
+        db.close();
+
         return name;
 
 
@@ -377,6 +394,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         cursor.close();
         // return contact list
+
+        db.close();
         return recipeList;
     }
 
@@ -463,6 +482,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
         cursor.close();
+
+        db.close();
 
         return id;
 

@@ -26,6 +26,29 @@ public class Table_Ingredient implements Table {
             + ")";
 
 
+    // Default Ingredients
+
+    private static final String D1 = "INSERT INTO ingredient VALUES (1,'Sugar',0,0);";
+    private static final String D2 = "INSERT INTO ingredient VALUES (2,'Saffron',0,0);";
+    private static final String D3 = "INSERT INTO ingredient VALUES (3,'Salt',0,0);";
+    private static final String D4 = "INSERT INTO ingredient VALUES (4,'Baking Powder',0,0);";
+    private static final String D5 = "INSERT INTO ingredient VALUES (5,'Vanilla',0,0);";
+    private static final String D6 = "INSERT INTO ingredient VALUES (6,'Flour',0,0);";
+
+
+    // Default Ingredient Array
+
+    public static final String[] DEFAULT_INGREDIENT = {D1, D2, D3, D4, D5, D6};
+
+
+
+
+
+
+
+
+
+
     @Override
     public String printTable() {
 
