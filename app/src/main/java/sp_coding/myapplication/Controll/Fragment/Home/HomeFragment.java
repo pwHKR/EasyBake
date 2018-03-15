@@ -1,19 +1,25 @@
 package sp_coding.myapplication.Controll.Fragment.Home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
+import sp_coding.myapplication.Controll.Fragment.Recipe.ViewRecipeFragment;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
@@ -48,6 +54,15 @@ public class HomeFragment extends Fragment implements Util {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("recipeName", parent.getItemAtPosition(position).toString());
+
+                ViewRecipeFragment viewRecipeFragment = new ViewRecipeFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                viewRecipeFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.frame, viewRecipeFragment);
+                fragmentTransaction.commit();
 
             }
         });

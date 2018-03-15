@@ -90,8 +90,12 @@ public class RecipeUtility extends Utility {
 
     }
 
-    public String checkRecipeName(String name){
+    public String checkRecipeName(String name) {
         return dbh.checkIfRecipeNameExists(name);
+    }
+
+    public String getRecipeInfoText(String name) {
+        return dbh.getRecipeInfo(name);
     }
 
 

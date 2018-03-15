@@ -12,7 +12,7 @@
         android:id="@+id/info3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="54dp"
+        android:layout_marginBottom="53dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,10 @@
         android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="347dp"
         android:background="#1C83CE"
         android:minHeight="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,30 +55,32 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="TextView"
         android:textSize="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/info2"
+        app:layout_constraintBottom_toTopOf="@+id/info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info3" />
 
     <TextView
-        android:id="@+id/info2"
-        android:layout_width="385dp"
+        android:id="@+id/info"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginStart="13dp"
         android:scrollbars="vertical"
         android:text="TextView"
         android:textSize="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/listView2"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ListView
-        android:id="@+id/listView2"
+        android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -85,7 +89,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info2" />
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
 
 </android.support.constraint.ConstraintLayout>

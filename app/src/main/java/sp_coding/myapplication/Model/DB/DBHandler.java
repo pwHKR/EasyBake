@@ -530,5 +530,27 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         return recipeName;
     }
 
+    public String getRecipeInfo(String name) {
+        String recipeInfo = "";
+
+        String selectQuery = "SELECT infoText FROM recipe WHERE name = '" + name + "'" ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                recipeInfo = cursor.getString(0);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        // return contact list
+
+        db.close();
+        return recipeInfo;
+    }
+
 
 }
