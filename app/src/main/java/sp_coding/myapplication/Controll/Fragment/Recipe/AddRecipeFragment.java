@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -135,6 +137,43 @@ public class AddRecipeFragment extends Fragment implements Util {
                 fragmentTransaction1.replace(R.id.frame, recipeFragment);
                 fragmentTransaction1.commit();
 
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(final AdapterView<?> parent, View view, final int position, long id) {
+
+                final AlertDialog alertDialog;
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        getActivity());
+
+                alertDialogBuilder.setTitle("Delete From Recipe");
+
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                alertDialogBuilder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ingredientsForListView.remove(position);
+                        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, ingredientsForListView);
+                        listView.setAdapter(adapter);
+
+
+                    }
+                });
+
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                return true;
             }
         });
 
