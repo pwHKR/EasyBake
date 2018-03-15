@@ -1,7 +1,5 @@
 package sp_coding.myapplication.Controll.Fragment.Recipe;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,17 +9,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import sp_coding.myapplication.Controll.Fragment.Home.HomeFragment;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
+import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 import sp_coding.myapplication.Model.Utility.Recipe.RecipeUtility;
 import sp_coding.myapplication.R;
 
@@ -35,7 +32,11 @@ public class ViewRecipeFragment extends Fragment implements Util {
     TextView info;
     ListView ingredientList;
 
+    ArrayList ingredientArray;
+    ArrayAdapter<String> adapter;
+
     RecipeUtility recipeUtility;
+    LinkUtility linkUtility;
 
     @Nullable
     @Override
@@ -46,6 +47,10 @@ public class ViewRecipeFragment extends Fragment implements Util {
         IniUtilityClass();
 
         Bundle bundle = getArguments();
+
+        ingredientArray = linkUtility.getRecipeIngredients(bundle.getString("recipeName"));
+        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, ingredientArray);
+        ingredientList.setAdapter(adapter);
 
         info.setMovementMethod(new ScrollingMovementMethod());
 
@@ -75,7 +80,8 @@ public class ViewRecipeFragment extends Fragment implements Util {
 
         title = v.findViewById(R.id.title);
         info = v.findViewById(R.id.info);
-        ingredientList = v.findViewById(R.id.listView);
+        ingredientList = v.findViewById(R.id.ingredientListView);
+        ingredientArray = new ArrayList();
 
     }
 
@@ -83,8 +89,10 @@ public class ViewRecipeFragment extends Fragment implements Util {
     public void IniUtilityClass() {
 
         recipeUtility = new RecipeUtility();
+        linkUtility = new LinkUtility();
 
         recipeUtility.setContext(this.getContext());
+        linkUtility.setContext(this.getContext());
 
     }
 }

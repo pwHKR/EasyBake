@@ -251,7 +251,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         inputInfo = v.findViewById(R.id.infoInput);
         ingredientList = new ArrayList<>();
         selectedIngredient = new ArrayList<>();
-        listView = v.findViewById(R.id.listView);
+        listView = v.findViewById(R.id.ingredientListView);
 
 
     }

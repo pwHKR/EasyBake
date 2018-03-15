@@ -2,6 +2,7 @@ package sp_coding.myapplication.Model.Utility.Link;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.System.Main.Link;
@@ -72,6 +73,27 @@ public class LinkUtility extends Utility {
 
         }
 
+
+    }
+
+    public ArrayList<String> getRecipeIngredients(String name) {
+
+        Link link = dbh.getLinkIngredient(dbh.getRecipeId(name));
+        ArrayList<String> ingredientList = new ArrayList<>();
+
+        for (int i : link.getListIngredient()) {
+
+
+            if (i != 0)
+
+                // "dbh.getIngredientName(i) " i denna if sats och for loop ger dig alla ingredienser
+
+                ingredientList.add(dbh.getIngredientName(i));
+
+
+        }
+
+        return ingredientList;
 
     }
 }
