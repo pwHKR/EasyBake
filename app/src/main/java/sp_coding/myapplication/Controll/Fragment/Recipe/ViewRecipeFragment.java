@@ -2,6 +2,7 @@ package sp_coding.myapplication.Controll.Fragment.Recipe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.method.ScrollingMovementMethod;
@@ -43,6 +44,9 @@ public class ViewRecipeFragment extends Fragment implements Util {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.view_recipe_fragment, container, false);
 
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+        bottomNavigationView.setVisibility(View.GONE);
+
         Ini(v);
         IniUtilityClass();
 
@@ -61,10 +65,15 @@ public class ViewRecipeFragment extends Fragment implements Util {
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+
                 HomeFragment homeFragment = new HomeFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame, homeFragment);
                 fragmentTransaction.commit();
+
             }
         });
 
