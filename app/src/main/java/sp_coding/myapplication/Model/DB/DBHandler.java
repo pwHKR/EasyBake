@@ -57,7 +57,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -83,11 +82,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
             db.execSQL(defaultIngredient);
         }
-
-
-
-
-
 
 
     }
@@ -123,7 +117,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         values.put(BOOLEAN_INGREDIENT, ingredient.getInStock_TinyInt()); // If Ingredient in stock
 
 
-
         // Inserting Row
         db.insert(TABLE_INGREDIENT, null, values);
         db.close(); // Closing database connection
@@ -149,9 +142,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
             } while (cursor.moveToNext());
         }
-
-
-
 
 
         // return Ingredient
@@ -322,7 +312,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
                 }
 
 
-
                 Link link = new Link(linkId, idRecipe, numArray);
 
                 // Adding Link to list
@@ -404,7 +393,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
-
     public List<String> getAllRecipeNames() {
         List<String> recipeList = new ArrayList<>();
         // Select All Query
@@ -474,7 +462,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         db.execSQL("UPDATE ingredient SET inRecipe = 1  WHERE id = " + String.valueOf(id));
 
 
-
         db.close();
 
 
@@ -495,7 +482,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
 
     }
-
 
 
     public int getIngredientId(String name) {
@@ -530,44 +516,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     }
 
 
-    public int[] getRecipeIds(int ingredientId) {
-
-
-        int recipeids[] = new int[30];
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        //select idRecipe from link where num2 = 2;
-
-        for (int i = 1; i < 30; i++) {
-
-            String querry = " select idRecipe from link where num" + i + "= " + String.valueOf(ingredientId);
-
-            Cursor cursor = db.rawQuery(querry, null);
-
-            if (cursor.moveToFirst()) {
-                do {
-
-                    recipeids[i] = cursor.getInt(0);
-
-
-                } while (cursor.moveToNext());
-            }
-
-            // return recipe
-
-            cursor.close();
-        }
-
-
-        db.close();
-
-        return recipeids;
-
-
-    }
-
-
     public void deleteRecipeAndLink(int recipeId) {
 
 
@@ -590,10 +538,6 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
             db.endTransaction();
         }
     }
-
-
-
-
 
 
     // Utility methods
@@ -661,24 +605,11 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         return link;
     }
 
-    public int getMaxLinkId() {
-
-
-        int max = 0;
-
-        String countQuery = "SELECT MAX(IdLink) FROM link";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        max = cursor.getCount();
-        cursor.close();
-
-        return max;
-    }
 
     public String checkIfRecipeNameExists(String name) {
         String recipeName = "";
 
-        String selectQuery = "SELECT name FROM recipe WHERE name = '" + name + "'" ;
+        String selectQuery = "SELECT name FROM recipe WHERE name = '" + name + "'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -700,7 +631,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
     public String getRecipeInfo(String name) {
         String recipeInfo = "";
 
-        String selectQuery = "SELECT infoText FROM recipe WHERE name = '" + name + "'" ;
+        String selectQuery = "SELECT infoText FROM recipe WHERE name = '" + name + "'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

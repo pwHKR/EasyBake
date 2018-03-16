@@ -6,14 +6,13 @@ import sp_coding.myapplication.Model.DB.DBHandler;
 
 /**
  * Created by woojen on 2018-02-26.
- *
+ * <p>
  * Use childs classes with Util Interface on fragments or activity's
- *
  */
 
 public abstract class Utility {
 
-    protected Context context;
+    private Context context;
 
 
     protected DBHandler dbh;

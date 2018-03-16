@@ -50,7 +50,6 @@ public class AddRecipeFragment extends Fragment implements Util {
     private EditText inputName;
     private EditText inputInfo;
 
-    private String currentItem;
 
     @Nullable
     @Override
@@ -162,7 +161,7 @@ public class AddRecipeFragment extends Fragment implements Util {
                     public void onClick(DialogInterface dialog, int which) {
 
                         ingredientsForListView.remove(position);
-                        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, ingredientsForListView);
+                        adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, ingredientsForListView);
                         listView.setAdapter(adapter);
 
 
@@ -263,12 +262,6 @@ public class AddRecipeFragment extends Fragment implements Util {
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-
-    @Override
     public void IniUtilityClass() {
         recipeUtility = new RecipeUtility();
         linkUtility = new LinkUtility();
@@ -279,7 +272,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         ingredientUtility.setContext(this.getContext());
     }
 
-    public void Ini(View v) {
+    private void Ini(View v) {
 
 
         inputName = v.findViewById(R.id.nameInput);
@@ -292,14 +285,6 @@ public class AddRecipeFragment extends Fragment implements Util {
 
     }
 
-    public void refreshIngredientField() {
-
-
-        ingredientList.clear();
-        ingredientList.trimToSize();
-
-
-    }
 
     private void size30() {
 
@@ -311,7 +296,7 @@ public class AddRecipeFragment extends Fragment implements Util {
         }
     }
 
-    public void createSpinner() {
+    private void createSpinner() {
 
 
         spinnerDialog = new SpinnerDialog(getActivity(), ingredientList, "Select Ingredient");

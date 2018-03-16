@@ -10,7 +10,7 @@ import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 
 /**
  * Created by woojen on 2018-02-26.
- *
+ * <p>
  * Use with Util Interface on fragments or activity's
  */
 

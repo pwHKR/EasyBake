@@ -42,7 +42,6 @@ public class Ingredient extends Id_Name {
     }
 
 
-
     public boolean isInStock() {
         return inStock;
     }

@@ -79,12 +79,8 @@ public class ViewRecipeFragment extends Fragment implements Util {
         return v;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
-    public void Ini(View v) {
+    private void Ini(View v) {
 
         title = v.findViewById(R.id.title);
         info = v.findViewById(R.id.info);

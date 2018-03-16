@@ -25,7 +25,6 @@ public class Table_Recipe implements Table {
             + INFO_RECIPE + " Text" + ")";
 
 
-
     @Override
     public String printTable() {
         String output = "Table: " + TABLE_RECIPE + "\n" + "-----------" +

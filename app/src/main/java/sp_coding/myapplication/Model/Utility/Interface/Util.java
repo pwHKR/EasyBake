@@ -11,7 +11,7 @@ package sp_coding.myapplication.Model.Utility.Interface;
  * <p>
  * // public void IniUtilityClass() {
  * <p>
-
+ * <p>
  * ingredientUtility = new IngredientUtility();
  * ingredientUtility.setContext(this.getContext());
  */

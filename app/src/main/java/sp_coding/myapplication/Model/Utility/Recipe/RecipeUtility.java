@@ -14,8 +14,8 @@ import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 
 /**
  * Created by woojen on 2018-02-26.
- *
- *
+ * <p>
+ * <p>
  * Use with Util Interface on fragments or activity's
  */
 
@@ -51,10 +51,6 @@ public class RecipeUtility extends Utility {
         dbh.addRecipe(recipe);
 
         Link link = new Link(getNewID("link"), dbh.getMaxRecipeId(), numArray);
-
-
-
-
 
 
         dbh.addLink(link);
@@ -102,7 +98,6 @@ public class RecipeUtility extends Utility {
         logRecipe();
 
 
-
     }
 
     public String checkRecipeName(String name) {
@@ -113,7 +108,7 @@ public class RecipeUtility extends Utility {
         return dbh.getRecipeInfo(name);
     }
 
-    public int getRecipeID(String name){
+    public int getRecipeID(String name) {
         return dbh.getRecipeId(name);
     }
 

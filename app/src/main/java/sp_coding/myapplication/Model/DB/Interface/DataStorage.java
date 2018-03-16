@@ -23,7 +23,6 @@ public interface DataStorage {
     List<Ingredient> getAllIngredients();
 
 
-
     // Recipe storing
 
     void addRecipe(Recipe recipe);

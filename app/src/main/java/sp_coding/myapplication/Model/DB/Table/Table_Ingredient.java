@@ -41,14 +41,6 @@ public class Table_Ingredient implements Table {
     public static final String[] DEFAULT_INGREDIENT = {D1, D2, D3, D4, D5, D6};
 
 
-
-
-
-
-
-
-
-
     @Override
     public String printTable() {
 

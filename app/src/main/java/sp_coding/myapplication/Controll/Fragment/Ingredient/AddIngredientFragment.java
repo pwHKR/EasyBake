@@ -63,8 +63,6 @@ public class AddIngredientFragment extends Fragment implements Util {
                 ingredientUtility.logIngredient();
 
 
-
-
             }
         });
 
@@ -87,11 +85,6 @@ public class AddIngredientFragment extends Fragment implements Util {
         return v;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
 
     public void IniUtilityClass() {
 
@@ -107,7 +100,7 @@ public class AddIngredientFragment extends Fragment implements Util {
     }
 
     // Return to ingredient fragment
-    public void goBack(){
+    public void goBack() {
         IngredientFragment ingredientFragment = new IngredientFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, ingredientFragment);

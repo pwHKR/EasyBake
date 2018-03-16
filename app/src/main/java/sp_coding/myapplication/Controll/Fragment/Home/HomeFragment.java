@@ -29,7 +29,7 @@ public class HomeFragment extends Fragment implements Util {
     private ArrayList<String> recipeList = new ArrayList<String>();
     private RecipeUtility recipeUtility;
     private ArrayAdapter<String> adapter;
-    ListView listView;
+    private ListView listView;
 
     @Nullable
     @Override
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements Util {
         listView = v.findViewById(R.id.recipeListView);
 
         //Add info to adapter
-        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
+        adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
         //Apply adapter to ListView
         listView.setAdapter(adapter);
 
@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements Util {
                     public void onClick(DialogInterface dialog, int which) {
 
                         recipeUtility.delete(recipeUtility.getRecipeID(parent.getItemAtPosition(position).toString()));
-                        adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
+                        adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
                         listView.setAdapter(adapter);
                         refreshFragment();
 
@@ -103,17 +103,13 @@ public class HomeFragment extends Fragment implements Util {
         return v;
     }
 
-    private void refreshFragment(){
+    private void refreshFragment() {
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, homeFragment);
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     @Override
     public void IniUtilityClass() {

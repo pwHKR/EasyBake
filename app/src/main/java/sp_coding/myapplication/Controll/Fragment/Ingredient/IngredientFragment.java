@@ -47,9 +47,6 @@ public class IngredientFragment extends Fragment implements Util {
 
         createSpinner();
 
-        //linkUtility.testTemp();
-
-
 
         Button addIngredientButton = v.findViewById(R.id.addIngredient);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +72,6 @@ public class IngredientFragment extends Fragment implements Util {
         return v;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
 
     @Override
     public void IniUtilityClass() {
@@ -94,7 +85,7 @@ public class IngredientFragment extends Fragment implements Util {
     }
 
 
-    public void createSpinner() {
+    private void createSpinner() {
 
 
         spinnerDialog = new SpinnerDialog(getActivity(), (ArrayList<String>) ingredientList, "Select Ingredient");
@@ -161,7 +152,7 @@ public class IngredientFragment extends Fragment implements Util {
         });
     }
 
-    public void refreshFragment() {
+    private void refreshFragment() {
         IngredientFragment ingredientFragment = new IngredientFragment();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, ingredientFragment);
