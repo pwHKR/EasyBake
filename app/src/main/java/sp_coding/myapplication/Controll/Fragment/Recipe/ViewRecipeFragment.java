@@ -60,6 +60,14 @@ public class ViewRecipeFragment extends Fragment implements Util {
         title.setText(bundle.getString("recipeName"));
         info.setText(recipeUtility.getRecipeInfoText(bundle.getString("recipeName")));
 
+        Button shareButton = v.findViewById(R.id.shareBtn);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         Button exitBtn = v.findViewById(R.id.exitBtn);
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

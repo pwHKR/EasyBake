@@ -39,6 +39,15 @@
             android:layout_gravity="right">
 
             <Button
+                android:id="@+id/shareBtn"
+                android:layout_width="175dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:background="@drawable/buttonshape3"
+                android:text="Share On Facebook"
+                android:textColor="#FFFFFF" />
+
+            <Button
                 android:id="@+id/exitBtn"
                 android:layout_width="102dp"
                 android:layout_height="44dp"
@@ -84,7 +93,7 @@
         android:id="@+id/ingredientListView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="9dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
