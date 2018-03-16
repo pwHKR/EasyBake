@@ -74,7 +74,7 @@ public class AddIngredientFragment extends Fragment implements Util {
             public void onClick(View v) {
 
 
-                recipeUtility.delete(); // test metod for delete recipe
+                //recipeUtility.delete(); // test metod for delete recipe
 
                 //linkUtility.printIngredients("second");
 

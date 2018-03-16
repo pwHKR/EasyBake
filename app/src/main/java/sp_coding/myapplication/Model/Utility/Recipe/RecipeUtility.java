@@ -111,6 +111,10 @@ public class RecipeUtility extends Utility {
         return dbh.getRecipeInfo(name);
     }
 
+    public int getRecipeID(String name){
+        return dbh.getRecipeId(name);
+    }
+
 
 }
 
