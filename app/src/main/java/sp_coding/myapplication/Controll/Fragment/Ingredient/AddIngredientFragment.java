@@ -1,5 +1,7 @@
 package sp_coding.myapplication.Controll.Fragment.Ingredient;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -58,9 +60,9 @@ public class AddIngredientFragment extends Fragment implements Util {
 
                 ingredientUtility.NewIngredient(editText.getText().toString(), isTrue);
 
-                allIngredientList = ingredientUtility.getCompleteList();
+                AlertAddOk(editText.getText().toString());
 
-                ingredientUtility.logIngredient();
+                goBack();
 
 
             }
@@ -70,11 +72,6 @@ public class AddIngredientFragment extends Fragment implements Util {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                //recipeUtility.delete(); // test metod for delete recipe
-
-                //linkUtility.printIngredients("second");
 
 
                 goBack();
@@ -110,5 +107,29 @@ public class AddIngredientFragment extends Fragment implements Util {
         bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
+
+    private void AlertAddOk(String item) {
+
+
+        final AlertDialog alertDialog;
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        alertDialogBuilder.setTitle("New Ingredient");
+        alertDialogBuilder.setMessage(item + " is added to the database ");
+
+        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
+    }
 
 }
