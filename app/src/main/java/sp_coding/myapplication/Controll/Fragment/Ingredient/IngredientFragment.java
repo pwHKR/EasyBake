@@ -128,19 +128,27 @@ public class IngredientFragment extends Fragment implements Util {
                         switch (choice) {
                             case 0:
                                 ingredientUtility.setinStock(selectedItem, true);
-                                Log.d("Test", "case1");
-                                ingredientUtility.logIngredient();
+                                //Log.d("Test", "case1");
+                                AlertinStock(selectedItem);
 
                                 break;
                             case 1:
                                 ingredientUtility.setinStock(selectedItem, false);
-                                Log.d("Test", "case2");
-                                ingredientUtility.logIngredient();
+                                //  Log.d("Test", "case2");
+                                AlertNotInStock(selectedItem);
                                 break;
                             case 2:
                                 inRecipe = ingredientUtility.delete(selectedItem);
+
+                                if (inRecipe) {
+                                    AlertToManyRecipes(selectedItem, inRecipe);
+                                } else {
+                                    AlertDeleteOk(selectedItem);
+                                }
+
+
                                 refreshFragment();
-                                Log.d("Test", "case3");
+                                //Log.d("Test", "case3");
                                 break;
 
                         }
@@ -180,4 +188,119 @@ public class IngredientFragment extends Fragment implements Util {
         }
 
     }
+
+    private void AlertToManyRecipes(String name, boolean inRecipe) {
+
+        int id;
+        int amount;
+
+        if (inRecipe) {
+
+            id = ingredientUtility.getId(name);
+
+            amount = ingredientUtility.xInRecipe(id);
+
+            final AlertDialog alertDialog;
+
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    getActivity());
+
+            alertDialogBuilder.setTitle("Warning!");
+            alertDialogBuilder.setMessage("This Ingredient is used in " + amount + " Recipes.\nYou need to delete those recipes before you can delete this ingredient");
+
+            alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+
+        }
+
+    }
+
+
+    private void AlertinStock(String item) {
+
+
+        final AlertDialog alertDialog;
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        alertDialogBuilder.setTitle("");
+        alertDialogBuilder.setMessage(item + " is in stock");
+
+        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
+    }
+
+
+    private void AlertNotInStock(String item) {
+
+
+        final AlertDialog alertDialog;
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        alertDialogBuilder.setTitle("");
+        alertDialogBuilder.setMessage(item + " is no longer in stock");
+
+        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
+    }
+
+
+    private void AlertDeleteOk(String item) {
+
+
+        final AlertDialog alertDialog;
+
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        alertDialogBuilder.setTitle("");
+        alertDialogBuilder.setMessage(item + " deleted");
+
+        alertDialogBuilder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+
+    }
+
 }
+
+
+
+
+

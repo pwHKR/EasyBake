@@ -120,6 +120,13 @@ public class IngredientUtility extends Utility {
 
     }
 
+    public int getId(String name) {
+
+        int id = dbh.getIngredientId(name);
+
+        return id;
+    }
+
 
     // This method will return the number of recipes that contains a certain ingredient
     public int xInRecipe(int ingredientID) {
