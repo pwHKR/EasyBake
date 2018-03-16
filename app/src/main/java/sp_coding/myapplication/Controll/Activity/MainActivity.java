@@ -1,12 +1,20 @@
 package sp_coding.myapplication.Controll.Activity;
 
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import sp_coding.myapplication.Controll.Fragment.Home.HomeFragment;
 import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
@@ -71,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame, homeFragment);
         fragmentTransaction.commit();
 
-    }
 
+
+    }
 
 }
