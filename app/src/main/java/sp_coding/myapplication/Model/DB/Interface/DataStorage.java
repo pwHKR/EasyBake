@@ -22,6 +22,14 @@ public interface DataStorage {
 
     List<Ingredient> getAllIngredients();
 
+    boolean deleteIngredient(int id);
+
+    void setIngredient_InRecipe(int id);
+
+    void setIngredientInStock(int id, boolean value);
+
+    int getIngredientId(String name);
+
 
     // Recipe storing
 
@@ -31,12 +39,30 @@ public interface DataStorage {
 
     List<Recipe> getAllRecipes();
 
+    int getRecipeId(String name);
+
+    List<String> getAllRecipeNames();
+
+    String checkIfRecipeNameExists(String name);
+
+    String getRecipeInfo(String name);
+
+    int getMaxRecipeId();
+
 
     // Link storing
 
     void addLink(Link link);
 
     List<Link> getAllLink();
+
+    Link getLinkIngredient(int recipeID);
+
+
+    // Link and Recipe Storing
+
+    void deleteRecipeAndLink(int recipeId);
+
 
     // Storage Utility methods
 
