@@ -90,12 +90,12 @@ public class RecipeUtility extends Utility {
 
     }
 
-    public void tempTest2() {
+    public void delete(int recipeID) {
 
         RecipeUtility recipeUtility = new RecipeUtility();
         LinkUtility linkUtility = new LinkUtility();
 
-        dbh.deleteRecipeAndLink(2);
+        dbh.deleteRecipeAndLink(recipeID);
 
         logRecipe();
 

@@ -47,6 +47,7 @@
                 android:text="Exit"
                 android:textColor="#1C83CE" />
 
+
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
