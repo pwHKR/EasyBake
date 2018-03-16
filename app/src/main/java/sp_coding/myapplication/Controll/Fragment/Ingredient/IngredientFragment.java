@@ -19,6 +19,7 @@ import java.util.List;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+import sp_coding.myapplication.Model.System.Main.Ingredient;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -45,8 +46,11 @@ public class IngredientFragment extends Fragment implements Util {
 
         ingredientUtility.logIngredient();
 
+        refreshIngredientStatus();
+
         createSpinner();
 
+        // testX();
 
         Button addIngredientButton = v.findViewById(R.id.addIngredient);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -157,5 +161,23 @@ public class IngredientFragment extends Fragment implements Util {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, ingredientFragment);
         fragmentTransaction.commit();
+    }
+
+    private void testX() {
+
+
+        Log.d("x1", String.valueOf(ingredientUtility.xInRecipe(1)));
+    }
+
+
+    private void refreshIngredientStatus() {
+
+        List<Ingredient> list = ingredientUtility.getCompleteList();
+
+        for (Ingredient i : list) {
+
+            ingredientUtility.xInRecipe(i.getId());
+        }
+
     }
 }

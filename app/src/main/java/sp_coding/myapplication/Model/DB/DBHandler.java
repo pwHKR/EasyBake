@@ -455,11 +455,15 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         return inRecipe;
     }
 
-    public void setIngredient_InRecipe(int id) {
+    public void setIngredient_InRecipe(int id, boolean flag) {
+
+
+
+
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.execSQL("UPDATE ingredient SET inRecipe = 1  WHERE id = " + String.valueOf(id));
+        db.execSQL("UPDATE ingredient SET inRecipe = " + IngredientUtility.convertBoolean(flag) + " WHERE id = " + String.valueOf(id));
 
 
         db.close();

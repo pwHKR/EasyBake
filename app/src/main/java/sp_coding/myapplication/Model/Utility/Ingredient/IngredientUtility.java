@@ -5,6 +5,8 @@ import android.util.Log;
 import java.util.List;
 
 import sp_coding.myapplication.Model.System.Main.Ingredient;
+import sp_coding.myapplication.Model.System.Main.Link;
+import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Abstract.Utility;
 
 /**
@@ -116,6 +118,48 @@ public class IngredientUtility extends Utility {
         dbh.setIngredientInStock(dbh.getIngredientId(ingredientName), isInStock);
 
 
+    }
+
+
+    // This method will return the number of recipes that contains a certain ingredient
+    public int xInRecipe(int ingredientID) {
+
+        List<Recipe> recipeList;
+        Link link;
+        int[] ingredientList;
+
+
+        int inRecipeAmount = 0;
+
+        recipeList = dbh.getAllRecipes();
+
+        for (Recipe recipe : recipeList) {
+
+            link = dbh.getLinkIngredient(recipe.getId());
+
+            ingredientList = link.getListIngredient();
+
+
+            for (int i : ingredientList) {
+
+                if (i == ingredientID) {
+
+                    inRecipeAmount++;
+                }
+
+            }
+
+
+        }
+
+
+        if (inRecipeAmount == 0) {
+
+            dbh.setIngredient_InRecipe(ingredientID, false);
+
+        }
+
+        return inRecipeAmount;
     }
 
 

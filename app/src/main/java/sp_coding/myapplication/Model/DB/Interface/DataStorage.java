@@ -24,7 +24,7 @@ public interface DataStorage {
 
     boolean deleteIngredient(int id);
 
-    void setIngredient_InRecipe(int id);
+    void setIngredient_InRecipe(int id, boolean flag);
 
     void setIngredientInStock(int id, boolean value);
 

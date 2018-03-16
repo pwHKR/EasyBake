@@ -40,7 +40,7 @@ public class RecipeUtility extends Utility {
                 numArray[i] = id;
 
 
-                dbh.setIngredient_InRecipe(id);
+                dbh.setIngredient_InRecipe(id, true);
 
             }
 
