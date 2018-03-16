@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
-import sp_coding.myapplication.Controll.Fragment.Ingredient.IngredientFragment;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -36,20 +35,20 @@ import sp_coding.myapplication.R;
 
 public class AddRecipeFragment extends Fragment implements Util {
 
-    ArrayList<String> ingredientList;
-    ArrayList<String> ingredientsForListView;
-    ArrayList<String> selectedIngredient;
-    SpinnerDialog spinnerDialog;
-    ListView listView;
-    ArrayAdapter<String> adapter;
-    String checkedRecipeName;
+    private ArrayList<String> ingredientList;
+    private ArrayList<String> ingredientsForListView;
+    private ArrayList<String> selectedIngredient;
+    private SpinnerDialog spinnerDialog;
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private String checkedRecipeName;
 
-    RecipeUtility recipeUtility;
-    LinkUtility linkUtility;
-    IngredientUtility ingredientUtility;
+    private RecipeUtility recipeUtility;
+    private LinkUtility linkUtility;
+    private IngredientUtility ingredientUtility;
 
-    EditText inputName;
-    EditText inputInfo;
+    private EditText inputName;
+    private EditText inputInfo;
 
     private String currentItem;
 
@@ -184,7 +183,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
                 checkedRecipeName = recipeUtility.checkRecipeName(inputName.getText().toString());
 
-                if(inputName.getText().toString().isEmpty()){
+                if (inputName.getText().toString().isEmpty()) {
 
                     final AlertDialog alertDialog;
 
@@ -209,7 +208,7 @@ public class AddRecipeFragment extends Fragment implements Util {
                     alertDialog.show();
 
 
-                } else if (inputName.getText().toString().equals(checkedRecipeName)){
+                } else if (inputName.getText().toString().equals(checkedRecipeName)) {
 
                     final AlertDialog alertDialog;
 
@@ -323,7 +322,7 @@ public class AddRecipeFragment extends Fragment implements Util {
             public void onClick(String item, int position) {
                 Toast.makeText(getActivity(), "Selected: " + item, Toast.LENGTH_SHORT).show();
 
-                if(ingredientsForListView.contains(item)){
+                if (ingredientsForListView.contains(item)) {
                     final AlertDialog alertDialog;
 
                     final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(

@@ -25,7 +25,6 @@ import static sp_coding.myapplication.Model.DB.Table.Table_Link.CREATE_LINK_TABL
 import static sp_coding.myapplication.Model.DB.Table.Table_Link.F_KEY_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Link.TABLE_LINK;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.CREATE_RECIPE_TABLE;
-import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.F_KEY_LINK;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.INFO_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.KEY_ID_RECIPE;
 import static sp_coding.myapplication.Model.DB.Table.Table_Recipe.NAME_RECIPE;
@@ -217,7 +216,7 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         //values.put(KEY_ID_RECIPE, recipe.getId()); // Recipe ID
         values.put(NAME_RECIPE, recipe.getName()); // Recipe Name
         values.put(INFO_RECIPE, recipe.getInfoText()); // Info text
-        values.put(F_KEY_LINK, recipe.getIdIngredient()); // Reference to Link table where ingredients are stored
+        //values.put(F_KEY_LINK, recipe.getiD_Link()); // Reference to Link table where ingredients are stored
 
 
         // Inserting Row
@@ -252,8 +251,8 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
-                        cursor.getInt(3));
+                Recipe recipe = new Recipe(cursor.getInt(0), cursor.getString(1), cursor.getString(2)
+                );
 
                 // Adding Recipe to list
                 recipeList.add(recipe);
@@ -718,6 +717,38 @@ public class DBHandler extends SQLiteOpenHelper implements DataStorage {
 
         db.close();
         return recipeInfo;
+    }
+
+
+    public int getMaxRecipeId() {
+
+        int id = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String querry = "Select MAX(id) from recipe";
+
+        Cursor cursor = db.rawQuery(querry, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                id = cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+
+        // return recipe
+
+
+        cursor.close();
+
+        db.close();
+
+        return id;
+
+
     }
 
 

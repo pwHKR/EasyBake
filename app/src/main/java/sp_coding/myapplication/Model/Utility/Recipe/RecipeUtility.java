@@ -49,17 +49,12 @@ public class RecipeUtility extends Utility {
         Recipe recipe = new Recipe(getNewID("recipe"), inputName.getText().toString(), inputInfo.getText().toString());
 
 
-        Link link = new Link(getNewID("link"), recipe.getId(), numArray);
-
+        Link link = new Link(getNewID("link"), dbh.getMaxRecipeId() + 1, numArray);
 
 
 
 
         dbh.addLink(link);
-
-
-        recipe.setIdIngredient(dbh.getMaxLinkId());
-
         dbh.addRecipe(recipe);
 
 

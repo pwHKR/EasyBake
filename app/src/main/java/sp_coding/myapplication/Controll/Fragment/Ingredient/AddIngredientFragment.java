@@ -28,12 +28,12 @@ import sp_coding.myapplication.R;
 
 public class AddIngredientFragment extends Fragment implements Util {
 
-    boolean isTrue;
-    IngredientUtility ingredientUtility;
-    RecipeUtility recipeUtility;
-    LinkUtility linkUtility;
+    private boolean isTrue;
+    private IngredientUtility ingredientUtility;
+    private RecipeUtility recipeUtility;
+    private LinkUtility linkUtility;
 
-    List<Ingredient> allIngredientList;
+    private List<Ingredient> allIngredientList;
 
     @Nullable
     @Override
@@ -74,7 +74,7 @@ public class AddIngredientFragment extends Fragment implements Util {
             public void onClick(View v) {
 
 
-                // recipeUtility.tempTest2(); // test metod for delete recipe
+                recipeUtility.tempTest2(); // test metod for delete recipe
 
                 //linkUtility.printIngredients("second");
 

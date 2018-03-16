@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,15 +28,15 @@ import sp_coding.myapplication.R;
 
 public class ViewRecipeFragment extends Fragment implements Util {
 
-    TextView title;
-    TextView info;
-    ListView ingredientList;
+    private TextView title;
+    private TextView info;
+    private ListView ingredientList;
 
-    ArrayList ingredientArray;
-    ArrayAdapter<String> adapter;
+    private ArrayList ingredientArray;
+    private ArrayAdapter<String> adapter;
 
-    RecipeUtility recipeUtility;
-    LinkUtility linkUtility;
+    private RecipeUtility recipeUtility;
+    private LinkUtility linkUtility;
 
     @Nullable
     @Override

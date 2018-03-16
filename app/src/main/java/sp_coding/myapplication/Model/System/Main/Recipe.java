@@ -10,7 +10,7 @@ public class Recipe extends Id_Name {
 
 
     private String infoText;
-    private int idIngredient;
+    private int iD_Link;
 
 
     public Recipe(int id, String name, String infoText) {
@@ -19,12 +19,12 @@ public class Recipe extends Id_Name {
         this.infoText = infoText;
     }
 
-    public Recipe(int id, String name, String infoText, int idIngredient) {
+    public Recipe(int id, String name, String infoText, int iD_Link) {
         super(id, name);
 
 
         this.infoText = infoText;
-        this.idIngredient = idIngredient;
+        this.iD_Link = iD_Link;
     }
 
     public Recipe(int id, String name) {
@@ -43,12 +43,12 @@ public class Recipe extends Id_Name {
     }
 
 
-    public int getIdIngredient() {
-        return idIngredient;
+    public int getiD_Link() {
+        return iD_Link;
     }
 
-    public void setIdIngredient(int idIngredient) {
-        this.idIngredient = idIngredient;
+    public void setiD_Link(int iD_Link) {
+        this.iD_Link = iD_Link;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Recipe extends Id_Name {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", infoText='" + infoText + '\'' +
-                ", idIngredient=" + idIngredient +
+                ", iD_Link=" + iD_Link +
                 '}';
     }
 }
