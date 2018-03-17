@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sp_coding.myapplication.Model.System.Main.Ingredient;
+import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
@@ -49,6 +51,7 @@ public class AddIngredientFragment extends Fragment implements Util {
         final CheckBox checkBox = v.findViewById(R.id.checkBox);
         allIngredientList = new ArrayList<>();
         IniUtilityClass();
+
         Button send = v.findViewById(R.id.add_ingredient);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +76,13 @@ public class AddIngredientFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
-
+                logCatForInStock();
                 goBack();
+
+
+                // Temp test code
+
+
             }
         });
 
@@ -130,6 +138,19 @@ public class AddIngredientFragment extends Fragment implements Util {
         alertDialog.show();
 
 
+    }
+
+    private void logCatForInStock() {
+
+        List<Recipe> list;
+
+        list = recipeUtility.getRecipesWithInStockArg(true);
+
+
+        for (Recipe r : list) {
+
+            Log.d("stockList", r.getName());
+        }
     }
 
 }

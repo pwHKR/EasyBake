@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,11 +170,7 @@ public class IngredientFragment extends Fragment implements Util {
         fragmentTransaction.commit();
     }
 
-    private void testX() {
 
-
-        Log.d("x1", String.valueOf(ingredientUtility.xInRecipe(1)));
-    }
 
 
     private void refreshIngredientStatus() {

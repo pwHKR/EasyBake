@@ -9,7 +9,6 @@ import java.util.List;
 import sp_coding.myapplication.Model.System.Main.Link;
 import sp_coding.myapplication.Model.System.Main.Recipe;
 import sp_coding.myapplication.Model.Utility.Abstract.Utility;
-import sp_coding.myapplication.Model.Utility.Ingredient.IngredientUtility;
 import sp_coding.myapplication.Model.Utility.Link.LinkUtility;
 
 /**
@@ -78,15 +77,55 @@ public class RecipeUtility extends Utility {
         return dbh.getAllRecipeNames();
     }
 
-    public void tempTest() {
+    public ArrayList<Recipe> getRecipesWithInStockArg(boolean returnInStock) {
 
-        IngredientUtility ingredientUtility = new IngredientUtility();
 
-        dbh.setIngredientInStock(4, false);
+        List<Recipe> recipe = dbh.getAllRecipes();
 
-        ingredientUtility.logIngredient();
+        ArrayList<Recipe> recipeInStock = new ArrayList<>();
+        ArrayList<Recipe> recipeNotInStock = new ArrayList<>();
 
+        int[] ingredientList;
+
+        boolean inStock = true;
+
+
+        for (Recipe i : recipe) {
+
+            Link link;
+
+            link = dbh.getLinkIngredient(i.getId());
+
+            ingredientList = link.getListIngredient();
+
+            for (int p = 0; p < 30; p++) {
+
+                if (ingredientList[p] != 0)
+
+                    if (!dbh.getIngredient(ingredientList[p]).isInStock())
+
+                        inStock = false;
+
+
+            }
+
+
+            if (inStock) {
+                recipeInStock.add(i);
+            } else {
+                recipeNotInStock.add(i);
+            }
+
+        }
+
+        if (returnInStock) {
+            return recipeInStock;
+        } else {
+            return recipeNotInStock;
+        }
     }
+
+
 
     public void delete(int recipeID) {
 
@@ -111,6 +150,33 @@ public class RecipeUtility extends Utility {
     public int getRecipeID(String name) {
         return dbh.getRecipeId(name);
     }
+
+
+    // Return true if you want in stock list and return false if you want not in stock
+    public List<String> isInStockList(boolean inStockList) {
+
+        List<Recipe> temp;
+        List<String> recipeName;
+        recipeName = new ArrayList<>();
+
+        if (inStockList) {
+
+            temp = getRecipesWithInStockArg(inStockList);
+
+
+            for (Recipe r : temp) {
+
+                recipeName.add(r.getName());
+
+            }
+
+
+        }
+
+        return recipeName;
+
+    }
+
 
 
 }

@@ -66,41 +66,7 @@ public class AddRecipeFragment extends Fragment implements Util {
 
         createSpinner();
 
-        //recipeUtility.tempTest();
 
-        /*Button ok = v.findViewById(R.id.ok);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                boolean flag = false;
-
-                for (String s : selectedIngredient) {
-
-                    if (s.equalsIgnoreCase(currentItem)) {
-
-                        flag = true;
-
-                    }
-
-                }
-
-
-                if (!flag) {
-                    selectedIngredient.add(currentItem);
-                }
-
-
-                //ingredientList.remove(currentItem);
-                //ingredientList.trimToSize();
-
-
-                //createSpinner();
-
-
-
-            }
-        });*/
 
         Button addIngredientButton = v.findViewById(R.id.add_ingredient_for_recipe);
         addIngredientButton.setOnClickListener(new View.OnClickListener() {
@@ -231,12 +197,11 @@ public class AddRecipeFragment extends Fragment implements Util {
                     size30();
 
                     recipeUtility.newRecipe(ingredientsForListView, inputName, inputInfo);
-                    //refreshIngredientField();
 
 
                     recipeUtility.logRecipe();
 
-                    //linkUtility.logLinkList(); //
+
                     linkUtility.logLinkListv2();
 
                     RecipeFragment recipeFragment = new RecipeFragment();

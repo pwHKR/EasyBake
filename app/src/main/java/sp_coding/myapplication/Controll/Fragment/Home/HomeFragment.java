@@ -39,7 +39,10 @@ public class HomeFragment extends Fragment implements Util {
         IniUtilityClass();
 
         //Add recipe names to ArrayList
-        recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
+
+        recipeList = (ArrayList<String>) recipeUtility.isInStockList(true); // True if you want in stock list and false if you want not in stock
+        //recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
+
         listView = v.findViewById(R.id.recipeListView);
 
         //Add info to adapter
@@ -119,4 +122,6 @@ public class HomeFragment extends Fragment implements Util {
         recipeUtility.setContext(this.getContext());
 
     }
+
+
 }
