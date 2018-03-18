@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment implements Util {
         spinner = (Spinner) v.findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
         list.add("In stock ingredients recipes");
-        list.add("Not in stock ingredients recipes");
+        list.add("All recipes");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,8 +73,8 @@ public class HomeFragment extends Fragment implements Util {
                     recipeList = (ArrayList<String>) recipeUtility.isInStockList(true);
                     adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
                     listView.setAdapter(adapter);
-                } else if (parent.getItemAtPosition(position).toString().equals("Not in stock ingredients recipes")){
-                    recipeList = (ArrayList<String>) recipeUtility.isInStockList(false);
+                } else if (parent.getItemAtPosition(position).toString().equals("All recipes")){
+                    recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
                     adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
                     listView.setAdapter(adapter);
                 }
