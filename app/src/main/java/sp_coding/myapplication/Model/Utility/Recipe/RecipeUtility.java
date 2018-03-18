@@ -87,10 +87,9 @@ public class RecipeUtility extends Utility {
 
         int[] ingredientList;
 
-        boolean inStock = true;
-
-
         for (Recipe i : recipe) {
+
+            boolean inStock = true;
 
             Link link;
 
@@ -124,7 +123,6 @@ public class RecipeUtility extends Utility {
             return recipeNotInStock;
         }
     }
-
 
 
     public void delete(int recipeID) {
@@ -172,11 +170,11 @@ public class RecipeUtility extends Utility {
 
 
         }
+        //Log.d("gg2", recipeName.toString());
 
         return recipeName;
 
     }
-
 
 
 }

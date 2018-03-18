@@ -1,11 +1,14 @@
 package sp_coding.myapplication.Controll.Fragment.Recipe;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
+import org.json.JSONObject;
+
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 import sp_coding.myapplication.Controll.Fragment.Home.HomeFragment;
@@ -38,10 +48,14 @@ public class ViewRecipeFragment extends Fragment implements Util {
     private RecipeUtility recipeUtility;
     private LinkUtility linkUtility;
 
+    ShareDialog shareDialog;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.view_recipe_fragment, container, false);
+
+        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
         bottomNavigationView.setVisibility(View.GONE);
@@ -65,6 +79,19 @@ public class ViewRecipeFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
+                if (ShareDialog.canShow(ShareLinkContent.class)) {
+                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                            .setContentTitle("Android Facebook Integration and Login Tutorial")
+                            .setImageUrl(Uri.parse("https://www.studytutorial.in/ " +
+                                    "wp-content/uploads/2017/02/FacebookLoginButton-min-300x136.png"))
+                                            .setContentDescription(
+                                                    "This tutorial explains how to integrate Facebook and Login " +
+                                                            "through Android Application")
+                                                            .setContentUrl(Uri.parse("https://www.studytutorial.in/ " +
+                                                                    "android-facebook-integration-and-login-tutorial"))
+                                                                            .build();
+                    shareDialog.show(linkContent);  // Show facebook ShareDialog
+                }
             }
         });
 
@@ -107,4 +134,11 @@ public class ViewRecipeFragment extends Fragment implements Util {
         linkUtility.setContext(this.getContext());
 
     }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
 }

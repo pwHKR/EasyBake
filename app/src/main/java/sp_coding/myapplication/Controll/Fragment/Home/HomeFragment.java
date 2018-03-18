@@ -6,14 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import sp_coding.myapplication.Controll.Fragment.Recipe.ViewRecipeFragment;
 import sp_coding.myapplication.Model.Utility.Interface.Util;
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment implements Util {
     private RecipeUtility recipeUtility;
     private ArrayAdapter<String> adapter;
     private ListView listView;
+    private Spinner spinner;
 
     @Nullable
     @Override
@@ -43,12 +47,45 @@ public class HomeFragment extends Fragment implements Util {
         recipeList = (ArrayList<String>) recipeUtility.isInStockList(true); // True if you want in stock list and false if you want not in stock
         //recipeList = (ArrayList<String>) recipeUtility.getCompleteNameList();
 
+        Log.d("List", recipeUtility.isInStockList(true).toString());
+
         listView = v.findViewById(R.id.recipeListView);
+
 
         //Add info to adapter
         adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
         //Apply adapter to ListView
         listView.setAdapter(adapter);
+
+        spinner = (Spinner) v.findViewById(R.id.spinner);
+        List<String> list = new ArrayList<String>();
+        list.add("In stock ingredients recipes");
+        list.add("Not in stock ingredients recipes");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).toString().equals("In stock ingredients recipes")){
+                    recipeList = (ArrayList<String>) recipeUtility.isInStockList(true);
+                    adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
+                    listView.setAdapter(adapter);
+                } else if (parent.getItemAtPosition(position).toString().equals("Not in stock ingredients recipes")){
+                    recipeList = (ArrayList<String>) recipeUtility.isInStockList(false);
+                    adapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, R.id.txtitem, recipeList);
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

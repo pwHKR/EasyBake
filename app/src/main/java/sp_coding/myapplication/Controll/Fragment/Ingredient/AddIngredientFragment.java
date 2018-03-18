@@ -76,7 +76,7 @@ public class AddIngredientFragment extends Fragment implements Util {
             @Override
             public void onClick(View v) {
 
-                logCatForInStock();
+                //logCatForInStock();
                 goBack();
 
 
