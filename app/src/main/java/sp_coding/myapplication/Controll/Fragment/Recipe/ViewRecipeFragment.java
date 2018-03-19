@@ -17,7 +17,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
@@ -48,13 +52,15 @@ public class ViewRecipeFragment extends Fragment implements Util {
     private RecipeUtility recipeUtility;
     private LinkUtility linkUtility;
 
-    ShareDialog shareDialog;
+    private ShareDialog shareDialog;
+    private CallbackManager callBackManager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.view_recipe_fragment, container, false);
 
+        FacebookSdk.setApplicationId("1820733634893943");
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.navigation);
@@ -74,24 +80,49 @@ public class ViewRecipeFragment extends Fragment implements Util {
         title.setText(bundle.getString("recipeName"));
         info.setText(recipeUtility.getRecipeInfoText(bundle.getString("recipeName")));
 
-        Button shareButton = v.findViewById(R.id.shareBtn);
+        callBackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(getActivity());
+
+        final Button shareButton = v.findViewById(R.id.shareBtn);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (ShareDialog.canShow(ShareLinkContent.class)) {
-                    ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                            .setContentTitle("Android Facebook Integration and Login Tutorial")
-                            .setImageUrl(Uri.parse("https://www.studytutorial.in/ " +
-                                    "wp-content/uploads/2017/02/FacebookLoginButton-min-300x136.png"))
-                                            .setContentDescription(
-                                                    "This tutorial explains how to integrate Facebook and Login " +
-                                                            "through Android Application")
-                                                            .setContentUrl(Uri.parse("https://www.studytutorial.in/ " +
-                                                                    "android-facebook-integration-and-login-tutorial"))
-                                                                            .build();
-                    shareDialog.show(linkContent);  // Show facebook ShareDialog
+                shareDialog.registerCallback(callBackManager, new FacebookCallback<Sharer.Result>() {
+                    @Override
+                    public void onSuccess(Sharer.Result result) {
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+
+                    }
+                });
+
+                String formattedString = ingredientArray.toString()
+                        .replace(",", ", ")  //remove the commas
+                        .replace("[", "")  //remove the right bracket
+                        .replace("]", "")  //remove the left bracket
+                        .trim();           //remove trailing spaces from partially initialized arrays
+
+                ShareLinkContent shareLinkContent = new ShareLinkContent.Builder()
+                        .setQuote("Just created a recipe using EasyBake!" +
+                                "\n" + "Recipe Name: " + title.getText() + "\n" + "Information: "
+                                + info.getText() + "\n" + "Ingredients: " + formattedString + "\n" +
+                                        "\n" + "Download link below:")
+                        .setContentUrl(Uri.parse("http://www.mediafire.com/file/vcz0uh71rjz0kr0/EasyBake.apk"))
+                        .build();
+
+                if(shareDialog.canShow(ShareLinkContent.class)){
+                    shareDialog.show(shareLinkContent);
                 }
+
             }
         });
 
@@ -134,11 +165,5 @@ public class ViewRecipeFragment extends Fragment implements Util {
         linkUtility.setContext(this.getContext());
 
     }
-
-    @Override
-    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 
 }
