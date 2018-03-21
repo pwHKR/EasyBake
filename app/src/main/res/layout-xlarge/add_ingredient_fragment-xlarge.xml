@@ -15,39 +15,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="148dp"
         android:text="Add Ingredient"
         android:textColor="@android:color/white"
-        android:textSize="34sp"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/cancel"
-        android:layout_width="185dp"
-        android:layout_height="57dp"
+        android:layout_width="227dp"
+        android:layout_height="87dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/buttonshape"
         android:text="Cancel"
         android:textColor="#1C83CE"
-        android:textSize="30sp"
+        android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/add_ingredient"
         android:layout_width="0dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="98dp"
+        android:layout_marginBottom="87dp"
         android:layout_marginEnd="65dp"
         android:layout_marginStart="65dp"
         android:background="@drawable/buttonshape"
         android:text="Save Ingredient"
         android:textColor="#1C83CE"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -55,41 +55,48 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="507dp"
+        android:layout_marginEnd="73dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="40dp"
         android:text="Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_ingredient" />
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="279dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="102dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="220dp"
         android:layout_marginStart="31dp"
         android:text="In Stock"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="59dp"
-        android:layout_marginStart="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/cancel"
+        android:layout_marginBottom="229dp"
+        android:layout_marginStart="40dp"
+        android:scaleX="1.70"
+        android:scaleY="1.70"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/cancel" />
 
 

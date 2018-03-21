@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recipe_layout"
+    android:id="@+id/ingredient_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -16,29 +16,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="266dp"
+        android:layout_marginBottom="235dp"
         android:layout_marginTop="148dp"
-        android:text="Recipes"
+        android:text="Ingredient"
         android:textColor="@android:color/white"
         android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/add_recipe"
+        app:layout_constraintBottom_toTopOf="@+id/addIngredient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_recipe"
-        android:layout_width="338dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="616dp"
+        android:id="@+id/addIngredient"
+        android:layout_width="496dp"
+        android:layout_height="122dp"
+        android:layout_marginBottom="71dp"
         android:background="@drawable/buttonshape"
-        android:text="Add Recipe"
+        android:text="Add Ingredient"
+        android:textColor="#1C83CE"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toTopOf="@+id/manageIngredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGrid" />
+
+    <Button
+        android:id="@+id/manageIngredients"
+        android:layout_width="496dp"
+        android:layout_height="122dp"
+        android:layout_marginBottom="441dp"
+        android:background="@drawable/buttonshape"
+        android:text="Manage Ingredients"
         android:textColor="#1C83CE"
         android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textGrid" />
+        app:layout_constraintTop_toBottomOf="@+id/addIngredient" />
 
 
 </android.support.constraint.ConstraintLayout>

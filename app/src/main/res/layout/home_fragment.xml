@@ -15,54 +15,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="21dp"
-        android:layout_marginEnd="94dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="219dp"
         android:text="Recipes"
         android:textColor="#1C83CE"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/recipeListView"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="233dp" />
 
     <TextView
         android:id="@+id/textGrid1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="97dp"
-        android:layout_marginTop="76dp"
         android:text="Home"
         android:textColor="@android:color/white"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="76dp" />
 
     <ListView
         android:id="@+id/recipeListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textGrid" />
+        android:layout_width="395dp"
+        android:layout_height="326dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="323dp" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="394dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textGrid"
-        app:layout_constraintTop_toBottomOf="@+id/textGrid1" />
+        android:layout_width="210dp"
+        android:layout_height="74dp"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="219dp" />
 
 </android.support.constraint.ConstraintLayout>
