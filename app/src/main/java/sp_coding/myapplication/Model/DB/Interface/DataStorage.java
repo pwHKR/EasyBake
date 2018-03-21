@@ -14,6 +14,8 @@ import sp_coding.myapplication.Model.System.Main.Recipe;
 
 public interface DataStorage {
 
+    String someThing = "null";
+
     // Ingredient storing
 
     void addIngredient(Ingredient ingredient);
